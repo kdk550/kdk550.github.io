@@ -21,7 +21,7 @@
   }
 </style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%90%B1&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://kdk550.github.io/blog/2022/cnblogs-16535413/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> magicat </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">关于 </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">博客 </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">P1347 排序</h1> <p class="post-meta"> Created on July 30, 2022 </p> <p class="post-tags"> <a href="/blog/2022"> <i class="fa-solid fa-calendar fa-sm"></i> 2022 </a>   ·   <a href="/blog/category/%E5%9B%BE%E8%AE%BA"> <i class="fa-solid fa-tag fa-sm"></i> 图论</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <h1 id="p1347-排序"><a href="https://www.luogu.com.cn/problem/P1347" rel="external nofollow noopener" target="_blank">P1347 排序</a></h1> <p>通过给出的关系，去确定大写字母的关系，并打印出</p> <p>步骤：</p> <ol> <li>先将关系存下来。见题意，不可能建完图再遍历<br> 因为确定 <span class="katex"><span class="katex-mathml">n<span class="katex-html"><span class="base"><span class="strut"><span class="mord mathnormal"> 个元素的顺序后即可结束程序，可以不用考虑确定顺序之后出现矛盾的情况）<br><br></span></span></span></span></span></span> </li> <li><span class="katex" style="font-size: 14pt"><span class="katex-mathml"><span class="katex-html"><span class="base"><span class="strut"><span class="mord mathnormal">1~m条边，每在图上建一条边就检查当前图是否确定n个元素的关系，亦或者图是否存在矛盾（有环的情况，自己和自己的关系式）</span></span></span></span></span></span></li> <li><span class="katex" style="font-size: 14pt"><span class="katex-mathml"><span class="katex-html"><span class="base"><span class="strut"><span class="mord mathnormal">检查图是否存在环，就将加入的边的顶点dfs，看是否会重新遍历到自身。当出现矛盾就输出<br>Inconsistency found after x relations.<br></span></span></span></span></span></span></li> <li>检查当前图是否确定n个元素的关系，进行拓扑排序，将入度为0的点加入队列然后退出循环（这里是因为有大小顺序，所以只能以一个元素作为起点），记录下拓扑排序是否访问了n个元素，同时记录下当前元素有几个元素加入队列，大于1说明出现矛盾。<br> 如果访问了n个元素，且一个元素的bfs中没有大于1以上数量的元素加入队列。<br> 那么打印拓扑排序</li> <li>如果m条边既没有矛盾也没有确定关系顺序<br> 输出Sorted sequence cannot be determined.</li> </ol> <p>并查集好像也可以判断环</p> <p>见代码：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include&lt;iostream&gt;
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> magicat </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/news/">news </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">P1347 排序</h1> <p class="post-meta"> Created on July 30, 2022 </p> <p class="post-tags"> <a href="/blog/2022"> <i class="fa-solid fa-calendar fa-sm"></i> 2022 </a>   ·   <a href="/blog/category/%E5%9B%BE%E8%AE%BA"> <i class="fa-solid fa-tag fa-sm"></i> 图论</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <h1 id="p1347-排序"><a href="https://www.luogu.com.cn/problem/P1347" rel="external nofollow noopener" target="_blank">P1347 排序</a></h1> <p>通过给出的关系，去确定大写字母的关系，并打印出</p> <p>步骤：</p> <ol> <li>先将关系存下来。见题意，不可能建完图再遍历<br> 因为确定 <span class="katex"><span class="katex-mathml">n<span class="katex-html"><span class="base"><span class="strut"><span class="mord mathnormal"> 个元素的顺序后即可结束程序，可以不用考虑确定顺序之后出现矛盾的情况）<br><br></span></span></span></span></span></span> </li> <li><span class="katex" style="font-size: 14pt"><span class="katex-mathml"><span class="katex-html"><span class="base"><span class="strut"><span class="mord mathnormal">1~m条边，每在图上建一条边就检查当前图是否确定n个元素的关系，亦或者图是否存在矛盾（有环的情况，自己和自己的关系式）</span></span></span></span></span></span></li> <li><span class="katex" style="font-size: 14pt"><span class="katex-mathml"><span class="katex-html"><span class="base"><span class="strut"><span class="mord mathnormal">检查图是否存在环，就将加入的边的顶点dfs，看是否会重新遍历到自身。当出现矛盾就输出<br>Inconsistency found after x relations.<br></span></span></span></span></span></span></li> <li>检查当前图是否确定n个元素的关系，进行拓扑排序，将入度为0的点加入队列然后退出循环（这里是因为有大小顺序，所以只能以一个元素作为起点），记录下拓扑排序是否访问了n个元素，同时记录下当前元素有几个元素加入队列，大于1说明出现矛盾。<br> 如果访问了n个元素，且一个元素的bfs中没有大于1以上数量的元素加入队列。<br> 那么打印拓扑排序</li> <li>如果m条边既没有矛盾也没有确定关系顺序<br> 输出Sorted sequence cannot be determined.</li> </ol> <p>并查集好像也可以判断环</p> <p>见代码：</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include&lt;iostream&gt;
 #include&lt;algorithm&gt;
 #include&lt;string&gt;
 #include&lt;cstring&gt;
@@ -119,18 +119,25 @@ const ninja = document.querySelector('ninja-keys');
 
 // add the home and posts menu items
 ninja.data = [{
-    id: "nav-关于",
-    title: "关于",
+    id: "nav-about",
+    title: "about",
     section: "Navigation",
     handler: () => {
       window.location.href = "/";
     },
-  },{id: "nav-博客",
-          title: "博客",
+  },{id: "nav-blog",
+          title: "blog",
           description: "",
           section: "Navigation",
           handler: () => {
             window.location.href = "/blog/";
+          },
+        },{id: "nav-news",
+          title: "news",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/news/";
           },
         },{id: "post-rtx5060ti-配置xinference",
         
@@ -1463,7 +1470,10 @@ ninja.data = [{
             window.location.href = "/blog/2021/cnblogs-15022440/";
           
         },
-      },{
+      },{id: "news-launched-the-new-website-and-migrated-121-posts-from-my-cnblogs-archive-including-markdown-formulas-images-code-blocks-and-tables",
+          title: 'Launched the new website and migrated 121 posts from my CNBlogs archive, including...',
+          description: "",
+          section: "News",},{
         id: 'social-github',
         title: 'GitHub',
         section: 'Socials',

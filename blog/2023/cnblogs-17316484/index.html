@@ -21,7 +21,7 @@
   }
 </style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%90%B1&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://kdk550.github.io/blog/2023/cnblogs-17316484/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> magicat </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">关于 </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">博客 </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">[USACO12MAR]Flowerpot S 单调队列</h1> <p class="post-meta"> Created on April 13, 2023 </p> <p class="post-tags"> <a href="/blog/2023"> <i class="fa-solid fa-calendar fa-sm"></i> 2023 </a>   ·   <a href="/blog/category/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80"> <i class="fa-solid fa-tag fa-sm"></i> 算法基础</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p><a href="https://www.luogu.com.cn/problem/P2698" title="[USACO12MAR]Flowerpot S" rel="external nofollow noopener" target="_blank">[USACO12MAR]Flowerpot S</a></p> <p>tag:单调队列</p> <p>很惭愧，今天发现自己连滑动窗口都不会了，遂做了一些题</p> <p>两滴水的高度之差大于等于D的情况下的最小花盆宽度</p> <p>暴力思路：对于任意两点求水滴高度差是否大于等于D，若大于等于<span class="math inline">(D)</span>则计算最下的两点距离 <span class="math inline">(w)</span></p> <p>但这显然是能过但不完全过，手玩一下样例，是求<span class="math inline">(\text{区间的最小长度})</span>，在<span class="math inline">(\text{区间最大值和区间最小值的差})</span> <span class="math inline">(\geq D)</span>的情况下。</p> <p>那么答案即为:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">fi</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">l</span><span class="p">].</span><span class="n">fi</span><span class="p">);</span>
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> magicat </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/news/">news </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">[USACO12MAR]Flowerpot S 单调队列</h1> <p class="post-meta"> Created on April 13, 2023 </p> <p class="post-tags"> <a href="/blog/2023"> <i class="fa-solid fa-calendar fa-sm"></i> 2023 </a>   ·   <a href="/blog/tag/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97"> <i class="fa-solid fa-hashtag fa-sm"></i> 单调队列</a>   ·   <a href="/blog/category/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80"> <i class="fa-solid fa-tag fa-sm"></i> 算法基础</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p><a href="https://www.luogu.com.cn/problem/P2698" title="[USACO12MAR]Flowerpot S" rel="external nofollow noopener" target="_blank">[USACO12MAR]Flowerpot S</a></p> <p>tag:单调队列</p> <p>很惭愧，今天发现自己连滑动窗口都不会了，遂做了一些题</p> <p>两滴水的高度之差大于等于D的情况下的最小花盆宽度</p> <p>暴力思路：对于任意两点求水滴高度差是否大于等于D，若大于等于<span class="math inline">(D)</span>则计算最下的两点距离 <span class="math inline">(w)</span></p> <p>但这显然是能过但不完全过，手玩一下样例，是求<span class="math inline">(\text{区间的最小长度})</span>，在<span class="math inline">(\text{区间最大值和区间最小值的差})</span> <span class="math inline">(\geq D)</span>的情况下。</p> <p>那么答案即为:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">fi</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">l</span><span class="p">].</span><span class="n">fi</span><span class="p">);</span>
 </code></pre></div></div> <p>发现和滑动窗口很像，但每次往区间加入元素，那如何区间弹出元素？<br> 只要计算答案的时候每次左移<span class="math inline">(\text{区间左端点}l)</span>即可，</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//  AC one more times</span>
 
 <span class="cp">#include</span> <span class="cpf">&lt;bits/stdc++.h&gt;</span><span class="cp">
@@ -124,18 +124,25 @@ const ninja = document.querySelector('ninja-keys');
 
 // add the home and posts menu items
 ninja.data = [{
-    id: "nav-关于",
-    title: "关于",
+    id: "nav-about",
+    title: "about",
     section: "Navigation",
     handler: () => {
       window.location.href = "/";
     },
-  },{id: "nav-博客",
-          title: "博客",
+  },{id: "nav-blog",
+          title: "blog",
           description: "",
           section: "Navigation",
           handler: () => {
             window.location.href = "/blog/";
+          },
+        },{id: "nav-news",
+          title: "news",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/news/";
           },
         },{id: "post-rtx5060ti-配置xinference",
         
@@ -1468,7 +1475,10 @@ ninja.data = [{
             window.location.href = "/blog/2021/cnblogs-15022440/";
           
         },
-      },{
+      },{id: "news-launched-the-new-website-and-migrated-121-posts-from-my-cnblogs-archive-including-markdown-formulas-images-code-blocks-and-tables",
+          title: 'Launched the new website and migrated 121 posts from my CNBlogs archive, including...',
+          description: "",
+          section: "News",},{
         id: 'social-github',
         title: 'GitHub',
         section: 'Socials',
