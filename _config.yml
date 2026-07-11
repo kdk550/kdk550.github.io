@@ -314,25 +314,20 @@ jekyll-archives:
       tags: "/blog/:type/:name/"
       categories: "/blog/:type/:name/"
 
-display_tags: ["单调队列", "排序", "模拟", "贪心", "堆", "dp", "离散化", "前缀和", "树状数组", "线段树", "栈模拟"] # explicit tags recovered from author-written tag lines
-display_categories: [
-    "数据结构",
-    "算法基础",
-    "动态规划",
-    "Codeforces",
-    "数学",
-    "图论",
-    "VP",
-    "计算几何",
-    "语法",
-    "杂但重要",
-    "构造",
-    "Atcoder",
-    "字符串",
-    "博弈",
-    "AcWing",
-    "AI",
-  ] # all CNBlogs categories
+display_tags:
+  - data structures
+  - algorithm basics
+  - dynamic programming
+  - contest
+  - mathematics
+  - graph theory
+  - computational geometry
+  - reflections
+  - miscellaneous
+  - constructive algorithms
+  - game theory
+  - AI
+display_categories: []
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar

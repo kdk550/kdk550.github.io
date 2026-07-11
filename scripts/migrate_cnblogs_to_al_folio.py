@@ -75,6 +75,39 @@ INLINE_TAG_RE = re.compile(
 TAG_SEPARATOR_RE = re.compile(r"[,，、;；]+")
 FENCE_RE = re.compile(r"^\s*(?P<fence>`{3,}|~{3,})")
 
+# Normalize the original CNBlogs categories and explicit author-written tag
+# lines into one English tag vocabulary for the public site.  Original values
+# are retained separately in each post's front matter and in the report.
+TAXONOMY_TAG_MAP = {
+    "数据结构": "data structures",
+    "单调队列": "data structures",
+    "堆": "data structures",
+    "离散化": "data structures",
+    "树状数组": "data structures",
+    "线段树": "data structures",
+    "栈模拟": "data structures",
+    "算法基础": "algorithm basics",
+    "排序": "algorithm basics",
+    "模拟": "algorithm basics",
+    "贪心": "algorithm basics",
+    "dp": "dynamic programming",
+    "动态规划": "dynamic programming",
+    "Codeforces": "contest",
+    "Atcoder": "contest",
+    "AcWing": "contest",
+    "数学": "mathematics",
+    "图论": "graph theory",
+    "VP": "contest",
+    "计算几何": "computational geometry",
+    "语法": "reflections",
+    "杂但重要": "miscellaneous",
+    "构造": "constructive algorithms",
+    "字符串": "algorithm basics",
+    "博弈": "game theory",
+    "AI": "AI",
+    "前缀和": "algorithm basics",
+}
+
 
 def parse_args() -> argparse.Namespace:
     repo_root = Path(__file__).resolve().parents[1]
@@ -184,6 +217,19 @@ def inline_tags(markdown: str) -> list[str]:
     return result
 
 
+def normalized_english_tags(*taxonomies: list[str]) -> list[str]:
+    """Merge source taxonomy values into the configured English tag set."""
+    result: list[str] = []
+    for values in taxonomies:
+        for value in values:
+            mapped = TAXONOMY_TAG_MAP.get(value)
+            if mapped is None:
+                raise ValueError(f"No English tag mapping configured for {value!r}")
+            if mapped not in result:
+                result.append(mapped)
+    return result
+
+
 def plain_text_from_markdown(markdown: str) -> str:
     """Extract enough plain text for a short description; never changes a post."""
     text = re.sub(r"```.*?```", " ", markdown, flags=re.DOTALL)
@@ -221,8 +267,10 @@ def make_front_matter(
     published: datetime,
     updated: datetime,
     description: str,
-    categories: list[str],
     tags: list[str],
+    source_categories: list[str],
+    source_platform_tags: list[str],
+    promoted_body_tags: list[str],
     canonical: str,
     source_url: str,
     permalink: str,
@@ -236,8 +284,11 @@ def make_front_matter(
             f"updated: {format_jekyll_datetime(updated)}",
             f"description: {yaml_string(description)}",
             f"excerpt: {yaml_string(description)}",
-            f"categories: {yaml_string(categories)}",
+            "categories: []",
             f"tags: {yaml_string(tags)}",
+            f"source_categories: {yaml_string(source_categories)}",
+            f"source_platform_tags: {yaml_string(source_platform_tags)}",
+            f"promoted_body_tags: {yaml_string(promoted_body_tags)}",
             f"canonical: {yaml_string(canonical)}",
             f"source_url: {yaml_string(source_url)}",
             f"permalink: {permalink}",
@@ -359,6 +410,7 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
         "internal_links_rewritten": 0,
         "liquid_raw_wrapped_posts": 0,
         "inline_tags_inferred": 0,
+        "normalized_tag_assignments": 0,
     }
     copied_assets: dict[str, dict[str, str]] = {}
     missing_assets: list[dict[str, str]] = []
@@ -448,12 +500,12 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
                 metadata.get("canonical") or metadata.get("source_url") or ""
             ).strip()
             source_url = str(metadata.get("source_url") or canonical).strip()
-            categories = normalize_taxonomy(metadata.get("categories"))
-            tags = normalize_taxonomy(metadata.get("tags"))
+            source_categories = normalize_taxonomy(metadata.get("categories"))
+            source_platform_tags = normalize_taxonomy(metadata.get("tags"))
             recovered_tags = inline_tags(body)
-            for tag in recovered_tags:
-                if tag not in tags:
-                    tags.append(tag)
+            tags = normalized_english_tags(
+                source_categories, source_platform_tags, recovered_tags
+            )
             rich = metadata.get("rich") if isinstance(metadata.get("rich"), dict) else {}
             front_matter = make_front_matter(
                 post_id=post_id,
@@ -461,8 +513,10 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
                 published=record["published"],
                 updated=updated,
                 description=make_description(metadata, body),
-                categories=categories,
                 tags=tags,
+                source_categories=source_categories,
+                source_platform_tags=source_platform_tags,
+                promoted_body_tags=recovered_tags,
                 canonical=canonical,
                 source_url=source_url,
                 permalink=record["permalink"],
@@ -501,6 +555,7 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
             totals["internal_links_rewritten"] += post_link_count
             totals["liquid_raw_wrapped_posts"] += 1
             totals["inline_tags_inferred"] += len(recovered_tags)
+            totals["normalized_tag_assignments"] += len(tags)
             post_mappings.append(
                 {
                     "post_id": post_id,
@@ -510,8 +565,10 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
                     "permalink": record["permalink"],
                     "published": metadata.get("published"),
                     "updated": metadata.get("updated"),
-                    "categories": categories,
+                    "categories": [],
                     "tags": tags,
+                    "source_categories": source_categories,
+                    "source_platform_tags": source_platform_tags,
                     "inline_tags_inferred": recovered_tags,
                     "canonical": canonical,
                     "source_url": source_url,
@@ -547,6 +604,15 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
         "managed_image_directory": str(managed_assets_dir.relative_to(repo_root)),
         "slug_policy": "cnblogs-<post_id>",
         "permalink_policy": "/blog/<year>/cnblogs-<post_id>/",
+        "taxonomy_policy": "merge source categories and explicit body tags into English tags",
+        "taxonomy_tag_map": TAXONOMY_TAG_MAP,
+        "normalized_tags": sorted(
+            {
+                tag
+                for mapping in post_mappings
+                for tag in mapping.get("tags", [])
+            }
+        ),
         "source_posts_discovered": len(records),
         "totals": totals,
         "generated_post_files": len(generated_posts),

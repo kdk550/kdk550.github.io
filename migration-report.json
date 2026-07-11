@@ -1,11 +1,55 @@
 {
   "migration_version": 1,
-  "generated_at": "2026-07-11T12:14:42.781783+00:00",
+  "generated_at": "2026-07-11T15:52:02.632945+00:00",
   "archive_root": "/home/magicat/00文档/blogs/20260711/archive",
   "repository_root": "/home/magicat/00文档/kdk550.github.io",
   "managed_image_directory": "assets/img/blog/cnblogs",
   "slug_policy": "cnblogs-<post_id>",
   "permalink_policy": "/blog/<year>/cnblogs-<post_id>/",
+  "taxonomy_policy": "merge source categories and explicit body tags into English tags",
+  "taxonomy_tag_map": {
+    "数据结构": "data structures",
+    "单调队列": "data structures",
+    "堆": "data structures",
+    "离散化": "data structures",
+    "树状数组": "data structures",
+    "线段树": "data structures",
+    "栈模拟": "data structures",
+    "算法基础": "algorithm basics",
+    "排序": "algorithm basics",
+    "模拟": "algorithm basics",
+    "贪心": "algorithm basics",
+    "dp": "dynamic programming",
+    "动态规划": "dynamic programming",
+    "Codeforces": "contest",
+    "Atcoder": "contest",
+    "AcWing": "contest",
+    "数学": "mathematics",
+    "图论": "graph theory",
+    "VP": "contest",
+    "计算几何": "computational geometry",
+    "语法": "reflections",
+    "杂但重要": "miscellaneous",
+    "构造": "constructive algorithms",
+    "字符串": "algorithm basics",
+    "博弈": "game theory",
+    "AI": "AI",
+    "前缀和": "algorithm basics"
+  },
+  "normalized_tags": [
+    "AI",
+    "algorithm basics",
+    "computational geometry",
+    "constructive algorithms",
+    "contest",
+    "data structures",
+    "dynamic programming",
+    "game theory",
+    "graph theory",
+    "mathematics",
+    "miscellaneous",
+    "reflections"
+  ],
   "source_posts_discovered": 121,
   "totals": {
     "posts": 121,
@@ -17,7 +61,8 @@
     "tables": 5,
     "internal_links_rewritten": 296,
     "liquid_raw_wrapped_posts": 121,
-    "inline_tags_inferred": 11
+    "inline_tags_inferred": 11,
+    "normalized_tag_assignments": 206
   },
   "generated_post_files": 121,
   "official_example_posts_removed": [],
@@ -349,10 +394,14 @@
       "permalink": "/blog/2021/cnblogs-15022440/",
       "published": "2021-07-17 02:06",
       "updated": "2021-07-17 02:06",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "reflections"
+      ],
+      "source_categories": [
         "语法"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15022440.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15022440.html",
@@ -372,10 +421,14 @@
       "permalink": "/blog/2021/cnblogs-15047098/",
       "published": "2021-07-23 00:35",
       "updated": "2023-01-21 19:09",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics"
+      ],
+      "source_categories": [
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15047098.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15047098.html",
@@ -395,10 +448,14 @@
       "permalink": "/blog/2021/cnblogs-15050262/",
       "published": "2021-07-23 19:19",
       "updated": "2023-01-21 19:09",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics"
+      ],
+      "source_categories": [
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15050262.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15050262.html",
@@ -418,10 +475,14 @@
       "permalink": "/blog/2021/cnblogs-15050384/",
       "published": "2021-07-23 20:14",
       "updated": "2023-01-21 19:09",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics"
+      ],
+      "source_categories": [
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15050384.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15050384.html",
@@ -441,10 +502,14 @@
       "permalink": "/blog/2021/cnblogs-15057867/",
       "published": "2021-07-25 15:09",
       "updated": "2023-01-21 19:09",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics"
+      ],
+      "source_categories": [
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15057867.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15057867.html",
@@ -464,10 +529,14 @@
       "permalink": "/blog/2021/cnblogs-15059076/",
       "published": "2021-07-25 21:25",
       "updated": "2023-01-21 19:10",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics"
+      ],
+      "source_categories": [
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15059076.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15059076.html",
@@ -487,10 +556,14 @@
       "permalink": "/blog/2021/cnblogs-15061019/",
       "published": "2021-07-26 13:41",
       "updated": "2021-07-28 14:34",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "reflections"
+      ],
+      "source_categories": [
         "语法"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15061019.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15061019.html",
@@ -510,10 +583,14 @@
       "permalink": "/blog/2021/cnblogs-15068443/",
       "published": "2021-07-27 23:30",
       "updated": "2023-01-21 19:11",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics"
+      ],
+      "source_categories": [
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15068443.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15068443.html",
@@ -533,10 +610,14 @@
       "permalink": "/blog/2021/cnblogs-15070230/",
       "published": "2021-07-28 14:12",
       "updated": "2021-08-05 19:51",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "reflections"
+      ],
+      "source_categories": [
         "语法"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15070230.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15070230.html",
@@ -556,10 +637,14 @@
       "permalink": "/blog/2021/cnblogs-15074331/",
       "published": "2021-07-29 11:33",
       "updated": "2023-01-21 19:11",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "reflections"
+      ],
+      "source_categories": [
         "语法"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15074331.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15074331.html",
@@ -579,10 +664,14 @@
       "permalink": "/blog/2021/cnblogs-15077000/",
       "published": "2021-07-29 20:40",
       "updated": "2023-01-21 19:11",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures"
+      ],
+      "source_categories": [
         "数据结构"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15077000.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15077000.html",
@@ -602,10 +691,14 @@
       "permalink": "/blog/2021/cnblogs-15077139/",
       "published": "2021-07-29 21:17",
       "updated": "2023-01-21 17:43",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "miscellaneous"
+      ],
+      "source_categories": [
         "杂但重要"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15077139.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15077139.html",
@@ -625,10 +718,14 @@
       "permalink": "/blog/2021/cnblogs-15080790/",
       "published": "2021-07-30 17:48",
       "updated": "2023-01-21 17:44",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics"
+      ],
+      "source_categories": [
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15080790.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15080790.html",
@@ -648,10 +745,14 @@
       "permalink": "/blog/2021/cnblogs-15089329/",
       "published": "2021-08-02 11:56",
       "updated": "2023-01-21 17:44",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics"
+      ],
+      "source_categories": [
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15089329.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15089329.html",
@@ -671,11 +772,16 @@
       "permalink": "/blog/2021/cnblogs-15089397/",
       "published": "2021-08-02 12:20",
       "updated": "2021-08-02 12:21",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "reflections"
+      ],
+      "source_categories": [
         "数学",
         "语法"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15089397.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15089397.html",
@@ -695,10 +801,14 @@
       "permalink": "/blog/2021/cnblogs-15145188/",
       "published": "2021-08-15 21:33",
       "updated": "2023-01-21 17:37",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics"
+      ],
+      "source_categories": [
         "数学"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15145188.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15145188.html",
@@ -718,10 +828,14 @@
       "permalink": "/blog/2021/cnblogs-15526764/",
       "published": "2021-11-08 23:08",
       "updated": "2021-11-15 22:57",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "computational geometry"
+      ],
+      "source_categories": [
         "计算几何"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15526764.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15526764.html",
@@ -741,10 +855,14 @@
       "permalink": "/blog/2021/cnblogs-15526781/",
       "published": "2021-11-08 23:10",
       "updated": "2023-01-21 17:38",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "miscellaneous"
+      ],
+      "source_categories": [
         "杂但重要"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15526781.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15526781.html",
@@ -764,10 +882,14 @@
       "permalink": "/blog/2021/cnblogs-15558982/",
       "published": "2021-11-15 22:53",
       "updated": "2021-11-15 23:36",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "computational geometry"
+      ],
+      "source_categories": [
         "计算几何"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15558982.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15558982.html",
@@ -787,10 +909,14 @@
       "permalink": "/blog/2021/cnblogs-15559001/",
       "published": "2021-11-15 22:57",
       "updated": "2021-11-15 22:57",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "computational geometry"
+      ],
+      "source_categories": [
         "计算几何"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15559001.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15559001.html",
@@ -810,10 +936,14 @@
       "permalink": "/blog/2021/cnblogs-15559024/",
       "published": "2021-11-15 23:00",
       "updated": "2021-11-15 23:00",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "computational geometry"
+      ],
+      "source_categories": [
         "计算几何"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15559024.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15559024.html",
@@ -833,10 +963,14 @@
       "permalink": "/blog/2021/cnblogs-15559029/",
       "published": "2021-11-15 23:02",
       "updated": "2023-01-21 15:19",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "computational geometry"
+      ],
+      "source_categories": [
         "计算几何"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15559029.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15559029.html",
@@ -856,10 +990,14 @@
       "permalink": "/blog/2021/cnblogs-15559062/",
       "published": "2021-11-15 23:13",
       "updated": "2021-11-19 17:43",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "computational geometry"
+      ],
+      "source_categories": [
         "计算几何"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15559062.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15559062.html",
@@ -884,10 +1022,14 @@
       "permalink": "/blog/2021/cnblogs-15559073/",
       "published": "2021-11-15 23:14",
       "updated": "2021-11-15 23:14",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "computational geometry"
+      ],
+      "source_categories": [
         "计算几何"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15559073.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15559073.html",
@@ -909,10 +1051,14 @@
       "permalink": "/blog/2021/cnblogs-15559110/",
       "published": "2021-11-15 23:23",
       "updated": "2021-11-15 23:23",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "computational geometry"
+      ],
+      "source_categories": [
         "计算几何"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15559110.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15559110.html",
@@ -932,10 +1078,14 @@
       "permalink": "/blog/2021/cnblogs-15570283/",
       "published": "2021-11-18 00:21",
       "updated": "2021-11-18 00:21",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "computational geometry"
+      ],
+      "source_categories": [
         "计算几何"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15570283.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15570283.html",
@@ -957,10 +1107,14 @@
       "permalink": "/blog/2021/cnblogs-15605008/",
       "published": "2021-11-25 21:26",
       "updated": "2021-11-25 21:26",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest"
+      ],
+      "source_categories": [
         "Codeforces"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15605008.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15605008.html",
@@ -983,10 +1137,14 @@
       "permalink": "/blog/2021/cnblogs-15612896/",
       "published": "2021-11-27 19:59",
       "updated": "2021-11-27 19:59",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "computational geometry"
+      ],
+      "source_categories": [
         "计算几何"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/15612896.html",
       "source_url": "https://www.cnblogs.com/magicat/p/15612896.html",
@@ -1006,10 +1164,14 @@
       "permalink": "/blog/2022/cnblogs-16084546/",
       "published": "2022-03-31 22:37",
       "updated": "2023-01-21 17:37",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "miscellaneous"
+      ],
+      "source_categories": [
         "杂但重要"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16084546.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16084546.html",
@@ -1029,10 +1191,14 @@
       "permalink": "/blog/2022/cnblogs-16102198/",
       "published": "2022-04-05 14:02",
       "updated": "2023-01-21 17:37",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "miscellaneous"
+      ],
+      "source_categories": [
         "杂但重要"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16102198.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16102198.html",
@@ -1052,10 +1218,14 @@
       "permalink": "/blog/2022/cnblogs-16111971/",
       "published": "2022-04-07 14:01",
       "updated": "2022-04-21 22:11",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "reflections"
+      ],
+      "source_categories": [
         "语法"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16111971.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16111971.html",
@@ -1075,10 +1245,14 @@
       "permalink": "/blog/2022/cnblogs-16175918/",
       "published": "2022-04-21 20:30",
       "updated": "2022-04-21 22:11",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "reflections"
+      ],
+      "source_categories": [
         "语法"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16175918.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16175918.html",
@@ -1098,10 +1272,14 @@
       "permalink": "/blog/2022/cnblogs-16176722/",
       "published": "2022-04-21 22:11",
       "updated": "2023-01-21 17:30",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics"
+      ],
+      "source_categories": [
         "数学"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16176722.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16176722.html",
@@ -1121,10 +1299,14 @@
       "permalink": "/blog/2022/cnblogs-16205079/",
       "published": "2022-04-28 23:48",
       "updated": "2023-01-21 17:32",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics"
+      ],
+      "source_categories": [
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16205079.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16205079.html",
@@ -1144,10 +1326,14 @@
       "permalink": "/blog/2022/cnblogs-16206292/",
       "published": "2022-04-29 13:11",
       "updated": "2023-01-21 17:32",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics"
+      ],
+      "source_categories": [
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16206292.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16206292.html",
@@ -1167,10 +1353,14 @@
       "permalink": "/blog/2022/cnblogs-16209267/",
       "published": "2022-04-30 01:15",
       "updated": "2022-04-30 01:15",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "reflections"
+      ],
+      "source_categories": [
         "语法"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16209267.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16209267.html",
@@ -1190,10 +1380,14 @@
       "permalink": "/blog/2022/cnblogs-16246867/",
       "published": "2022-05-08 20:52",
       "updated": "2023-01-21 17:34",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics"
+      ],
+      "source_categories": [
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16246867.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16246867.html",
@@ -1213,10 +1407,14 @@
       "permalink": "/blog/2022/cnblogs-16248802/",
       "published": "2022-05-09 12:45",
       "updated": "2022-05-09 12:45",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest"
+      ],
+      "source_categories": [
         "Codeforces"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16248802.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16248802.html",
@@ -1236,10 +1434,14 @@
       "permalink": "/blog/2022/cnblogs-16262095/",
       "published": "2022-05-12 13:19",
       "updated": "2023-01-21 17:34",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "reflections"
+      ],
+      "source_categories": [
         "语法"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16262095.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16262095.html",
@@ -1259,10 +1461,14 @@
       "permalink": "/blog/2022/cnblogs-16276160/",
       "published": "2022-05-16 10:59",
       "updated": "2022-05-16 12:49",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics"
+      ],
+      "source_categories": [
         "数学"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16276160.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16276160.html",
@@ -1286,10 +1492,14 @@
       "permalink": "/blog/2022/cnblogs-16289041/",
       "published": "2022-05-19 16:26",
       "updated": "2023-01-21 17:35",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "reflections"
+      ],
+      "source_categories": [
         "语法"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16289041.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16289041.html",
@@ -1309,10 +1519,14 @@
       "permalink": "/blog/2022/cnblogs-16301119/",
       "published": "2022-05-23 14:36",
       "updated": "2023-01-21 16:53",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "reflections"
+      ],
+      "source_categories": [
         "语法"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16301119.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16301119.html",
@@ -1332,10 +1546,14 @@
       "permalink": "/blog/2022/cnblogs-16358925/",
       "published": "2022-06-09 13:12",
       "updated": "2023-01-21 16:54",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "reflections"
+      ],
+      "source_categories": [
         "语法"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16358925.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16358925.html",
@@ -1355,11 +1573,16 @@
       "permalink": "/blog/2022/cnblogs-16535093/",
       "published": "2022-07-30 15:31",
       "updated": "2022-07-31 10:09",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures",
+        "graph theory"
+      ],
+      "source_categories": [
         "数据结构",
         "图论"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16535093.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16535093.html",
@@ -1379,10 +1602,14 @@
       "permalink": "/blog/2022/cnblogs-16535143/",
       "published": "2022-07-30 15:47",
       "updated": "2022-07-31 10:09",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "graph theory"
+      ],
+      "source_categories": [
         "图论"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16535143.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16535143.html",
@@ -1402,10 +1629,14 @@
       "permalink": "/blog/2022/cnblogs-16535165/",
       "published": "2022-07-30 15:53",
       "updated": "2022-07-31 10:09",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "graph theory"
+      ],
+      "source_categories": [
         "图论"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16535165.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16535165.html",
@@ -1425,10 +1656,14 @@
       "permalink": "/blog/2022/cnblogs-16535187/",
       "published": "2022-07-30 16:04",
       "updated": "2022-07-31 10:07",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "graph theory"
+      ],
+      "source_categories": [
         "图论"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16535187.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16535187.html",
@@ -1448,10 +1683,14 @@
       "permalink": "/blog/2022/cnblogs-16535206/",
       "published": "2022-07-30 16:10",
       "updated": "2022-07-31 10:08",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "graph theory"
+      ],
+      "source_categories": [
         "图论"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16535206.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16535206.html",
@@ -1471,10 +1710,14 @@
       "permalink": "/blog/2022/cnblogs-16535223/",
       "published": "2022-07-30 16:14",
       "updated": "2022-07-31 10:08",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "graph theory"
+      ],
+      "source_categories": [
         "图论"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16535223.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16535223.html",
@@ -1494,10 +1737,14 @@
       "permalink": "/blog/2022/cnblogs-16535303/",
       "published": "2022-07-30 16:41",
       "updated": "2022-07-31 10:08",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "graph theory"
+      ],
+      "source_categories": [
         "图论"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16535303.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16535303.html",
@@ -1517,10 +1764,14 @@
       "permalink": "/blog/2022/cnblogs-16535330/",
       "published": "2022-07-30 16:51",
       "updated": "2022-07-31 10:08",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "graph theory"
+      ],
+      "source_categories": [
         "图论"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16535330.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16535330.html",
@@ -1540,10 +1791,14 @@
       "permalink": "/blog/2022/cnblogs-16535413/",
       "published": "2022-07-30 17:21",
       "updated": "2023-01-21 16:51",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "graph theory"
+      ],
+      "source_categories": [
         "图论"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16535413.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16535413.html",
@@ -1563,11 +1818,16 @@
       "permalink": "/blog/2022/cnblogs-16535716/",
       "published": "2022-07-30 20:03",
       "updated": "2022-07-31 10:07",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest",
+        "graph theory"
+      ],
+      "source_categories": [
         "Codeforces",
         "图论"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16535716.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16535716.html",
@@ -1587,10 +1847,14 @@
       "permalink": "/blog/2022/cnblogs-16535726/",
       "published": "2022-07-30 20:10",
       "updated": "2023-01-21 16:51",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest"
+      ],
+      "source_categories": [
         "Codeforces"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16535726.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16535726.html",
@@ -1610,10 +1874,14 @@
       "permalink": "/blog/2022/cnblogs-16536494/",
       "published": "2022-07-31 09:46",
       "updated": "2022-07-31 10:06",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest"
+      ],
+      "source_categories": [
         "Codeforces"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16536494.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16536494.html",
@@ -1633,14 +1901,16 @@
       "permalink": "/blog/2022/cnblogs-16566709/",
       "published": "2022-08-09 16:55",
       "updated": "2023-01-21 16:52",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures",
+        "algorithm basics"
+      ],
+      "source_categories": [
         "数据结构",
         "算法基础"
       ],
-      "tags": [
-        "贪心",
-        "堆"
-      ],
+      "source_platform_tags": [],
       "inline_tags_inferred": [
         "贪心",
         "堆"
@@ -1663,10 +1933,14 @@
       "permalink": "/blog/2022/cnblogs-16916516/",
       "published": "2022-11-22 21:24",
       "updated": "2023-01-21 15:21",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "miscellaneous"
+      ],
+      "source_categories": [
         "杂但重要"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16916516.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16916516.html",
@@ -1686,10 +1960,14 @@
       "permalink": "/blog/2022/cnblogs-16945914/",
       "published": "2022-12-02 22:47",
       "updated": "2023-01-21 16:50",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "miscellaneous"
+      ],
+      "source_categories": [
         "杂但重要"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/16945914.html",
       "source_url": "https://www.cnblogs.com/magicat/p/16945914.html",
@@ -1709,11 +1987,16 @@
       "permalink": "/blog/2023/cnblogs-17057781/",
       "published": "2023-01-17 14:39",
       "updated": "2023-01-17 20:38",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "dynamic programming",
+        "game theory"
+      ],
+      "source_categories": [
         "动态规划",
         "博弈"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17057781.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17057781.html",
@@ -1733,11 +2016,16 @@
       "permalink": "/blog/2023/cnblogs-17059064/",
       "published": "2023-01-18 04:08",
       "updated": "2023-01-28 17:24",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest",
+        "miscellaneous"
+      ],
+      "source_categories": [
         "Codeforces",
         "杂但重要"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17059064.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17059064.html",
@@ -1757,12 +2045,18 @@
       "permalink": "/blog/2023/cnblogs-17063289/",
       "published": "2023-01-21 14:53",
       "updated": "2023-01-21 15:13",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "computational geometry",
+        "contest",
+        "dynamic programming"
+      ],
+      "source_categories": [
         "计算几何",
         "Codeforces",
         "动态规划"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17063289.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17063289.html",
@@ -1782,14 +2076,22 @@
       "permalink": "/blog/2023/cnblogs-17069418/",
       "published": "2023-01-28 01:44",
       "updated": "2023-01-28 01:44",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "data structures",
+        "computational geometry",
+        "contest",
+        "algorithm basics"
+      ],
+      "source_categories": [
         "数学",
         "数据结构",
         "计算几何",
         "Codeforces",
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17069418.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17069418.html",
@@ -1809,11 +2111,16 @@
       "permalink": "/blog/2023/cnblogs-17070875/",
       "published": "2023-01-28 17:02",
       "updated": "2023-09-01 12:48",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest",
+        "algorithm basics"
+      ],
+      "source_categories": [
         "Codeforces",
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17070875.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17070875.html",
@@ -1833,10 +2140,14 @@
       "permalink": "/blog/2023/cnblogs-17282382/",
       "published": "2023-04-03 10:40",
       "updated": "2023-04-03 10:41",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures"
+      ],
+      "source_categories": [
         "数据结构"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17282382.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17282382.html",
@@ -1856,10 +2167,14 @@
       "permalink": "/blog/2023/cnblogs-17282481/",
       "published": "2023-04-03 10:56",
       "updated": "2023-04-03 10:57",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures"
+      ],
+      "source_categories": [
         "数据结构"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17282481.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17282481.html",
@@ -1879,10 +2194,14 @@
       "permalink": "/blog/2023/cnblogs-17282538/",
       "published": "2023-04-03 11:11",
       "updated": "2023-04-03 11:14",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures"
+      ],
+      "source_categories": [
         "数据结构"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17282538.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17282538.html",
@@ -1902,10 +2221,14 @@
       "permalink": "/blog/2023/cnblogs-17282595/",
       "published": "2023-04-03 11:24",
       "updated": "2023-04-03 11:24",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures"
+      ],
+      "source_categories": [
         "数据结构"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17282595.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17282595.html",
@@ -1927,6 +2250,8 @@
       "updated": "2023-04-03 11:37",
       "categories": [],
       "tags": [],
+      "source_categories": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17282641.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17282641.html",
@@ -1946,11 +2271,16 @@
       "permalink": "/blog/2023/cnblogs-17301214/",
       "published": "2023-04-09 21:59",
       "updated": "2023-04-09 22:00",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest",
+        "constructive algorithms"
+      ],
+      "source_categories": [
         "Codeforces",
         "构造"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17301214.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17301214.html",
@@ -1970,11 +2300,16 @@
       "permalink": "/blog/2023/cnblogs-17301315/",
       "published": "2023-04-09 22:29",
       "updated": "2023-04-09 22:31",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest",
+        "constructive algorithms"
+      ],
+      "source_categories": [
         "Codeforces",
         "构造"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17301315.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17301315.html",
@@ -1996,12 +2331,15 @@
       "permalink": "/blog/2023/cnblogs-17316484/",
       "published": "2023-04-13 21:23",
       "updated": "2023-04-13 21:24",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics",
+        "data structures"
+      ],
+      "source_categories": [
         "算法基础"
       ],
-      "tags": [
-        "单调队列"
-      ],
+      "source_platform_tags": [],
       "inline_tags_inferred": [
         "单调队列"
       ],
@@ -2023,7 +2361,17 @@
       "permalink": "/blog/2023/cnblogs-17325343/",
       "published": "2023-04-17 11:35",
       "updated": "2023-04-17 17:57",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "data structures",
+        "graph theory",
+        "dynamic programming",
+        "algorithm basics",
+        "constructive algorithms",
+        "contest"
+      ],
+      "source_categories": [
         "数学",
         "数据结构",
         "图论",
@@ -2033,7 +2381,7 @@
         "构造",
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17325343.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17325343.html",
@@ -2056,11 +2404,16 @@
       "permalink": "/blog/2023/cnblogs-17340896/",
       "published": "2023-04-21 16:30",
       "updated": "2023-04-21 16:54",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest",
+        "constructive algorithms"
+      ],
+      "source_categories": [
         "Codeforces",
         "构造"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17340896.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17340896.html",
@@ -2080,13 +2433,20 @@
       "permalink": "/blog/2023/cnblogs-17341063/",
       "published": "2023-04-21 16:59",
       "updated": "2023-04-21 17:00",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest",
+        "graph theory",
+        "algorithm basics",
+        "constructive algorithms"
+      ],
+      "source_categories": [
         "Codeforces",
         "图论",
         "算法基础",
         "构造"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17341063.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17341063.html",
@@ -2106,10 +2466,14 @@
       "permalink": "/blog/2023/cnblogs-17359861/",
       "published": "2023-04-27 18:00",
       "updated": "2023-04-27 18:01",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures"
+      ],
+      "source_categories": [
         "数据结构"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17359861.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17359861.html",
@@ -2129,10 +2493,14 @@
       "permalink": "/blog/2023/cnblogs-17360427/",
       "published": "2023-04-27 22:26",
       "updated": "2023-04-27 22:27",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures"
+      ],
+      "source_categories": [
         "数据结构"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17360427.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17360427.html",
@@ -2152,10 +2520,14 @@
       "permalink": "/blog/2023/cnblogs-17364818/",
       "published": "2023-04-30 01:09",
       "updated": "2023-04-30 17:32",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures"
+      ],
+      "source_categories": [
         "数据结构"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17364818.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17364818.html",
@@ -2175,10 +2547,14 @@
       "permalink": "/blog/2023/cnblogs-17365044/",
       "published": "2023-04-30 11:08",
       "updated": "2023-04-30 11:46",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures"
+      ],
+      "source_categories": [
         "数据结构"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17365044.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17365044.html",
@@ -2200,11 +2576,16 @@
       "permalink": "/blog/2023/cnblogs-17368435/",
       "published": "2023-05-02 22:20",
       "updated": "2023-05-02 22:20",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures",
+        "contest"
+      ],
+      "source_categories": [
         "数据结构",
         "Codeforces"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17368435.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17368435.html",
@@ -2226,11 +2607,16 @@
       "permalink": "/blog/2023/cnblogs-17378153/",
       "published": "2023-05-06 17:53",
       "updated": "2023-05-06 17:53",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest",
+        "constructive algorithms"
+      ],
+      "source_categories": [
         "Codeforces",
         "构造"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17378153.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17378153.html",
@@ -2250,7 +2636,16 @@
       "permalink": "/blog/2023/cnblogs-17380089/",
       "published": "2023-05-07 20:28",
       "updated": "2023-05-07 21:01",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "data structures",
+        "contest",
+        "dynamic programming",
+        "algorithm basics",
+        "constructive algorithms"
+      ],
+      "source_categories": [
         "数学",
         "数据结构",
         "Codeforces",
@@ -2260,7 +2655,7 @@
         "构造",
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17380089.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17380089.html",
@@ -2282,10 +2677,14 @@
       "permalink": "/blog/2023/cnblogs-17380982/",
       "published": "2023-05-08 10:32",
       "updated": "2023-05-08 11:44",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics"
+      ],
+      "source_categories": [
         "数学"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17380982.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17380982.html",
@@ -2305,7 +2704,18 @@
       "permalink": "/blog/2023/cnblogs-17385691/",
       "published": "2023-05-09 17:12",
       "updated": "2024-10-09 18:09",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "reflections",
+        "data structures",
+        "computational geometry",
+        "graph theory",
+        "dynamic programming",
+        "game theory",
+        "algorithm basics"
+      ],
+      "source_categories": [
         "数学",
         "语法",
         "数据结构",
@@ -2316,7 +2726,7 @@
         "字符串",
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17385691.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17385691.html",
@@ -2341,6 +2751,8 @@
       "updated": "2023-05-12 14:40",
       "categories": [],
       "tags": [],
+      "source_categories": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17394093.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17394093.html",
@@ -2360,13 +2772,20 @@
       "permalink": "/blog/2023/cnblogs-17429104/",
       "published": "2023-05-24 17:51",
       "updated": "2023-05-24 17:55",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures",
+        "graph theory",
+        "dynamic programming",
+        "contest"
+      ],
+      "source_categories": [
         "数据结构",
         "图论",
         "动态规划",
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17429104.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17429104.html",
@@ -2386,14 +2805,22 @@
       "permalink": "/blog/2023/cnblogs-17455486/",
       "published": "2023-06-04 12:05",
       "updated": "2023-06-07 17:47",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures",
+        "graph theory",
+        "dynamic programming",
+        "algorithm basics",
+        "contest"
+      ],
+      "source_categories": [
         "数据结构",
         "图论",
         "动态规划",
         "算法基础",
         "Atcoder"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17455486.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17455486.html",
@@ -2415,10 +2842,14 @@
       "permalink": "/blog/2023/cnblogs-17455881/",
       "published": "2023-06-04 16:48",
       "updated": "2023-06-04 16:52",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics"
+      ],
+      "source_categories": [
         "数学"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17455881.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17455881.html",
@@ -2438,13 +2869,16 @@
       "permalink": "/blog/2023/cnblogs-17467464/",
       "published": "2023-06-08 19:29",
       "updated": "2023-06-08 19:30",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures",
+        "contest"
+      ],
+      "source_categories": [
         "数据结构",
         "Atcoder"
       ],
-      "tags": [
-        "栈模拟"
-      ],
+      "source_platform_tags": [],
       "inline_tags_inferred": [
         "栈模拟"
       ],
@@ -2466,14 +2900,21 @@
       "permalink": "/blog/2023/cnblogs-17496565/",
       "published": "2023-06-21 16:20",
       "updated": "2023-06-21 16:21",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures",
+        "graph theory",
+        "algorithm basics",
+        "contest"
+      ],
+      "source_categories": [
         "数据结构",
         "图论",
         "算法基础",
         "VP",
         "Atcoder"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17496565.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17496565.html",
@@ -2495,12 +2936,18 @@
       "permalink": "/blog/2023/cnblogs-17521051/",
       "published": "2023-07-02 17:21",
       "updated": "2023-07-02 17:43",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures",
+        "dynamic programming",
+        "contest"
+      ],
+      "source_categories": [
         "数据结构",
         "动态规划",
         "AcWing"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17521051.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17521051.html",
@@ -2520,18 +2967,19 @@
       "permalink": "/blog/2023/cnblogs-17521094/",
       "published": "2023-07-02 17:39",
       "updated": "2023-07-05 10:06",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures",
+        "dynamic programming",
+        "contest",
+        "algorithm basics"
+      ],
+      "source_categories": [
         "数据结构",
         "动态规划",
         "AcWing"
       ],
-      "tags": [
-        "dp",
-        "离散化",
-        "前缀和",
-        "树状数组",
-        "线段树"
-      ],
+      "source_platform_tags": [],
       "inline_tags_inferred": [
         "dp",
         "离散化",
@@ -2557,14 +3005,16 @@
       "permalink": "/blog/2023/cnblogs-17521119/",
       "published": "2023-07-02 18:00",
       "updated": "2024-09-29 23:15",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics",
+        "contest"
+      ],
+      "source_categories": [
         "算法基础",
         "Atcoder"
       ],
-      "tags": [
-        "排序",
-        "模拟"
-      ],
+      "source_platform_tags": [],
       "inline_tags_inferred": [
         "排序",
         "模拟"
@@ -2587,10 +3037,14 @@
       "permalink": "/blog/2023/cnblogs-17593730/",
       "published": "2023-07-31 16:11",
       "updated": "2023-07-31 16:12",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "dynamic programming"
+      ],
+      "source_categories": [
         "动态规划"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17593730.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17593730.html",
@@ -2610,10 +3064,14 @@
       "permalink": "/blog/2023/cnblogs-17611545/",
       "published": "2023-08-07 15:11",
       "updated": "2023-08-08 21:38",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "dynamic programming"
+      ],
+      "source_categories": [
         "动态规划"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17611545.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17611545.html",
@@ -2633,13 +3091,20 @@
       "permalink": "/blog/2023/cnblogs-17616549/",
       "published": "2023-08-09 12:20",
       "updated": "2023-08-11 20:37",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "data structures",
+        "dynamic programming",
+        "constructive algorithms"
+      ],
+      "source_categories": [
         "数学",
         "数据结构",
         "动态规划",
         "构造"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17616549.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17616549.html",
@@ -2659,10 +3124,14 @@
       "permalink": "/blog/2023/cnblogs-17623748/",
       "published": "2023-08-11 18:38",
       "updated": "2023-08-11 18:38",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "miscellaneous"
+      ],
+      "source_categories": [
         "杂但重要"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17623748.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17623748.html",
@@ -2682,11 +3151,16 @@
       "permalink": "/blog/2023/cnblogs-17636155/",
       "published": "2023-08-16 20:43",
       "updated": "2023-08-16 20:44",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "dynamic programming",
+        "contest"
+      ],
+      "source_categories": [
         "动态规划",
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17636155.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17636155.html",
@@ -2706,10 +3180,14 @@
       "permalink": "/blog/2023/cnblogs-17641079/",
       "published": "2023-08-18 17:08",
       "updated": "2023-08-18 17:08",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest"
+      ],
+      "source_categories": [
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17641079.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17641079.html",
@@ -2729,11 +3207,16 @@
       "permalink": "/blog/2023/cnblogs-17652057/",
       "published": "2023-08-23 16:31",
       "updated": "2023-08-24 10:57",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures",
+        "contest"
+      ],
+      "source_categories": [
         "数据结构",
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17652057.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17652057.html",
@@ -2753,10 +3236,14 @@
       "permalink": "/blog/2023/cnblogs-17655905/",
       "published": "2023-08-25 03:07",
       "updated": "2023-08-25 19:39",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest"
+      ],
+      "source_categories": [
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17655905.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17655905.html",
@@ -2776,14 +3263,21 @@
       "permalink": "/blog/2023/cnblogs-17659255/",
       "published": "2023-08-26 18:16",
       "updated": "2023-08-27 12:52",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures",
+        "contest",
+        "dynamic programming",
+        "algorithm basics"
+      ],
+      "source_categories": [
         "数据结构",
         "Codeforces",
         "动态规划",
         "算法基础",
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17659255.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17659255.html",
@@ -2805,10 +3299,14 @@
       "permalink": "/blog/2023/cnblogs-17660205/",
       "published": "2023-08-27 13:36",
       "updated": "2023-08-27 13:37",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "algorithm basics"
+      ],
+      "source_categories": [
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17660205.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17660205.html",
@@ -2828,10 +3326,14 @@
       "permalink": "/blog/2023/cnblogs-17670762/",
       "published": "2023-09-01 00:45",
       "updated": "2023-09-01 00:45",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest"
+      ],
+      "source_categories": [
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17670762.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17670762.html",
@@ -2851,12 +3353,18 @@
       "permalink": "/blog/2023/cnblogs-17672708/",
       "published": "2023-09-01 19:12",
       "updated": "2023-09-01 19:55",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "contest",
+        "algorithm basics"
+      ],
+      "source_categories": [
         "数学",
         "Codeforces",
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17672708.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17672708.html",
@@ -2878,14 +3386,22 @@
       "permalink": "/blog/2023/cnblogs-17672888/",
       "published": "2023-09-01 21:31",
       "updated": "2023-09-01 21:31",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "data structures",
+        "contest",
+        "graph theory",
+        "algorithm basics"
+      ],
+      "source_categories": [
         "数学",
         "数据结构",
         "Codeforces",
         "图论",
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17672888.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17672888.html",
@@ -2905,13 +3421,20 @@
       "permalink": "/blog/2023/cnblogs-17674011/",
       "published": "2023-09-02 18:09",
       "updated": "2023-09-02 18:09",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "data structures",
+        "contest",
+        "algorithm basics"
+      ],
+      "source_categories": [
         "数学",
         "数据结构",
         "Codeforces",
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17674011.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17674011.html",
@@ -2931,14 +3454,22 @@
       "permalink": "/blog/2023/cnblogs-17674500/",
       "published": "2023-09-03 02:15",
       "updated": "2023-09-03 02:15",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "data structures",
+        "contest",
+        "dynamic programming",
+        "algorithm basics"
+      ],
+      "source_categories": [
         "数学",
         "数据结构",
         "Codeforces",
         "动态规划",
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17674500.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17674500.html",
@@ -2958,12 +3489,18 @@
       "permalink": "/blog/2023/cnblogs-17675933/",
       "published": "2023-09-04 00:57",
       "updated": "2023-09-04 00:58",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "contest",
+        "dynamic programming",
+        "algorithm basics"
+      ],
+      "source_categories": [
         "Codeforces",
         "动态规划",
         "算法基础"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17675933.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17675933.html",
@@ -2983,13 +3520,20 @@
       "permalink": "/blog/2023/cnblogs-17706686/",
       "published": "2023-09-16 14:08",
       "updated": "2023-09-16 14:09",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "data structures",
+        "dynamic programming",
+        "contest"
+      ],
+      "source_categories": [
         "数学",
         "数据结构",
         "动态规划",
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17706686.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17706686.html",
@@ -3012,11 +3556,16 @@
       "permalink": "/blog/2023/cnblogs-17706702/",
       "published": "2023-09-16 14:22",
       "updated": "2023-09-16 14:23",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "dynamic programming",
+        "contest"
+      ],
+      "source_categories": [
         "动态规划",
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17706702.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17706702.html",
@@ -3036,12 +3585,18 @@
       "permalink": "/blog/2023/cnblogs-17713269/",
       "published": "2023-09-18 22:14",
       "updated": "2023-09-18 22:15",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "data structures",
+        "dynamic programming",
+        "contest"
+      ],
+      "source_categories": [
         "数据结构",
         "动态规划",
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17713269.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17713269.html",
@@ -3065,6 +3620,8 @@
       "updated": "2023-10-06 10:42",
       "categories": [],
       "tags": [],
+      "source_categories": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17734570.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17734570.html",
@@ -3090,12 +3647,18 @@
       "permalink": "/blog/2023/cnblogs-17734624/",
       "published": "2023-09-27 23:09",
       "updated": "2023-09-27 23:10",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "dynamic programming",
+        "contest"
+      ],
+      "source_categories": [
         "数学",
         "动态规划",
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17734624.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17734624.html",
@@ -3118,12 +3681,18 @@
       "permalink": "/blog/2023/cnblogs-17735234/",
       "published": "2023-09-28 11:01",
       "updated": "2023-09-28 11:02",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "dynamic programming",
+        "contest"
+      ],
+      "source_categories": [
         "数学",
         "动态规划",
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17735234.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17735234.html",
@@ -3145,13 +3714,20 @@
       "permalink": "/blog/2023/cnblogs-17745941/",
       "published": "2023-10-07 11:41",
       "updated": "2023-10-07 11:42",
-      "categories": [
+      "categories": [],
+      "tags": [
+        "mathematics",
+        "computational geometry",
+        "dynamic programming",
+        "contest"
+      ],
+      "source_categories": [
         "数学",
         "计算几何",
         "动态规划",
         "VP"
       ],
-      "tags": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17745941.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17745941.html",
@@ -3177,6 +3753,8 @@
       "updated": "2023-10-10 20:29",
       "categories": [],
       "tags": [],
+      "source_categories": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17755661.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17755661.html",
@@ -3204,6 +3782,8 @@
       "updated": "2023-10-25 11:08",
       "categories": [],
       "tags": [],
+      "source_categories": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/17786697.html",
       "source_url": "https://www.cnblogs.com/magicat/p/17786697.html",
@@ -3227,6 +3807,8 @@
       "updated": "2025-05-29 22:00",
       "categories": [],
       "tags": [],
+      "source_categories": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/18440950",
       "source_url": "https://www.cnblogs.com/magicat/p/18440950",
@@ -3248,6 +3830,8 @@
       "updated": "2025-10-23 16:14",
       "categories": [],
       "tags": [],
+      "source_categories": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/19160805",
       "source_url": "https://www.cnblogs.com/magicat/p/19160805",
@@ -3269,6 +3853,8 @@
       "updated": "2025-10-23 16:32",
       "categories": [],
       "tags": [],
+      "source_categories": [],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/19161008",
       "source_url": "https://www.cnblogs.com/magicat/p/19161008",
@@ -3288,10 +3874,14 @@
       "permalink": "/blog/2025/cnblogs-19161022/",
       "published": "2025-10-23 16:57",
       "updated": "2025-10-23 16:58",
-      "categories": [
+      "categories": [],
+      "tags": [
         "AI"
       ],
-      "tags": [],
+      "source_categories": [
+        "AI"
+      ],
+      "source_platform_tags": [],
       "inline_tags_inferred": [],
       "canonical": "https://www.cnblogs.com/magicat/p/19161022",
       "source_url": "https://www.cnblogs.com/magicat/p/19161022",

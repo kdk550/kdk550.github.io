@@ -25,8 +25,24 @@ from urllib.parse import unquote, urlsplit
 EXPECTED_POSTS = 121
 EXPECTED_PAGINATION_PAGES = 24
 EXPECTED_MIGRATED_IMAGES = 38
-EXPECTED_TAG_ARCHIVES = 11
-EXPECTED_CATEGORY_ARCHIVES = 16
+EXPECTED_TAG_ARCHIVES = 12
+EXPECTED_CATEGORY_ARCHIVES = 0
+EXPECTED_PROMOTED_BODY_TAGS = 11
+EXPECTED_NORMALIZED_TAGS = {
+    "AI",
+    "algorithm basics",
+    "computational geometry",
+    "constructive algorithms",
+    "contest",
+    "data structures",
+    "dynamic programming",
+    "game theory",
+    "graph theory",
+    "mathematics",
+    "miscellaneous",
+    "reflections",
+}
+CJK_RE = re.compile(r"[\u3400-\u9fff]")
 PAGINATION_FIRST = 2
 PAGINATION_LAST = PAGINATION_FIRST + EXPECTED_PAGINATION_PAGES - 1
 
@@ -716,11 +732,56 @@ def verify_navigation_news_taxonomy(
 
     totals = report.get("totals") if isinstance(report.get("totals"), dict) else {}
     inferred_tags = totals.get("inline_tags_inferred")
-    if inferred_tags != EXPECTED_TAG_ARCHIVES:
+    if inferred_tags != EXPECTED_PROMOTED_BODY_TAGS:
         errors.append(
             {
                 "check": "navigation_news_taxonomy",
-                "message": f"migration report has {inferred_tags!r} promoted body tags; expected {EXPECTED_TAG_ARCHIVES}",
+                "message": f"migration report has {inferred_tags!r} promoted body tags; expected {EXPECTED_PROMOTED_BODY_TAGS}",
+            }
+        )
+
+    reported_tags = report.get("normalized_tags")
+    normalized_tags = set(reported_tags) if isinstance(reported_tags, list) else set()
+    if normalized_tags != EXPECTED_NORMALIZED_TAGS:
+        errors.append(
+            {
+                "check": "navigation_news_taxonomy",
+                "message": "normalized English tag vocabulary does not match policy",
+                "missing": sorted(EXPECTED_NORMALIZED_TAGS - normalized_tags),
+                "unexpected": sorted(normalized_tags - EXPECTED_NORMALIZED_TAGS),
+            }
+        )
+
+    mappings = report.get("post_mappings")
+    mappings = mappings if isinstance(mappings, list) else []
+    nonempty_public_categories: List[str] = []
+    non_english_public_tags: List[Dict[str, object]] = []
+    for mapping in mappings:
+        if not isinstance(mapping, dict):
+            continue
+        post_id = str(mapping.get("post_id", "unknown"))
+        categories = mapping.get("categories")
+        if isinstance(categories, list) and categories:
+            nonempty_public_categories.append(post_id)
+        tags = mapping.get("tags")
+        if isinstance(tags, list):
+            for tag in tags:
+                if isinstance(tag, str) and CJK_RE.search(tag):
+                    non_english_public_tags.append({"post_id": post_id, "tag": tag})
+    if nonempty_public_categories:
+        errors.append(
+            {
+                "check": "navigation_news_taxonomy",
+                "message": "public post categories should be empty after tag unification",
+                "post_ids": nonempty_public_categories,
+            }
+        )
+    if non_english_public_tags:
+        errors.append(
+            {
+                "check": "navigation_news_taxonomy",
+                "message": "public tags contain Chinese text",
+                "values": non_english_public_tags,
             }
         )
 
@@ -734,6 +795,9 @@ def verify_navigation_news_taxonomy(
         "tag_archives": len(tag_archives),
         "category_archives": len(category_archives),
         "promoted_body_tags": inferred_tags,
+        "normalized_tags": sorted(normalized_tags),
+        "nonempty_public_categories": nonempty_public_categories,
+        "non_english_public_tags": non_english_public_tags,
     }
 
 
