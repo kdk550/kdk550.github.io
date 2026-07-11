@@ -25,6 +25,8 @@ from urllib.parse import unquote, urlsplit
 EXPECTED_POSTS = 121
 EXPECTED_PAGINATION_PAGES = 24
 EXPECTED_MIGRATED_IMAGES = 38
+EXPECTED_TAG_ARCHIVES = 11
+EXPECTED_CATEGORY_ARCHIVES = 16
 PAGINATION_FIRST = 2
 PAGINATION_LAST = PAGINATION_FIRST + EXPECTED_PAGINATION_PAGES - 1
 
@@ -655,6 +657,86 @@ def verify_content_features(
     }
 
 
+def verify_navigation_news_taxonomy(
+    site_root: Path,
+    report: Dict[str, object],
+    errors: List[Dict[str, object]],
+) -> Dict[str, object]:
+    """Verify the English navigation, news page, and full taxonomy archives."""
+    home_path = site_root / "index.html"
+    news_path = site_root / "news" / "index.html"
+    home = home_path.read_text(encoding="utf-8") if home_path.is_file() else ""
+    news = news_path.read_text(encoding="utf-8") if news_path.is_file() else ""
+    nav_targets = {"about": "/", "blog": "/blog/", "news": "/news/"}
+    missing_nav = [
+        label
+        for label, target in nav_targets.items()
+        if not re.search(
+            rf'<a class="nav-link" href="{re.escape(target)}">\s*{label}\b',
+            home,
+            re.IGNORECASE,
+        )
+    ]
+    if missing_nav:
+        errors.append(
+            {
+                "check": "navigation_news_taxonomy",
+                "message": "English navigation labels are missing",
+                "values": missing_nav,
+            }
+        )
+
+    announcement = "Launched the new website"
+    if not news_path.is_file() or announcement not in news:
+        errors.append(
+            {
+                "check": "navigation_news_taxonomy",
+                "message": "news page or launch announcement is missing",
+            }
+        )
+
+    tag_archives = list((site_root / "blog" / "tag").glob("*/index.html"))
+    category_archives = list(
+        (site_root / "blog" / "category").glob("*/index.html")
+    )
+    if len(tag_archives) != EXPECTED_TAG_ARCHIVES:
+        errors.append(
+            {
+                "check": "navigation_news_taxonomy",
+                "message": f"found {len(tag_archives)} tag archives; expected {EXPECTED_TAG_ARCHIVES}",
+            }
+        )
+    if len(category_archives) != EXPECTED_CATEGORY_ARCHIVES:
+        errors.append(
+            {
+                "check": "navigation_news_taxonomy",
+                "message": f"found {len(category_archives)} category archives; expected {EXPECTED_CATEGORY_ARCHIVES}",
+            }
+        )
+
+    totals = report.get("totals") if isinstance(report.get("totals"), dict) else {}
+    inferred_tags = totals.get("inline_tags_inferred")
+    if inferred_tags != EXPECTED_TAG_ARCHIVES:
+        errors.append(
+            {
+                "check": "navigation_news_taxonomy",
+                "message": f"migration report has {inferred_tags!r} promoted body tags; expected {EXPECTED_TAG_ARCHIVES}",
+            }
+        )
+
+    return {
+        "english_navigation": {
+            "expected": sorted(nav_targets),
+            "missing": missing_nav,
+        },
+        "news_page": news_path.is_file(),
+        "launch_announcement": announcement in news,
+        "tag_archives": len(tag_archives),
+        "category_archives": len(category_archives),
+        "promoted_body_tags": inferred_tags,
+    }
+
+
 def audit(repository_root: Path, report_path: Path, site_root: Path) -> Dict[str, object]:
     errors: List[Dict[str, object]] = []
     if not report_path.is_file():
@@ -715,6 +797,9 @@ def audit(repository_root: Path, report_path: Path, site_root: Path) -> Dict[str
     content_features = verify_content_features(
         site_root, post_paths, parsed, errors
     )
+    navigation_news_taxonomy = verify_navigation_news_taxonomy(
+        site_root, report, errors
+    )
 
     return {
         "status": "PASS" if not errors else "FAIL",
@@ -729,6 +814,7 @@ def audit(repository_root: Path, report_path: Path, site_root: Path) -> Dict[str
             "migrated_images": migrated_images,
             "identity": identity,
             "content_features": content_features,
+            "navigation_news_taxonomy": navigation_news_taxonomy,
         },
         "errors": errors,
     }

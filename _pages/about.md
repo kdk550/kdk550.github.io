@@ -1,6 +1,6 @@
 ---
 layout: about
-title: 关于
+title: about
 permalink: /
 subtitle: 算法竞赛 · 数据结构 · AI 工程实践
 
@@ -16,9 +16,9 @@ selected_papers: false
 social: true
 
 announcements:
-  enabled: false
-  scrollable: false
-  limit: 0
+  enabled: true
+  scrollable: true
+  limit: 5
 
 latest_posts:
   enabled: true

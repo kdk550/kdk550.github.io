@@ -12,6 +12,8 @@ magicat 的个人网站与技术博客：<https://kdk550.github.io/>
 - `_config.yml`：站点、主题、数学公式、搜索和归档配置。
 - `scripts/migrate_cnblogs_to_al_folio.py`：从本地博客园归档重建文章的可重复执行脚本。
 
+分类与标签保留不同来源：16 个 categories 来自博客园“随笔分类”；博客园平台 tags 原本为空，站内 11 个 tags 来自 5 篇文章正文中作者手写的 `tag:` 语义提示。
+
 ## 本地预览
 
 官方推荐使用 Docker：

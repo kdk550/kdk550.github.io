@@ -120,8 +120,8 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # Blog
 # -----------------------------------------------------------------------------
 
-blog_name: magicat 的博客 # blog_name will be displayed in your blog page
-blog_description: 算法竞赛、数据结构与 AI 工程实践笔记
+blog_name: magicat's blog # blog_name will be displayed in your blog page
+blog_description: Notes on competitive programming, data structures, and AI engineering
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
@@ -172,7 +172,11 @@ newsletter:
 # Collections
 # -----------------------------------------------------------------------------
 
-collections: {}
+collections:
+  news:
+    defaults:
+      layout: post
+    output: true
 
 # -----------------------------------------------------------------------------
 # Jekyll settings
@@ -310,8 +314,25 @@ jekyll-archives:
       tags: "/blog/:type/:name/"
       categories: "/blog/:type/:name/"
 
-display_tags: [] # these tags will be displayed on the front page of your blog
-display_categories: ["数据结构", "算法基础", "动态规划", "Codeforces", "数学", "图论"] # these categories will be displayed on the front page of your blog
+display_tags: ["单调队列", "排序", "模拟", "贪心", "堆", "dp", "离散化", "前缀和", "树状数组", "线段树", "栈模拟"] # explicit tags recovered from author-written tag lines
+display_categories: [
+    "数据结构",
+    "算法基础",
+    "动态规划",
+    "Codeforces",
+    "数学",
+    "图论",
+    "VP",
+    "计算几何",
+    "语法",
+    "杂但重要",
+    "构造",
+    "Atcoder",
+    "字符串",
+    "博弈",
+    "AcWing",
+    "AI",
+  ] # all CNBlogs categories
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar

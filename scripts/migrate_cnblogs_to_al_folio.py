@@ -68,6 +68,12 @@ LOCAL_ASSET_RE = re.compile(
     r"(?:\.\./)+assets/(?P<asset>[A-Za-z0-9_./%+-]+)"
 )
 GENERATED_POST_RE = re.compile(r"^\d{4}-\d{2}-\d{2}-cnblogs-\d+\.md$")
+INLINE_TAG_RE = re.compile(
+    r"^\s*(?:tags?|标签)\s*[:：]\s*(?P<values>\S.*?)\s*$",
+    re.IGNORECASE,
+)
+TAG_SEPARATOR_RE = re.compile(r"[,，、;；]+")
+FENCE_RE = re.compile(r"^\s*(?P<fence>`{3,}|~{3,})")
 
 
 def parse_args() -> argparse.Namespace:
@@ -149,6 +155,32 @@ def normalize_taxonomy(values: Any) -> list[str]:
             candidate = candidate.strip()
             if candidate and candidate not in result:
                 result.append(candidate)
+    return result
+
+
+def inline_tags(markdown: str) -> list[str]:
+    """Recover explicit author-written ``tag:`` lines outside code fences."""
+    result: list[str] = []
+    active_fence: str | None = None
+    for line in markdown.splitlines():
+        fence_match = FENCE_RE.match(line)
+        if fence_match:
+            fence = fence_match.group("fence")
+            marker = fence[0]
+            if active_fence is None:
+                active_fence = marker
+            elif active_fence == marker:
+                active_fence = None
+            continue
+        if active_fence is not None:
+            continue
+        match = INLINE_TAG_RE.match(line)
+        if not match:
+            continue
+        for value in TAG_SEPARATOR_RE.split(match.group("values")):
+            value = value.strip().strip("`*_#")
+            if value and value not in result:
+                result.append(value)
     return result
 
 
@@ -326,6 +358,7 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
         "tables": 0,
         "internal_links_rewritten": 0,
         "liquid_raw_wrapped_posts": 0,
+        "inline_tags_inferred": 0,
     }
     copied_assets: dict[str, dict[str, str]] = {}
     missing_assets: list[dict[str, str]] = []
@@ -417,6 +450,10 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
             source_url = str(metadata.get("source_url") or canonical).strip()
             categories = normalize_taxonomy(metadata.get("categories"))
             tags = normalize_taxonomy(metadata.get("tags"))
+            recovered_tags = inline_tags(body)
+            for tag in recovered_tags:
+                if tag not in tags:
+                    tags.append(tag)
             rich = metadata.get("rich") if isinstance(metadata.get("rich"), dict) else {}
             front_matter = make_front_matter(
                 post_id=post_id,
@@ -463,6 +500,7 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
             totals["tables"] += tables
             totals["internal_links_rewritten"] += post_link_count
             totals["liquid_raw_wrapped_posts"] += 1
+            totals["inline_tags_inferred"] += len(recovered_tags)
             post_mappings.append(
                 {
                     "post_id": post_id,
@@ -474,6 +512,7 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
                     "updated": metadata.get("updated"),
                     "categories": categories,
                     "tags": tags,
+                    "inline_tags_inferred": recovered_tags,
                     "canonical": canonical,
                     "source_url": source_url,
                     "formulas": formulas,
