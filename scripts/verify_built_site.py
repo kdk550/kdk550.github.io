@@ -28,6 +28,17 @@ EXPECTED_MIGRATED_IMAGES = 38
 EXPECTED_TAG_ARCHIVES = 12
 EXPECTED_CATEGORY_ARCHIVES = 0
 EXPECTED_PROMOTED_BODY_TAGS = 11
+EXPECTED_CURATED_TAG_ASSIGNMENTS = 8
+EXPECTED_CURATED_POST_TAGS = {
+    "17282641": ["data structures"],
+    "17394093": ["posts"],
+    "17734570": ["posts"],
+    "17755661": ["posts"],
+    "17786697": ["posts"],
+    "18440950": ["posts"],
+    "19160805": ["AI"],
+    "19161008": ["AI"],
+}
 EXPECTED_NORMALIZED_TAGS = {
     "AI",
     "algorithm basics",
@@ -40,7 +51,7 @@ EXPECTED_NORMALIZED_TAGS = {
     "graph theory",
     "mathematics",
     "miscellaneous",
-    "reflections",
+    "posts",
 }
 CJK_RE = re.compile(r"[\u3400-\u9fff]")
 PAGINATION_FIRST = 2
@@ -740,6 +751,26 @@ def verify_navigation_news_taxonomy(
             }
         )
 
+    curated_assignments = totals.get("curated_tag_assignments")
+    if curated_assignments != EXPECTED_CURATED_TAG_ASSIGNMENTS:
+        errors.append(
+            {
+                "check": "navigation_news_taxonomy",
+                "message": f"migration report has {curated_assignments!r} curated tag assignments; expected {EXPECTED_CURATED_TAG_ASSIGNMENTS}",
+            }
+        )
+
+    reported_curated_tags = report.get("curated_post_tags")
+    if reported_curated_tags != EXPECTED_CURATED_POST_TAGS:
+        errors.append(
+            {
+                "check": "navigation_news_taxonomy",
+                "message": "curated post tag assignments do not match policy",
+                "expected": EXPECTED_CURATED_POST_TAGS,
+                "observed": reported_curated_tags,
+            }
+        )
+
     reported_tags = report.get("normalized_tags")
     normalized_tags = set(reported_tags) if isinstance(reported_tags, list) else set()
     if normalized_tags != EXPECTED_NORMALIZED_TAGS:
@@ -756,6 +787,7 @@ def verify_navigation_news_taxonomy(
     mappings = mappings if isinstance(mappings, list) else []
     nonempty_public_categories: List[str] = []
     non_english_public_tags: List[Dict[str, object]] = []
+    invalid_curated_posts: List[Dict[str, object]] = []
     for mapping in mappings:
         if not isinstance(mapping, dict):
             continue
@@ -764,6 +796,20 @@ def verify_navigation_news_taxonomy(
         if isinstance(categories, list) and categories:
             nonempty_public_categories.append(post_id)
         tags = mapping.get("tags")
+        expected_curated_tags = EXPECTED_CURATED_POST_TAGS.get(post_id)
+        if expected_curated_tags is not None:
+            if (
+                mapping.get("curated_tags") != expected_curated_tags
+                or tags != expected_curated_tags
+            ):
+                invalid_curated_posts.append(
+                    {
+                        "post_id": post_id,
+                        "expected": expected_curated_tags,
+                        "curated_tags": mapping.get("curated_tags"),
+                        "tags": tags,
+                    }
+                )
         if isinstance(tags, list):
             for tag in tags:
                 if isinstance(tag, str) and CJK_RE.search(tag):
@@ -784,6 +830,14 @@ def verify_navigation_news_taxonomy(
                 "values": non_english_public_tags,
             }
         )
+    if invalid_curated_posts:
+        errors.append(
+            {
+                "check": "navigation_news_taxonomy",
+                "message": "curated posts do not have their expected public tags",
+                "values": invalid_curated_posts,
+            }
+        )
 
     return {
         "english_navigation": {
@@ -795,9 +849,12 @@ def verify_navigation_news_taxonomy(
         "tag_archives": len(tag_archives),
         "category_archives": len(category_archives),
         "promoted_body_tags": inferred_tags,
+        "curated_tag_assignments": curated_assignments,
+        "curated_post_tags": reported_curated_tags,
         "normalized_tags": sorted(normalized_tags),
         "nonempty_public_categories": nonempty_public_categories,
         "non_english_public_tags": non_english_public_tags,
+        "invalid_curated_posts": invalid_curated_posts,
     }
 
 

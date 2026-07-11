@@ -99,13 +99,26 @@ TAXONOMY_TAG_MAP = {
     "图论": "graph theory",
     "VP": "contest",
     "计算几何": "computational geometry",
-    "语法": "reflections",
+    "语法": "posts",
     "杂但重要": "miscellaneous",
     "构造": "constructive algorithms",
     "字符串": "algorithm basics",
     "博弈": "game theory",
     "AI": "AI",
     "前缀和": "algorithm basics",
+}
+
+# Curated assignments for posts whose CNBlogs source did not contain a
+# category, platform tag, or explicit author-written tag line.
+CURATED_POST_TAGS = {
+    "17282641": ["data structures"],
+    "17394093": ["posts"],
+    "17734570": ["posts"],
+    "17755661": ["posts"],
+    "17786697": ["posts"],
+    "18440950": ["posts"],
+    "19160805": ["AI"],
+    "19161008": ["AI"],
 }
 
 
@@ -217,8 +230,8 @@ def inline_tags(markdown: str) -> list[str]:
     return result
 
 
-def normalized_english_tags(*taxonomies: list[str]) -> list[str]:
-    """Merge source taxonomy values into the configured English tag set."""
+def normalized_english_tags(post_id: str, *taxonomies: list[str]) -> list[str]:
+    """Merge source and curated values into the configured English tag set."""
     result: list[str] = []
     for values in taxonomies:
         for value in values:
@@ -227,6 +240,9 @@ def normalized_english_tags(*taxonomies: list[str]) -> list[str]:
                 raise ValueError(f"No English tag mapping configured for {value!r}")
             if mapped not in result:
                 result.append(mapped)
+    for tag in CURATED_POST_TAGS.get(post_id, []):
+        if tag not in result:
+            result.append(tag)
     return result
 
 
@@ -410,6 +426,7 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
         "internal_links_rewritten": 0,
         "liquid_raw_wrapped_posts": 0,
         "inline_tags_inferred": 0,
+        "curated_tag_assignments": 0,
         "normalized_tag_assignments": 0,
     }
     copied_assets: dict[str, dict[str, str]] = {}
@@ -504,7 +521,7 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
             source_platform_tags = normalize_taxonomy(metadata.get("tags"))
             recovered_tags = inline_tags(body)
             tags = normalized_english_tags(
-                source_categories, source_platform_tags, recovered_tags
+                post_id, source_categories, source_platform_tags, recovered_tags
             )
             rich = metadata.get("rich") if isinstance(metadata.get("rich"), dict) else {}
             front_matter = make_front_matter(
@@ -555,6 +572,9 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
             totals["internal_links_rewritten"] += post_link_count
             totals["liquid_raw_wrapped_posts"] += 1
             totals["inline_tags_inferred"] += len(recovered_tags)
+            totals["curated_tag_assignments"] += len(
+                CURATED_POST_TAGS.get(post_id, [])
+            )
             totals["normalized_tag_assignments"] += len(tags)
             post_mappings.append(
                 {
@@ -570,6 +590,7 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
                     "source_categories": source_categories,
                     "source_platform_tags": source_platform_tags,
                     "inline_tags_inferred": recovered_tags,
+                    "curated_tags": CURATED_POST_TAGS.get(post_id, []),
                     "canonical": canonical,
                     "source_url": source_url,
                     "formulas": formulas,
@@ -604,8 +625,9 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
         "managed_image_directory": str(managed_assets_dir.relative_to(repo_root)),
         "slug_policy": "cnblogs-<post_id>",
         "permalink_policy": "/blog/<year>/cnblogs-<post_id>/",
-        "taxonomy_policy": "merge source categories and explicit body tags into English tags",
+        "taxonomy_policy": "merge source categories, explicit body tags, and curated post assignments into English tags",
         "taxonomy_tag_map": TAXONOMY_TAG_MAP,
+        "curated_post_tags": CURATED_POST_TAGS,
         "normalized_tags": sorted(
             {
                 tag
