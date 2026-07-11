@@ -1,0 +1,5 @@
+# Force LF line endings, needed for Docker to work on Windows
+*.sh text eol=lf
+
+# Migrated posts intentionally preserve Markdown hard breaks and source-code whitespace.
+_posts/*.md -whitespace
