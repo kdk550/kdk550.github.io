@@ -1,0 +1,1476 @@
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> P5318 【深基18.例3】查找文献 | magicat </title> <meta name="author" content="magicat "> <meta name="description" content="原题地址：P5318 【深基18.例3】查找文献 根据描述和样例 分析如下： 1. 先对 边 u- v 排一个序，满足字典序的需求 2. dfs和bfs 都要记录当前点是否已经被访问过了，若之前没被访问过，继续dfs或bfs。防止出现重复访问 代码如下:"> <meta name="keywords" content="算法竞赛, 数据结构, 动态规划, 图论, 数学, AI, LLM"> <meta property="og:site_name" content="magicat"> <meta property="og:type" content="article"> <meta property="og:title" content="magicat | P5318 【深基18.例3】查找文献"> <meta property="og:url" content="https://kdk550.github.io/blog/2022/cnblogs-16535143/"> <meta property="og:description" content="原题地址：P5318 【深基18.例3】查找文献 根据描述和样例 分析如下： 1. 先对 边 u- v 排一个序，满足字典序的需求 2. dfs和bfs 都要记录当前点是否已经被访问过了，若之前没被访问过，继续dfs或bfs。防止出现重复访问 代码如下:"> <meta property="og:image" content="/assets/img/magicat-avatar.jpg"> <meta property="og:locale" content="zh-CN"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="P5318 【深基18.例3】查找文献"> <meta name="twitter:description" content="原题地址：P5318 【深基18.例3】查找文献 根据描述和样例 分析如下： 1. 先对 边 u- v 排一个序，满足字典序的需求 2. dfs和bfs 都要记录当前点是否已经被访问过了，若之前没被访问过，继续dfs或bfs。防止出现重复访问 代码如下:"> <meta name="twitter:image" content="/assets/img/magicat-avatar.jpg"> <script type="application/ld+json">
+    {
+        "author":
+        {
+            "@type": "Person",
+            "name": "magicat "
+        },
+        "url": "https://kdk550.github.io/blog/2022/cnblogs-16535143/",
+        "@type": "BlogPosting",
+        "description": "原题地址：P5318 【深基18.例3】查找文献 根据描述和样例 分析如下： 1. 先对 边 u- v 排一个序，满足字典序的需求 2. dfs和bfs 都要记录当前点是否已经被访问过了，若之前没被访问过，继续dfs或bfs。防止出现重复访问 代码如下:",
+        "headline": "P5318 【深基18.例3】查找文献",
+        
+        "sameAs": ["https://github.com/kdk550"],
+        
+        "name": "magicat ",
+        "@context": "https://schema.org"
+    }
+  </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%90%B1&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://kdk550.github.io/blog/2022/cnblogs-16535143/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> magicat </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">关于 </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">博客 </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">P5318 【深基18.例3】查找文献</h1> <p class="post-meta"> Created on July 30, 2022 </p> <p class="post-tags"> <a href="/blog/2022"> <i class="fa-solid fa-calendar fa-sm"></i> 2022 </a>   ·   <a href="/blog/category/%E5%9B%BE%E8%AE%BA"> <i class="fa-solid fa-tag fa-sm"></i> 图论</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>原题地址：<a href="https://www.luogu.com.cn/problem/P5318" rel="external nofollow noopener" target="_blank">P5318 【深基18.例3】查找文献</a></p> <p>根据描述和样例 分析如下：</p> <ol> <li>先对 边 <strong>u-&gt;v 排一个序，满足字典序的需求</strong> </li> <li><strong>dfs和bfs 都要记录当前点是否已经被访问过了，若之前没被访问过，继续dfs或bfs。防止出现重复访问</strong></li> </ol> <p><strong>代码如下:</strong></p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;vector&gt;
+#include&lt;set&gt;
+#include&lt;map&gt;
+#include&lt;queue&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+
+
+int n,m;
+int d1[100010],d2[100010];
+bool st[100010];
+vector&lt;int&gt; son[100010];
+void dfs(int u)
+{
+    cout&lt;&lt;u&lt;&lt;" ";
+    st[u]=true;
+    for(auto v:son[u])
+        if(st[v]==false)
+            dfs(v);
+
+}
+void bfs()
+{
+    st[1]=true;
+    queue&lt;int&gt; q;   q.push(1);
+    while(!q.empty())
+    {
+        int u=q.front();q.pop();
+        cout&lt;&lt;u&lt;&lt;" ";
+        for(auto v:son[u])   
+            if(st[v]==false)
+            {
+                st[v]=true;
+                q.push(v);
+            }
+    }
+}
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;m;
+    for(int i=1;i&lt;=m;i++)
+    {
+        int x,y;    cin&gt;&gt;x&gt;&gt;y;
+        son[x].push_back(y);
+    }
+    for(int i=1;i&lt;=n;i++)
+        sort(son[i].begin(),son[i].end());
+    dfs(1);    cout&lt;&lt;endl;
+    memset(st,false,sizeof st);
+    bfs();     cout&lt;&lt;endl;
+    return 0;
+}
+</code></pre></div></div> </div> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 magicat . 使用 <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> 构建，由 <a href="https://pages.github.com/" rel="external nofollow noopener" target="_blank">GitHub Pages</a> 托管。 Last updated: July 11, 2026. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-关于",
+    title: "关于",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-博客",
+          title: "博客",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "post-rtx5060ti-配置xinference",
+        
+          title: "RTX5060TI 配置Xinference",
+        
+        description: "RTX5060TI 配置Xinference CUDA 配置环境和安装依赖 下载模型 在这个网站自助 运行Xinference windows不支持0.0.0.需要使用127.0.0.1 ip的方式 xinference-local --host 0.0.0.0 --port 9997 xinference-loca…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/cnblogs-19161022/";
+          
+        },
+      },{id: "post-npu配置xinference环境-并部署embedding和rerank模型",
+        
+          title: "npu配置Xinference环境，并部署embedding和rerank模型",
+        
+        description: "在我司服务器上部署，但是尝试了其他文章的docker镜像，出现算子错误等问题，后面又用回 参考文献 后面我直接通过打开 http://127.0.0.1:9997 配置embedding和rerank模型。",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/cnblogs-19161008/";
+          
+        },
+      },{id: "post-rtx-5060ti-部署llama-factory",
+        
+          title: "RTX 5060TI 部署llama-factory",
+        
+        description: "搭建环境 NVIDIA驱动略，CUDA略 如果出现环境冲突，请尝试使用pip install --no-deps -e解决",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/cnblogs-19160805/";
+          
+        },
+      },{id: "post-xcpc最后的故事",
+        
+          title: "XCPC最后的故事",
+        
+        description: "update：为了学弟的救赎，合作在2024年ICPC昆明和香港拿下铜和银 最后在23年的桂林和济南拿下了两个铜牌，于24年5月在广州打了退役之战 end 换blog了",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/cnblogs-18440950/";
+          
+        },
+      },{id: "post-三轮考核",
+        
+          title: "三轮考核",
+        
+        description: "三轮考核 Codeforces游玩攻略 : 考核标准：codeforces rating \(\geq\) 1200 任务 ： 1. 自行参加codeforces的div.2 3 4的比赛，并赛后补题 2. 设置组织为 Shaoguan University 3. 自行组织每周三，周六，周日下午的训练（我会告诉第1个…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17786697/";
+          
+        },
+      },{id: "post-算法",
+        
+          title: "算法",
+        
+        description: "1. 学习道路： 1. 通过第一学期的算法学习，顺利成为一名算法竞赛选手。 2. 学习目标 ：通过科学的方式学习算法，向 ACM-ICPC（是计算机类竞赛最有含金量的比赛）奖牌冲锋 3. 在第二学期参加比赛，比赛中学习，学习中比赛，其中每年能够有多次外出比赛的机会 参加的主要赛事（A类赛事或企业认可度高的赛事）： 比…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17755661/";
+          
+        },
+      },{id: "post-2022-china-collegiate-programming-contest-ccpc-weihai-site-eajgci",
+        
+          title: "2022 China Collegiate Programming Contest (CCPC) Weihai Site EAJGCI",
+        
+        description: "2022 China Collegiate Programming Contest (CCPC) Weihai Site 目录 - 2022 China Collegiate Programming Contest (CCPC) Weihai Site - VP概况 - E - Python Will be Fast…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17745941/";
+          
+        },
+      },{id: "post-2022-china-collegiate-programming-contest-ccpc-mianyang-onsite-gchmad",
+        
+          title: "2022 China Collegiate Programming Contest (CCPC) Mianyang Onsite GCHMAD",
+        
+        description: "2022 China Collegiate Programming Contest (CCPC) Mianyang Onsite 目录 - 2022 China Collegiate Programming Contest (CCPC) Mianyang Onsite - VP 情况 - G - Let Them E…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17735234/";
+          
+        },
+      },{id: "post-the-2021-china-collegiate-programming-contest-harbin-jbeidg",
+        
+          title: "The 2021 China Collegiate Programming Contest (Harbin) JBEIDG",
+        
+        description: "The 2021 China Collegiate Programming Contest (Harbin) 目录 - The 2021 China Collegiate Programming Contest (Harbin) - VP概况 - J - Local Minimum - B - Magical Sub…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17734624/";
+          
+        },
+      },{id: "post-极光工作室",
+        
+          title: "极光工作室",
+        
+        description: "极光算法二轮考核 目录 - 极光算法二轮考核 - 算法端概况 - 考核内容 - C with STL （string，map，set） - 位运算 - 排序 - 二轮考核练习 算法端概况 1. 获奖情况 ： 算法端曾荣获蓝桥杯国一3次、国二和国三多次，今年首次参加的比赛获得：睿抗国一，中国高校计算机大赛——团体程序设…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17734570/";
+          
+        },
+      },{id: "post-2022年中国大学生程序设计竞赛女生专场-aceghil",
+        
+          title: "2022年中国大学生程序设计竞赛女生专场 ACEGHIL",
+        
+        description: "2022年中国大学生程序设计竞赛女生专场 目录 - 2022年中国大学生程序设计竞赛女生专场 - 概况 - A - 减肥计划 - C - 测量学 - E - 睡觉 - G - 排队打卡 - H - 提瓦特之旅 - I - 宠物对战 - L - 彩色的树 概况 因为女生赛，要给女队找找题，我又试了下2022女生赛，题目…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17713269/";
+          
+        },
+      },{id: "post-2021年中国大学生程序设计竞赛女生专场-akdgibc",
+        
+          title: "2021年中国大学生程序设计竞赛女生专场 AKDGIBC",
+        
+        description: "2021年中国大学生程序设计竞赛女生专场 目录 - 2021年中国大学生程序设计竞赛女生专场 - 概况 - C - 连锁商店 - B - 攻防演练 - I - 驾驶卡丁车 - G - 3G网络 - D - 修建道路 - K - 音乐游戏 - A - 公交线路 概况 ![image-20230916141124495]…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17706702/";
+          
+        },
+      },{id: "post-2022-international-collegiate-programming-contest-jinan-site-mkaedgc",
+        
+          title: "2022 International Collegiate Programming Contest, Jinan Site MKAEDGC",
+        
+        description: "2022 International Collegiate Programming Contest, Jinan Site 目录 - 2022 International Collegiate Programming Contest, Jinan Site - VP概况 - M - Best Carry Player…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17706686/";
+          
+        },
+      },{id: "post-educational-codeforces-round-7-a-e",
+        
+          title: "Educational Codeforces Round 7 A - E",
+        
+        description: "Educational Codeforces Round 7 目录 - Educational Codeforces Round 7 - A - Infinite Sequence - B - The Time - C - Not Equal on a Segment - D - Optimal Number Per…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17675933/";
+          
+        },
+      },{id: "post-educational-codeforces-round-6-a-e",
+        
+          title: "Educational Codeforces Round 6 A - E",
+        
+        description: "Educational Codeforces Round 6 目录 - Educational Codeforces Round 6 - A - Professor GukiZ&#39;s Robot - B - Grandfather Dovlet’s calculator - C - Pearls in a Row…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17674500/";
+          
+        },
+      },{id: "post-educational-codeforces-round-23-a-f",
+        
+          title: "Educational Codeforces Round 23 A - F",
+        
+        description: "Educational Codeforces Round 23 目录 - Educational Codeforces Round 23 - A - Treasure Hunt - B - Makes And The Product - C - Really Big Numbers - D - Imbalanced…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17674011/";
+          
+        },
+      },{id: "post-educational-codeforces-round-15-a-e",
+        
+          title: "Educational Codeforces Round 15 A - E",
+        
+        description: "Educational Codeforces Round 15 目录 - Educational Codeforces Round 15 - A - Maximum Increase - B - Powers of Two - C - Cellular Network - D - Road to Post Offic…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17672888/";
+          
+        },
+      },{id: "post-educational-codeforces-round-5-a-e",
+        
+          title: "Educational Codeforces Round 5 A-E",
+        
+        description: "Educational Codeforces Round 5 垫底咯，中间老师找我去聊了下新学期的机房借用和训练，但出去前就只有我没出E 目录 - Educational Codeforces Round 5 - A Comparing Two Long Integers - B Dinner with Emma…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17672708/";
+          
+        },
+      },{id: "post-the-2022-icpc-asia-nanjing-regional-contest",
+        
+          title: "The 2022 ICPC Asia Nanjing Regional Contest",
+        
+        description: "The 2022 ICPC Asia Nanjing Regional Contest 出题人题解 目录 - The 2022 ICPC Asia Nanjing Regional Contest - I - Perfect Palindrome - G - Inscryption - A - Stop, Yeste…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17670762/";
+          
+        },
+      },{id: "post-近段时间出现可以用multiset解决的题目",
+        
+          title: "近段时间出现可以用multiset解决的题目",
+        
+        description: "近段时间出现可以用multiset解决的题目 AtCoder Beginner Contest 308 G Minimum Xor Pair Query 题意：有一个数组进行 \(3\) 种操作: 1. 加一个数 2. 删一个数 3. 打印数组 \(\min { 1 \leq i &lt; j \leq n} {a i \…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17660205/";
+          
+        },
+      },{id: "post-codeforces-round-894-div-3-abcdefg-ak",
+        
+          title: "Codeforces Round 894 (Div. 3) ABCDEFG AK",
+        
+        description: "Codeforces Round 894 (Div. 3) 第一次div3 ak，虽然是vp的，后三题 A - Gift Carpet 穷举四个不同列即可，时间复杂度 \(O(M ^ 4)\) B - Sequence Game 分两种情况： 1. 对 b 数组 的每个 \(b {i - 1} &gt; b i (2 \l…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17659255/";
+          
+        },
+      },{id: "post-2020-2021-acm-icpc-asia-nanjing-regional-contest-klmefah",
+        
+          title: "2020-2021 ACM-ICPC, Asia Nanjing Regional Contest KLMEFAH",
+        
+        description: "2020-2021 ACM-ICPC, Asia Nanjing Regional Contest (XXI Open Cup, Grand Prix of Nanjing) 目录 - 2020-2021 ACM-ICPC, Asia Nanjing Regional Contest (XXI Open Cup, G…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17655905/";
+          
+        },
+      },{id: "post-german-collegiate-programming-contest-2021-abcehijklg-namomo-camp-day1-baidhgcfe",
+        
+          title: "German Collegiate Programming Contest 2021  ABCEHIJKLG namomo camp day1 BAIDHGCFE",
+        
+        description: "namomo camp day1 目录 - namomo camp day1 - B - Brexiting and Brentering - A - Amusement Arcade - I - Monty&#39;s Hall - D - Excursion to Porvoo - H - Looking for Wal…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17652057/";
+          
+        },
+      },{id: "post-the-2022-icpc-asia-regionals-online-contest-ii-ejfb",
+        
+          title: "The 2022 ICPC Asia Regionals Online Contest (II) EJFB",
+        
+        description: "The 2022 ICPC Asia Regionals Online Contest (II) E An Interesting Sequence 232323232323 323232323232 J A Game about Increasing Sequences 能拿的区间奇偶性判断 F Infinity…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17641079/";
+          
+        },
+      },{id: "post-the-2022-icpc-asia-regionals-online-contest-i-c-l-a",
+        
+          title: "The 2022 ICPC Asia Regionals Online Contest (I) C L A",
+        
+        description: "The 2022 ICPC Asia Regionals Online Contest (I) C 统计度的大小，算贡献，特判 \(n = 1\) L 动态规划 预处理所有不合法情况 A 观察得： 1. 一团大小为 \(k\) 的 \(1\) 可以删掉 \(\dfrac{k}{2} + k \% 2\) 2. 对于…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17636155/";
+          
+        },
+      },{id: "post-百度之星初赛第一场游记",
+        
+          title: "百度之星初赛第一场游记",
+        
+        description: "准大三第一次打，之前因为觉得太难了就没打过 蓝桥CB国三，天梯个人国三，XCPC铁 中午到机房准备开始比赛 下午13:50发现手机的监考小程序挂掉了，然后试图重进，一直到比赛开始都没进去 比赛开始，其他人的客户端刷不出来题目，后来通知延期两小时举行，在机房看了下番 没有午睡debuff 第一题是dijkstra板子题…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17623748/";
+          
+        },
+      },{id: "post-2023-8-9-2023-8-11-做题",
+        
+          title: "2023/8/9~2023/8/11 做题",
+        
+        description: "2023/8/9 2023/8/11 做题 目录 - 2023/8/9 2023/8/11 做题 - Codeforces Round 121 (Div. 1) C. Fools and Roads - Codeforces Round 343 (Div. 2) C. Famil Door and Brackets…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17616549/";
+          
+        },
+      },{id: "post-一些dp",
+        
+          title: "一些DP",
+        
+        description: "一些做题节选 目录 - 一些做题节选 - P1273 有线电视网 - [P2279 [HNOI2003] 消防局的设立](/blog/2023/cnblogs-17611545/ p2279-hnoi2003-消防局的设立) - [P5662 [CSP-J2019] 纪念品](/blog/2023/cnblogs-1…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17611545/";
+          
+        },
+      },{id: "post-p1273-有线电视网",
+        
+          title: "P1273 有线电视网",
+        
+        description: "P1273 有线电视网 树上背包的变形 \[f {u, j + k} = \max {v \in son(u)} f {u, j} + f {v, k} - w {u,v} \] 这里写成 \(j + k\) 是为了和代码一致。 \(f {u,j + k}\) 代表以 \(u\) 为根的子树中，选择了 \(j + k…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17593730/";
+          
+        },
+      },{id: "post-atcoder-beginner-contest-308-a-f",
+        
+          title: "AtCoder Beginner Contest 308 A~F",
+        
+        description: "AtCoder Beginner Contest 308 ![image-20230702174419133]() 手速有点慢 A - New Scheme 判断给定数字是否满足条件 B - Default Price 给出要买的颜色，和一些颜色价格，算出总花费，用 map mp; 统计要买的数量，然后直接算 C…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17521119/";
+          
+        },
+      },{id: "post-acwing-第110场周赛-智商药",
+        
+          title: "AcWing,第110场周赛 智商药",
+        
+        description: "AcWing,第110场周赛 智商药 UPD:2023/7/5发现维护 \(dp r = \sum {i = l}^{r - 1}dp i\) 直接用前缀和就可以了，不需要上树状数组和线段树。 tag：dp，离散化，前缀和，树状数组， 线段树 分析：每个药的 \(r\) ，只有 \([l, r - 1]\) 的方法对…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17521094/";
+          
+        },
+      },{id: "post-acwing-第108场周赛-拼接数组",
+        
+          title: "AcWing,第108场周赛 拼接数组",
+        
+        description: "AcWing,第108场周赛 拼接数组 前置知识：P1115 最大子段和 的dp和线段树作法 分析：对于一个数组，可以直接求出最大字段和，但由于多个数组拼接在一起，没有办法直接求得拼接数组的最大字段和。求最大字段和我已知有两种方法： 1. dp 2. 线段树 先对每一个数组用线段树求出最大前缀和，最大字段和，最大后缀…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17521051/";
+          
+        },
+      },{id: "post-atcoder-beginner-contest-302-abcdef",
+        
+          title: "AtCoder Beginner Contest 302 ABCDEF",
+        
+        description: "AtCoder Beginner Contest 302 F 看错题了，以为是求取得 \(1,2,\dots,m\) 。 后面npy告诉我是 \(1 \text{ and } m\) 。 A - Attack \(B \times x \geq A\) ，求 \(x\) B - Find snuke 8 个方向找 \…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17496565/";
+          
+        },
+      },{id: "post-atcoder-beginner-contest-240-d",
+        
+          title: "AtCoder Beginner Contest 240 D",
+        
+        description: "D - Strange Balls tag：栈模拟 发现自己隔了快半年再做此题看错相同数字的球消失的条件，不是 \(k \geq 2\) 而是 \(k = a i\) 电子竞技不需要视力 题意：当球 \(a i (1 \leq i \leq N)\) 有 \(a i\) 个一起出现时，这 \(a i\) 个球就会消失…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17467464/";
+          
+        },
+      },{id: "post-p4942-小凯的数字",
+        
+          title: "P4942 小凯的数字",
+        
+        description: "P4942 小凯的数字 题目和数据范围提示有 \(O(1)\) 作法。 直接拆数字，会TLE $res \mod 9 = l(l + 1)(l + 2)...(r - 1)r \mod 9$ 找规律不难发现 \(\texttt{所有数位的数字之和} \mod 9\) 即为答案。 但直接求所有数位之和明显不行， （数位…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17455881/";
+          
+        },
+      },{id: "post-atcoder-beginner-contest-304-abcdef",
+        
+          title: "AtCoder Beginner Contest 304 ABCDEF",
+        
+        description: "AtCoder Beginner Contest 304 感觉手速场，后 \(80\) 分钟纯纯坐牢， A - First Player 一些人坐成一个环，从年龄最小开始输出名字 B - Subscribers 对在范围内的数，将后几位变为0 C - Virus 染病毒的点可以传染给欧几里得距离小于等于 \(d\)…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17455486/";
+          
+        },
+      },{id: "post-2021四川省赛",
+        
+          title: "2021四川省赛",
+        
+        description: "The 2021 Sichuan Provincial Collegiate Programming Contest A - Chuanpai K - K-skip Permutation D - Rock Paper Scissors M - True Story H - Nihongo wa Muzukashii…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17429104/";
+          
+        },
+      },{id: "post-师妹的整理",
+        
+          title: "师妹的整理",
+        
+        description: "Digital DP template Digit sum Non-falling number P1836 Number of pages P2602 [ZJOI2010] Digital count P2657 [SCOI2009] windy num P4124 [CQOI2016] Mobile phone…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17394093/";
+          
+        },
+      },{id: "post-个人模板",
+        
+          title: "个人模板",
+        
+        description: "Math &amp; DP &amp; Data structure &amp; Graph &amp; Geometry &amp; Game 表演者: magicat 💕 nannan 目录 - - Math &amp; DP &amp; Data structure &amp; Graph &amp; Geometry &amp; Game - Head - 快读1 - 快读2 - 快读3…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17385691/";
+          
+        },
+      },{id: "post-数论分块总结",
+        
+          title: "数论分块总结",
+        
+        description: "AtCoder abc230\ e E - Fraction Floor Sum AtCoder abc230\ e Fraction Floor Sum 求: \[\sum {i = 1}^N ⌊\dfrac{N}{i}⌋ \] 是一个很裸的数论分块 P2261 [CQOI2007]余数求和 [P2261 [CQO…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17380982/";
+          
+        },
+      },{id: "post-2023湖北省赛-vp-5题mchjf-1题k",
+        
+          title: "2023湖北省赛 VP 5题MCHJF + 1题K",
+        
+        description: "2023湖北省赛 榜单 M 解方程 C 思维，对角线放法，放一个对角线隔一列继续放对角线 H 首先观察到deg权值的数量很少，只需要记录deg权值为 \(x\) 的数量，再与其他权值 \(x&#39;\) 做那个公式的值乘 \(x\) 的数量乘 \(x&#39;\) 的数量即可 我的作法离散化了一下 J 思维，模拟，很快得到思路，但…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17380089/";
+          
+        },
+      },{id: "post-c-ehab-and-path-etic-mexs",
+        
+          title: "C. Ehab and Path-etic MEXs",
+        
+        description: "C. Ehab and Path-etic MEXs 1. 对于成链的情况， \(\text{MEX} = n - 1\) 2. 一般的，一定有一条路径包含0和1，则可以确定 \(\text{MEX} \geq 2\) ，观察发现，对于度数 \(\geq 3\) 的点，我们在他的三条边赋值为0, 1, 2使得其他路径…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17378153/";
+          
+        },
+      },{id: "post-chemistry-experiment-codeforces-round-247-div-2-线段树动态开点-二分",
+        
+          title: "Chemistry Experiment Codeforces Round 247 (Div. 2) 线段树动态开点，二分",
+        
+        description: "第一次写的时候还不会线段树的动态开点，写了一个是线段树但是是 \(O(N^2)\) 的写法，现在用动态开点武装了自己，会了正解 \(O(qlog n^2)\) 。首先建立一个权值线段树，但这里的权值很大，通过动态开点去建树来节省空间，对于两种操作： 1. 操作1，常见的动态开点的单点修改 2. 操作2，二分答案，然后…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17368435/";
+          
+        },
+      },{id: "post-区间不同数的个数-二维数点-离线-扫描线-离线-可持久化线段树-在线",
+        
+          title: "区间不同数的个数 二维数点（离线）  扫描线（离线）  可持久化线段树（在线）",
+        
+        description: "[[SDOI2009] HH的项链](https://www.luogu.com.cn/problem/P1972 &quot; [SDOI2009] HH的项链&quot;) 按时间先后顺序对应：二维数点（离线） 扫描线（离线） 可持久化线段树（在线） 写的比较粗糙，偏主观理解 二维数点，对于询问的 \([l, r]\) 区间我们只需…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17365044/";
+          
+        },
+      },{id: "post-可持久化线段树模板-区间第k小数-区间前k大数之和",
+        
+          title: "可持久化线段树模板 区间第k小数,区间前k大数之和",
+        
+        description: "第K小数 The 17th Zhejiang Provincial Collegiate Programming Contest E题 区间前k大数之和 VP的时候小师妹读了这道题告诉我，很快想到了一个错误解法，后面画图发现答案是 \(\text{平方和} + \text{区间前k大之和}\) ，想不到用什么数据结构…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17364818/";
+          
+        },
+      },{id: "post-权值线段树模板",
+        
+          title: "权值线段树模板",
+        
+        description: "【模板】普通平衡树",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17360427/";
+          
+        },
+      },{id: "post-线段树的动态开点模板",
+        
+          title: "线段树的动态开点模板",
+        
+        description: "学习自 数据结构学习笔记(5)动态开点线段树动态开点线段树&quot;) 动态开点线段树 感谢大佬们博客的帮助",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17359861/";
+          
+        },
+      },{id: "post-d-solve-the-maze",
+        
+          title: "D. Solve The Maze",
+        
+        description: "D. Solve The Maze 大意:建墙让所有好人可以到达坐标 \((n,m)\) ，任何一个坏人都不能到达坐标 \((n,m)\) 分析： 1. 把坏人直接关起来，在坏人的四面建墙， 2. 统计好人的人数 3. 从坐标 \((n,m)\) 去遍历，整个地图，看能不能遇到所有好人 3可以通过dsu， flood…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17341063/";
+          
+        },
+      },{id: "post-d-non-zero-segments",
+        
+          title: "D. Non-zero Segments",
+        
+        description: "D. Non-zero Segments 过程：手玩样例发现，前缀和中出现相同值即为区间和为0 由前缀和公式 \(S i = S {i - 1} + A i\) 可以知道，区间 \([l,r]\) 满足题意即为 \(S r = S {l-1}\) ，对于每个这样的区间插入个巨大的数，让区间 \([1, r-1]\)…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17340896/";
+          
+        },
+      },{id: "post-湖南省第十八届大学生计算机程序设计竞赛-hncpc2022-vp记录",
+        
+          title: "湖南省第十八届大学生计算机程序设计竞赛（HNCPC2022）VP记录",
+        
+        description: "随便记录下 湖南省第十八届大学生计算机程序设计竞赛（HNCPC2022） 官方题解 VP情况 队友卡I占了机时导致罚时有点爆炸，也是策略的失误 6题837罚时 补到GH就不补个位数题 J 判断斐波那契区间有没有一段的和等于 \(n\) 由于 \(n \leq 10^{15}\) 直接暴力即可 K 判断字符串有没有不是…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17325343/";
+          
+        },
+      },{id: "post-usaco12mar-flowerpot-s-单调队列",
+        
+          title: "[USACO12MAR]Flowerpot S 单调队列",
+        
+        description: "[[USACO12MAR]Flowerpot S](https://www.luogu.com.cn/problem/P2698 &quot;[USACO12MAR]Flowerpot S&quot;) tag:单调队列 很惭愧，今天发现自己连滑动窗口都不会了，遂做了一些题 两滴水的高度之差大于等于D的情况下的最小花盆宽度 暴力思路：对…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17316484/";
+          
+        },
+      },{id: "post-b-plus-and-multiply",
+        
+          title: "B. Plus and Multiply",
+        
+        description: "B. Plus and Multiply 手模拟了一下 观察每个式子，化简得到: $a^x + by = n $ 由于$a^x$是指数增长，直接枚举它的幂次即可，注意对$a=1$的情况特判",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17301315/";
+          
+        },
+      },{id: "post-b-phoenix-and-beauty",
+        
+          title: "B. Phoenix and Beauty",
+        
+        description: "B. Phoenix and Beauty 要求所有长度为 \(k\) 的子数组之和相同，观察样例可以发现，当原数组中不同的元素个数小于等于 \(k\) 时可以满足条件，同时输出的数组长度 \(m\) 很大，可以从这里入手 构造一个有所有元素的数组，当这个数组长度不足时，补其他元素进去，答案即为 \(\frac{10…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17301214/";
+          
+        },
+      },{id: "post-new-year-tree",
+        
+          title: "New Year Tree",
+        
+        description: "New Year Tree 线段树，打标记，位运算 1. 操作1，区间赋值，很容易的线段树操作 2. 对于询问以 \(u\) 为根的子树上的所有节点的颜色数量，一开始我在线段树里开了一个大小61的数组，喜提MLE，但后续观察发现， \(1 &lt;&lt; 60 \leq \text{longlong}\) ，所以我们设每种颜色…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17282641/";
+          
+        },
+      },{id: "post-torcoder",
+        
+          title: "TorCoder",
+        
+        description: "TorCoder 26棵线段树 1. 建树，对于每个字符在响应字母的位置上进行修改数量 2. 对于 \([l,r]\) 的重排，对26个字母进行区间查询出现的数量，判断是否可以组成，如果可以组成，将 \([l,r]\) 出现过字母的区间[l,r]赋值为0，然后根据字典序顺序对进行区间赋值操作 3. \(m\) 次操作…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17282595/";
+          
+        },
+      },{id: "post-noi-online-1-提高组-冒泡排序",
+        
+          title: "[NOI Online #1 提高组] 冒泡排序",
+        
+        description: "[[NOI Online 1 提高组] 冒泡排序](https://www.luogu.com.cn/problem/P6186 &quot;[NOI Online 1 提高组] 冒泡排序&quot;) 树状数组or线段树维护逆序对 手推样例得到两个结论： 1. 操作1会使逆序对发生 \(\pm 1\) 的变化 2. 操作2，每一轮冒泡…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17282538/";
+          
+        },
+      },{id: "post-usaco08feb-hotel-g",
+        
+          title: "[USACO08FEB]Hotel G",
+        
+        description: "[[USACO08FEB]Hotel G](https://www.luogu.com.cn/problem/P2894 &quot; [USACO08FEB]Hotel G&quot;) 线段树二分，最大字段和 对于操作二，是很简单的区间赋值 对于操作一，长度为 \(len\) 的,我们要找到最小的的 \(x\) 满足 \([x, x…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17282481/";
+          
+        },
+      },{id: "post-scoi2010-序列操作",
+        
+          title: "[SCOI2010] 序列操作",
+        
+        description: "[[SCOI2010] 序列操作](https://www.luogu.com.cn/problem/P2572 &quot;[SCOI2010] 序列操作&quot;) 在dls的数据结构中级课那学了最大字段和的线段树写法，对于这道题，我们要维护的信息有： 1. 区间左边0/1的个数， 2. 区间右边0/1的个数 3. 区间最长0/1…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17282382/";
+          
+        },
+      },{id: "post-educational-codeforces-round-3-个人总结a-e",
+        
+          title: "Educational Codeforces Round 3 个人总结A-E",
+        
+        description: "Educational Codeforces Round 3 A. USB Flash Drives - 降序排序后，贪心，甚至不会爆longlong B. The Best Gift - 大意：有多少种互不相同不同的组合 - 用map记录这个类型出现的次数 - 一本书的贡献为 与这本书不同类型的数量 C. Load…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17070875/";
+          
+        },
+      },{id: "post-educational-codeforces-round-2-个人总结a-e",
+        
+          title: "Educational Codeforces Round 2 个人总结A-E",
+        
+        description: "Educational Codeforces Round 2 A. Extract Numbers - 简单的模拟 B. Queries about less or equal elements - 二分查找板子 C. Make Palindrome - 大意：输出使 s 为回文串，在操作次数最少的情况下， s 的字…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17069418/";
+          
+        },
+      },{id: "post-educational-codeforces-round-1-个人总结a-e",
+        
+          title: "Educational Codeforces Round 1 个人总结A-E",
+        
+        description: "Educational Codeforces Round 1 A. Tricky Sum 数学，求 \(1 \dots n\) 的和减去 小于等于n的二次幂乘2之和 B. Queries on a String 模拟，给你一个字符串，操作 \(n\) 次,将 \(l\) , \(r\) 区间的字符向右循环移动 - 观…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17063289/";
+          
+        },
+      },{id: "post-标记一下cf教育场的网址",
+        
+          title: "标记一下CF教育场的网址",
+        
+        description: "（因为太难翻了，做到哪里标到哪，自用 Educational Codeforces Round 1 Educational Codeforces Round 2 Educational Codeforces Round 3",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17059064/";
+          
+        },
+      },{id: "post-uva10404",
+        
+          title: "UVA10404",
+        
+        description: "由题意可知，这题和巴什博弈没什么关系了 相似题目：AtCoder Beginner Contest 278 F - Shiritori - 预备知识：DP，博弈论的必胜态和必败态 问题的关键是确定 \(f n\) 是必胜态还是必败态? 而必胜态由必败态转移而来 - 如果当前 \(i-a j\) 这个位置是必败态，那么…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cnblogs-17057781/";
+          
+        },
+      },{id: "post-补题空间",
+        
+          title: "补题空间",
+        
+        description: "列一下没补的题目，打算时不时push给队友的（bushi） 1. 剩下的数 2. AcWing 4721. 排队 3. 数组划分 4. 被抓住的小竹 5. 排队 6. 子树的大小 7. 剖分 8. Shiritori 9. Freefall 10. Perfect Word 11. Clone Ranran 12.…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16945914/";
+          
+        },
+      },{id: "post-2022-icpc沈阳合肥游记",
+        
+          title: "2022 ICPC沈阳合肥游记",
+        
+        description: "选赛区的时候很争议，除了沈阳是确定要选，队友对于合肥新赛区的看法很质疑，但我想选合肥，一是觉得人少，二是觉得强队会少，因为隔壁CCPC。然后就选了合肥，看情况选合肥确实很对。 一开始也不认为会拿牌，后面几场vp省赛自信心上来了，看到沈阳预测排名350左右很慌，沈阳第二题漏了对R的判断，wa了一发，又多了10分钟来写…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16916516/";
+          
+        },
+      },{id: "post-p4053-jsoi2007-建筑抢修",
+        
+          title: "P4053 [JSOI2007] 建筑抢修",
+        
+        description: "[P4053 [JSOI2007] 建筑抢修](https://www.luogu.com.cn/problem/P4053) tag：贪心，堆 一个堆A以 T2 为关键字 从小到大排序，另一个堆B记录 已维修的 的建筑的维修时间，用 cnt 记录总的维修时间（时刻？） 两种情况： 1. 若可以维修，cnt 加下维修…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16566709/";
+          
+        },
+      },{id: "post-上分准备-vp-codeforces-round-762-div-3-4题abce",
+        
+          title: "上分准备 VP Codeforces Round #762 (Div. 3) 4题ABCE",
+        
+        description: "+ 00:02 + 00:16 + 01:08 + 02:07 VP 情况 4/8 ABCE ，赛时排名可以到823，什么时候我可以上个青 - B 本想写个map的二分的，发现自己不会，写了个普普通通的二分 - C 高精度模拟，一发过了，用个vector将每个数位存起来，从个位开始判断，如果 A\ i 的数能加上小于…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16536494/";
+          
+        },
+      },{id: "post-上分之路-vp-codeforces-round-744-div-3-abde",
+        
+          title: "上分之路 VP Codeforces Round #744 (Div. 3) ABDE",
+        
+        description: "VP情况 4 / 8 AC： A,B,D,E1 60 minutes WA: C 4 127 + 00:02 + 00:28 -7 + 00:58 + 00:39 手速还在线 D pair排个序， 分类讨论 1. 个人最多的聚会 =其余n-1 人的聚会，这里答案就很清楚了 2. 个人最多的聚会&lt;其余n-1 人的聚会…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16535726/";
+          
+        },
+      },{id: "post-e-gardener-and-tree-拓扑排序板子",
+        
+          title: "E. Gardener and Tree 拓扑排序板子",
+        
+        description: "E. Gardener and Tree 将度为1的顶点加入队列，做拓扑排序，记录点的遍历层次，答案为 n-前k层的点的数量",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16535716/";
+          
+        },
+      },{id: "post-p1347-排序",
+        
+          title: "P1347 排序",
+        
+        description: "P1347 排序 通过给出的关系，去确定大写字母的关系，并打印出 步骤： 1. 先将关系存下来。见题意，不可能建完图再遍历 因为确定 n 个元素的顺序后即可结束程序，可以不用考虑确定顺序之后出现矛盾的情况） 2. 1 m条边，每在图上建一条边就检查当前图是否确定n个元素的关系，亦或者图是否存在矛盾（有环的情况，自己和…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16535413/";
+          
+        },
+      },{id: "post-p2853-usaco06dec-cow-picnic-s",
+        
+          title: "P2853 [USACO06DEC]Cow Picnic S",
+        
+        description: "[P2853 [USACO06DEC]Cow Picnic S](https://www.luogu.com.cn/problem/P2853) 和这道差不多P3916 图的遍历，图的遍历通过方向建边使子节点被标记最大编号。这题可以通过奶牛找牧场 分析：从奶牛的位置开始dfs，对每个被dfs的点进行标记，最后统计有多…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16535330/";
+          
+        },
+      },{id: "post-p1127-词链-欧拉图-欧拉回路-欧拉通路",
+        
+          title: "P1127 词链 欧拉图，欧拉回路，欧拉通路",
+        
+        description: "P1127 词链 欧拉通路： - 有向图：图连通，一个顶点 出度-入度=1 此点为起点，一个顶点 入度-出度=1 此点为终点，其余点入度=出度 - 无向图：图连通，只有两个顶点为奇数度，其余都是偶数度 关于欧拉通路度数判断： 欧拉回路： - 有向图：图连通，所有顶点 入度=出度 - 无向图：图连通，所有顶点都是偶数度…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16535303/";
+          
+        },
+      },{id: "post-p1807-最长路",
+        
+          title: "P1807 最长路",
+        
+        description: "P1807 最长路 在DAG上拓扑排序dp，题目数据没有环 分析： f[v]=max(f[v],f[u]+value[u][i];",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16535223/";
+          
+        },
+      },{id: "post-p4017-最大食物链计数",
+        
+          title: "P4017 最大食物链计数",
+        
+        description: "P4017 最大食物链计数 建图，食物链从 入度为0的点 到 出度为0的点 为一条完整的食物链 在DAG上拓扑排序dp，每个结点 有多少种方式 从入度为0的点到达表示为 f[v]+=f[u] u- v 当遍历到的点出度为0就将 f[v] 的值加入答案",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16535206/";
+          
+        },
+      },{id: "post-p1113-杂务",
+        
+          title: "P1113 杂务",
+        
+        description: "P1113 杂务 一题多解 一开始建图来写，写错了，发现有递推关系，写了下就对了，后面把拓扑排序的写法调了出来 递推1： 分析：第u个杂物做之前和第1 k-1个杂物存在关系，我们只需要找到 要在第u个杂物做之前 找到存在关系的最大完成的杂物时间 就能推出公式，f[u]=a[u]+max(len[v]); v代表存在关…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16535187/";
+          
+        },
+      },{id: "post-p3916-图的遍历",
+        
+          title: "P3916 图的遍历",
+        
+        description: "P3916 图的遍历 题意：求各个点所能到达最大的编号 按正常情况去遍历图，会超时和爆内存，得到20分（起码我只拿了20） 换个思路来求，编号大的地点可以到达哪些点 思路： 1. 反向建边 2. 从编号大的点开始dfs，dfs传递初始编号d，这是遍历到的点的答案 3. 若当前点被访问过了说明被更大的点访问过了，遂re…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16535165/";
+          
+        },
+      },{id: "post-p5318-深基18-例3-查找文献",
+        
+          title: "P5318 【深基18.例3】查找文献",
+        
+        description: "原题地址：P5318 【深基18.例3】查找文献 根据描述和样例 分析如下： 1. 先对 边 u- v 排一个序，满足字典序的需求 2. dfs和bfs 都要记录当前点是否已经被访问过了，若之前没被访问过，继续dfs或bfs。防止出现重复访问 代码如下:",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16535143/";
+          
+        },
+      },{id: "post-dag-有向无环图-拓扑排序-模板",
+        
+          title: "DAG（有向无环图）拓扑排序  模板",
+        
+        description: "应用： 1. 判断有向图是否存在环 代码源图论初级课程题单报名免费 2. 求一个图的拓扑序 3. 在2.的基础上求字典序最小拓扑序， 优先队列实现 拓扑排序板子： 选择入度为0的点作为起始点 有向图环判断 字典序最小拓扑序 新年礼物，DAG拓扑图上动态规划",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16535093/";
+          
+        },
+      },{id: "post-某次作业",
+        
+          title: "某次作业",
+        
+        description: "只做了后两个，PPT哪一页我找不到了",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16358925/";
+          
+        },
+      },{id: "post-uva1589-象棋-xiangqi题解",
+        
+          title: "UVA1589 象棋 Xiangqi题解",
+        
+        description: "这题考察我们的大脑体力，非常难调，我花了3.5小时，要是在区域赛里做着题，我碰都不碰，没有大样例非常难受。 分析如下： - 中国象棋，见百度百科 - 就是考虑当前情况下将军是不是已经给将死了 考虑： 1. 飞将 2. 将军吃掉了红色棋子的情况 3. 马脚问题 4. 将军只能在一定的区域内移动 5. 注意边界情况 6.…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16301119/";
+          
+        },
+      },{id: "post-某次作业",
+        
+          title: "某次作业",
+        
+        description: "#include #include using namespace std; class Teacher { public: void set2(string a,string b,string c,string d,string e,st",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16289041/";
+          
+        },
+      },{id: "post-勾股数组表-10以内-数论概论习题3-1",
+        
+          title: "勾股数组表（10以内），数论概论习题3.1",
+        
+        description: "直接两个for暴力穷举判断,观察数表发现和乘法表的数量差不多，再把数据范围扩大也是如此。留个坑（） 3.1(d)观察数表得 u,v一奇，一偶，且无公因数",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16276160/";
+          
+        },
+      },{id: "post-友元函数求两点的距离",
+        
+          title: "友元函数求两点的距离",
+        
+        description: "#include #include using namespace std; class point { friend double get(point,point); public: point(int a,int b) { x=a,y=b",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16262095/";
+          
+        },
+      },{id: "post-tokitsukaze-and-strange-inequality-codeforces-round-789-div-2-c",
+        
+          title: "Tokitsukaze and Strange Inequality Codeforces Round #789 (Div. 2)  C",
+        
+        description: "复盘 前缀和的姿势增加了 正解 暴力：TLE5 的",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16248802/";
+          
+        },
+      },{id: "post-uva227-谜题-puzzle",
+        
+          title: "UVA227 谜题 Puzzle",
+        
+        description: "UVA227 谜题 Puzzle 听过UVA输出格式有坑的，第一次做输入格式有坑的题，不愧是WF的题呀！ 输入注意的细节挺多的，我以为是空格，结果是没有的 纪念一下",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16246867/";
+          
+        },
+      },{id: "post-stl算法总结",
+        
+          title: "STL算法总结",
+        
+        description: "// AC one more times #include #include #include #include #include #include&lt;time",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16209267/";
+          
+        },
+      },{id: "post-uva156-反片语-ananagrams",
+        
+          title: "UVA156 反片语 Ananagrams",
+        
+        description: "传送门：UVA156 反片语 Ananagrams lrj 老师的代码我没有看，先是写了一个暴力，睡个午觉，起来再看",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16206292/";
+          
+        },
+      },{id: "post-uva10815-安迪的第一个字典-andy-39-s-first-dictionary",
+        
+          title: "UVA10815 安迪的第一个字典 Andy&#39;s First Dictionary",
+        
+        description: "凌晨给卡了输入，应该是我少考虑一些情况了 晚上再写卡了一会输出 还是不太明白lrj 老师为什么放在set那里，vector，map也可以做,然后借这个机会学了set vector: map: set",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16205079/";
+          
+        },
+      },{id: "post-uva10104",
+        
+          title: "UVA10104",
+        
+        description: "板子题 当 X + Y 最小时，那么是ax+by=gcd(a,b) 输入格式乱搞，见谅",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16176722/";
+          
+        },
+      },{id: "post-类实现明天的日期",
+        
+          title: "类实现明天的日期",
+        
+        description: "C++作业",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16175918/";
+          
+        },
+      },{id: "post-c-复数的类",
+        
+          title: "C++复数的类+-*/",
+        
+        description: "构造函数实现复数的加减乘除 实部虚部为0的时候有点小问题 上一次的在下面",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16111971/";
+          
+        },
+      },{id: "post-4月记录贴",
+        
+          title: "4月记录贴",
+        
+        description: "2022/4/1 1. 状压dp摸鱼 2. 状压dp旅行商 3. 具体数学1.1 1.3 4. 具体数学第一章作业 2022/4/2 4/4 就是摆了 - 玩euphoria 2022/4/5 有点摆 1. 搜索练习 组合的输出 2. 搜索练习[USACO19JAN]Icy Perimeters S 3. 搜索练习…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16102198/";
+          
+        },
+      },{id: "post-3月记录帖",
+        
+          title: "3月记录帖",
+        
+        description: "2022/3/13 1. 1650D Twist the Permutation 2. 1650C Weight of the System of Nested Segments 3. 1649B Game of Ball Passing 4. 1641AGreat Sequence 5. 1635C Differe…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/cnblogs-16084546/";
+          
+        },
+      },{id: "post-icpc2021上海热身two-point-removal",
+        
+          title: "ICPC2021上海热身Two Point Removal",
+        
+        description: "今天ICPC上海热身赛,本来我是负责计算几何的 但我队伍做题把A分为两种情况 1.删去两个相邻的点使得线段最短 2.删去两个不相邻的点使得线段最短 第二种如何找出不相邻的两个点的时候，把n\ n优化想不出，后面学长来写了，但写的时候我提起昨天CF的B题（模拟）结构体排序，保存排序前的下标，有了这一思路，只需要取排序后…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15612896/";
+          
+        },
+      },{id: "post-educational-codeforces-round-117-rated-for-div-2-a-b",
+        
+          title: "Educational Codeforces Round 117 (Rated for Div. 2)A-B",
+        
+        description: "本人实力有限，做题范围可能A-D，有错误之处还请指正，不喜勿喷 A vp,本来想着是计算几何（做多了，看到坐标就emmmm），想了20分钟，觉得很复杂啊！看了下榜单6000人过了，就知道是想复杂了 暴力枚举坐标上每个点判断符不符合条件…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15605008/";
+          
+        },
+      },{id: "post-uva11800-determine-the-shape",
+        
+          title: "UVA11800 Determine the Shape",
+        
+        description: "题意得： 1.Square 四条边相等，四个角相等 2.Rectangle 对边相等，四个角相等 3.Rhombus 四条边相等，对角相等 4.Parallelogram 对边相等，对边平行 5.Trapezium 两条边平行 6.Ordinary Quadrilateral 前面条件不满足，就输出这个 思路：由于题…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15570283/";
+          
+        },
+      },{id: "post-that-nice-euler-circuit-regionals-2004-gt-gt-asia-shanghai-uvalive-3263",
+        
+          title: "That Nice Euler Circuit——Regionals 2004 &gt;&gt; Asia - Shanghai——UVALive - 3263",
+        
+        description: "一笔画， 欧拉定理：平面图的顶点数，边数和面数分别为V,E和F 则V+F-E=2，所以求出顶点数V和边数E，就可以得到F=E+2-V V数组存在原来的结点和新增的结点，可能存在三线共点，需要删除重复的点",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15559110/";
+          
+        },
+      },{id: "post-cqoi2006-凸多边形-模板-半平面交",
+        
+          title: "[CQOI2006]凸多边形 /【模板】半平面交",
+        
+        description: "是半平面交模板题 逆时针给出 n 个凸多边形的顶点坐标，求它们交的面积。 例如 n = 2 时，两个凸多边形如下图： 则相交部分的面积为 5.233 。 输入格式 第一行有一个整数 n，表示凸多边形的个数，以下依次描述各个多边形。 第 i 个多边形的第一行包含一个整数 mi，表示多边形的边数，以下 mi 行每行两个整…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15559073/";
+          
+        },
+      },{id: "post-shoi2012信用卡凸包",
+        
+          title: "SHOI2012信用卡凸包",
+        
+        description: "信用卡是一个矩形，唯四个角作了圆滑处理，使它们都是与矩形的两边相切的 1/ 4 圆，如下图所示。 现在平面上有一些规格相同的信用卡，试求其凸包的周长。 注意凸包未必是多边形，因为它可能包含若干段圆弧。 输入格式 第一行是一个正整数 n ，表示信用卡的张数。 第二行包含三个实数 a , b , r 分别表示信用卡（圆滑…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15559062/";
+          
+        },
+      },{id: "post-usaco5-1-圈奶牛fencing-the-cows-模板-二维凸包",
+        
+          title: "[USACO5.1]圈奶牛Fencing the Cows /【模板】二维凸包",
+        
+        description: "二维凸包板子",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15559029/";
+          
+        },
+      },{id: "post-poj3304",
+        
+          title: "POJ3304",
+        
+        description: "枚举所有线段交点，依次判断是否与所有线段都有交点",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15559024/";
+          
+        },
+      },{id: "post-poj2318-amp-acwing-2983-玩具",
+        
+          title: "POJ2318&amp;AcWing 2983. 玩具",
+        
+        description: "二分求答案，判断点是不是在边的左边",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15559001/";
+          
+        },
+      },{id: "post-uva11437-triangle-fun",
+        
+          title: "UVA11437 Triangle Fun",
+        
+        description: "这是一道入门计算几何题，偏数学，和算法关系不大 我逛了一圈题解发现都是用的数学求法，这里我就用计算几何来水我第一篇洛谷题解 步骤： 1.求三等分点 2.求交点 3.叉积求面积 梅涅劳斯定理也可以做，详情见洛谷题解",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15558982/";
+          
+        },
+      },{id: "post-记录下目前学习状态",
+        
+          title: "记录下目前学习状态",
+        
+        description: "被队友日常迫害，抓去学计算几何，希望icpc上海能做出来",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15526781/";
+          
+        },
+      },{id: "post-计算几何uva11178-morley-39-s-theorem",
+        
+          title: "计算几何Uva11178 - Morley&#39;s Theorem",
+        
+        description: "这里模板是AcWing y总的和算法竞赛入门经典的 题目让我们求三角形角的三等分角与其他三等分角的交点的笛卡尔坐标（原pdf有图很详细，这里可能表述错误） 但实际上就是模板操作 例如题目图中∠D的求法，作法 1.求出三等分角，2.旋转，3.求交点 都可用模板完成 ∠E和∠F也是同样的求法，并运用三角形的对称性，只用写…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15526764/";
+          
+        },
+      },{id: "post-a-b快速幂",
+        
+          title: "a^b快速幂",
+        
+        description: "两种写法，见代码：",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15145188/";
+          
+        },
+      },{id: "post-两变量实现变量交换",
+        
+          title: "两变量实现变量交换",
+        
+        description: "a = a + b; b = a - b; a = a - b;//初次见到真是秀到我了，具体过程就自己推演吧",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15089397/";
+          
+        },
+      },{id: "post-洛谷p1009-noip1998-普及组-阶乘之和",
+        
+          title: "洛谷P1009 [NOIP1998 普及组] 阶乘之和",
+        
+        description: "本质上是高精度模板的运用 但我听说用python打表更快，羡慕了 比较容易写错，这里少了一些，那里字母又打错 错误总结： 有些表达式也有可能写错 还有判断数组有效数字长度的错误，算出来的是数组的长度，不是需要计算或打印的 由于是阶乘的计算，名命名一个全局变量，从头用到尾 AC代码： 用两个数组存储，一个处理结果（阶乘…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15089329/";
+          
+        },
+      },{id: "post-洛谷p2615-noip2015-提高组-神奇的幻方-题解",
+        
+          title: "洛谷P2615 [NOIP2015 提高组] 神奇的幻方 题解",
+        
+        description: "洛谷P2615 [NOIP2015 提高组] 神奇的幻方 题解 题目描述 幻方是一种很神奇的 N N N ∗ N 矩阵：它由数字 1,2,3,\cdots \cdots ,N \times N 1 , 2 , 3 , ⋯ ⋯ , N × N 构成，且每行、每列及两条对角线上的数字之和都相同。 当 N N 为奇数时，我…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15080790/";
+          
+        },
+      },{id: "post-三省吾身-no-1",
+        
+          title: "三省吾身——NO.1",
+        
+        description: "初步计划： - 基础算法 排序 二分 高精度 前缀和与差分 双指针算法 位运算 离散化 区间合并 - 数据结构 链表与邻接表：树与图的存储 栈与队列：单调队列、单调栈 kmp Trie 并查集 堆 Hash表 - 搜索与图论 DFS与BFS 树与图的遍历：拓扑排序 最短路 最小生成树 二分图：染色法、匈牙利算法…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15077139/";
+          
+        },
+      },{id: "post-队列",
+        
+          title: "队列",
+        
+        description: "队列先进先出，广度优先搜索可能用到",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15077000/";
+          
+        },
+      },{id: "post-vector-及被认为是移位运算符而编译错误",
+        
+          title: "vector    及被认为是移位运算符而编译错误",
+        
+        description: "vector菜鸟编程链接 STL容器的可变长度数组，头文件 include 1. vector v(N,i) 建立一个可变长度数组v，内部元素类型为int，最开始有N个元素，都初始化为i。可省略i（默认值为0），也可以把（N，i）省略，此时这个数组的长度就是0.也可以用double 2. v.push\ back(a…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15074331/";
+          
+        },
+      },{id: "post-自用-曾经看到不懂的代码-三目运算符-二分-returnx-gt-y-typedef-define-vector-共用体union",
+        
+          title: "自用(曾经看到不懂的代码）三目运算符  二分  returnx&gt;=y;    typedef  #define  vector   共用体union",
+        
+        description: "三目运算符： 提供了一种表达简单 if-else 语句的简写方法。该运算符由问号（？）和冒号（:）组成，其格式如下： 两种写法作用相等 二分： -------------------------------------------------------------------- x y是个判断语句 返回值为true…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15070230/";
+          
+        },
+      },{id: "post-二分查找与二分答案-待补充",
+        
+          title: "二分查找与二分答案（待补充）",
+        
+        description: "------------------------------------------------------------------------------------",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15068443/";
+          
+        },
+      },{id: "post-memset在此作用域尚未声明-初始化int数组和对其他值初始化错误-洛谷p1618-三连击-升级版",
+        
+          title: "memset在此作用域尚未声明，初始化int数组和对其他值初始化错误，洛谷P1618 三连击（升级版）",
+        
+        description: "memset初始化int数组…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15061019/";
+          
+        },
+      },{id: "post-洛谷p2089-烤鸡",
+        
+          title: "洛谷P2089 烤鸡",
+        
+        description: "暴力枚举 我现在还不会搜索 这么多}是我程序循环出了问题找的过程中产生的,是我for循环地末尾循环体用的都是a出错",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15059076/";
+          
+        },
+      },{id: "post-快速排序-模板-洛谷p1177-模板-快速排序",
+        
+          title: "快速排序——模板           洛谷P1177 【模板】快速排序",
+        
+        description: "algorithm自带的sort，sort是升序， 降序",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15057867/";
+          
+        },
+      },{id: "post-选择排序",
+        
+          title: "选择排序",
+        
+        description: "选择排序的算法时间复杂度为O（n^2） 空间复杂度为O（n）",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15050384/";
+          
+        },
+      },{id: "post-计数排序-洛谷p1271-深基9-例1-选举学生会",
+        
+          title: "计数排序               洛谷P1271 【深基9.例1】选举学生会",
+        
+        description: "第一次提交全WA了，想想不对我的代码没有出现问题，在输出后面加上空格才AC（捂脸 piao这个数组可以用一个变量来代替，来节省空间",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15050262/";
+          
+        },
+      },{id: "post-noip2015-普及组-扫雷游戏",
+        
+          title: "[NOIP2015 普及组] 扫雷游戏",
+        
+        description: "这是我的题解,洛谷100全AC了，但或许会有小瑕疵 那个判定地雷还可以做的更好",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15047098/";
+          
+        },
+      },{id: "post-cin读取数字时遇到字符的总结-c-primer-plus-代码引起思考-为什么输入q使得程序结束",
+        
+          title: "cin读取数字时遇到字符的总结——C++ primer plus 代码引起思考， 为什么输入q使得程序结束，",
+        
+        description: "那就一定是while循环中condition为false 有输出结果可知未运行到choices total choices;读入字符串跳出循环 可以用上面代码实验，读入字符串是condition为false，达到同样的效果。 总结 至于在输入数字的时候输入字符串会发生什么情况，在这种类型不匹配的情况时，有4种 1.…",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/cnblogs-15022440/";
+          
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/kdk550", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
