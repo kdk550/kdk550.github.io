@@ -372,25 +372,19 @@ def verify_posts(
         if not source_front_matter:
             invalid_manual_sources.append(source_name)
             continue
-        permalink_match = re.search(
-            r"(?m)^permalink:\s*(?P<value>[^#\r\n]+?)\s*(?:#.*)?$",
+        if re.search(r"(?m)^(?:slug|permalink):", source_front_matter):
+            invalid_manual_sources.append(source_name)
+            continue
+        filename_match = POST_FILENAME_RE.fullmatch(source_path.name)
+        if not filename_match:
+            invalid_manual_sources.append(source_name)
+            continue
+        date_match = re.search(
+            r"(?m)^date:\s*[\"']?(?P<year>\d{4})-\d{2}-\d{2}",
             source_front_matter,
         )
-        if permalink_match:
-            permalink = permalink_match.group("value").strip().strip("\"'")
-        else:
-            filename_match = POST_FILENAME_RE.fullmatch(source_path.name)
-            if not filename_match:
-                invalid_manual_sources.append(source_name)
-                continue
-            date_match = re.search(
-                r"(?m)^date:\s*[\"']?(?P<year>\d{4})-\d{2}-\d{2}",
-                source_front_matter,
-            )
-            year = (
-                date_match.group("year") if date_match else filename_match.group("year")
-            )
-            permalink = f"/blog/{year}/{filename_match.group('slug')}/"
+        year = date_match.group("year") if date_match else filename_match.group("year")
+        permalink = f"/blog/{year}/{filename_match.group('slug')}/"
         normalized_permalink = normalized_local_path(permalink)
         if normalized_permalink is None:
             invalid_manual_sources.append(source_name)
@@ -399,12 +393,7 @@ def verify_posts(
         if candidate is None:
             invalid_manual_sources.append(source_name)
             continue
-        output_path = (
-            candidate
-            if PurePosixPath(normalized_permalink).suffix
-            else candidate / "index.html"
-        )
-        manual_expected_paths.append(output_path)
+        manual_expected_paths.append(candidate / "index.html")
 
     duplicates = sorted(
         relative_string(path, site_root)
@@ -499,7 +488,7 @@ def verify_posts(
         errors.append(
             {
                 "check": "post_html",
-                "message": "manual post filenames or permalinks are invalid",
+                "message": "manual posts must use YYYY-MM-DD-lowercase-slug filenames without slug or permalink front matter",
                 "paths": invalid_manual_sources,
             }
         )

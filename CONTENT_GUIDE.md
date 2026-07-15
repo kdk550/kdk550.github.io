@@ -18,7 +18,7 @@
 
 ## 新增博客文章
 
-在 `_posts/` 中创建 `YYYY-MM-DD-slug.md`，其中 `slug` 建议使用小写英文和连字符。例如：
+在 `_posts/` 中创建 `YYYY-MM-DD-slug.md`。`slug` 必须只使用小写英文、数字和连字符。例如：
 
 ```text
 _posts/2026-07-15-my-new-post.md
@@ -41,7 +41,7 @@ related_posts: false
 这里是正文。
 ```
 
-手写文章不要添加 `cnblogs_post_id`，文件名也不要使用 `cnblogs-数字` 格式。这样重新运行迁移脚本时不会删除手写文章。
+手写文章不要添加 `cnblogs_post_id`，文件名也不要使用 `cnblogs-数字` 格式。front matter 中不要设置 `slug` 或 `permalink`；站点会根据文件名自动生成稳定 URL。这样重新运行迁移脚本时不会删除手写文章。
 
 暂未准备发布的文章请放入 `_drafts/`，不要在 `_posts/` 中使用未来日期或 `published: false`。验证器会要求 `_posts/` 中的每个手写文章都出现在构建结果中。
 
@@ -57,10 +57,10 @@ tags: ["AI", "model deployment"]
 
 1. 从所有文章收集标签。
 2. 在 Blog 页展示标签。
-3. 生成 `/blog/tag/<tag>/` 归档页。
+3. 将标签转换为 URL slug，并生成 `/blog/tag/<slugified-tag>/` 归档页。
 4. 在本地验证时动态核对标签链接和归档。
 
-新增标签时无需修改 `_config.yml` 或验证脚本。标签名称仍由作者决定，站点不会根据正文猜测语义标签。为保持分类稳定，建议使用简短、英文、可复用的标签名称。
+新增标签时无需修改 `_config.yml` 或验证脚本。标签名称仍由作者决定，站点不会根据正文猜测语义标签。为保持现有 taxonomy 一致，标签必须使用简短、英文、可复用的名称。
 
 ## 公式、代码、图片和表格
 
@@ -172,7 +172,7 @@ JEKYLL_ENV=production bundle exec jekyll build
 ./scripts/verify_built_site.py
 ```
 
-验证器会严格核对 121 篇迁移文章，同时允许任意数量的手写文章。手写文章数量、分页数量、标签数量和标签归档均从实际构建结果动态计算。
+验证器会严格核对 121 篇迁移文章，同时允许任意数量的手写文章。它会根据 `_posts/` 源文件动态计算手写文章和预期分页，再与实际构建的文章、分页、标签链接和标签归档交叉核对。
 
 ## 提交和发布
 
