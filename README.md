@@ -11,8 +11,11 @@ magicat 的个人网站与技术博客：<https://kdk550.github.io/>
 - `assets/img/blog/`：博客文章使用的本地图片。
 - `_config.yml`：站点、主题、数学公式、搜索和归档配置。
 - `scripts/migrate_cnblogs_to_al_folio.py`：从本地博客园归档重建文章的可重复执行脚本。
+- `CONTENT_GUIDE.md`：新增、修改、预览和发布内容的完整说明。
 
-公开站点使用统一的英文 tags：博客园的 16 个原始分类、5 篇正文中的 11 个手写 `tag:` 语义提示，以及 8 篇原本无标签文章的人工补充标签，经合并、翻译后形成 12 个 tags。原始中文分类仍保留在文章 front matter 的 `source_categories` 和 `migration-report.json` 中。
+标签由每篇文章 front matter 中的 `tags` 自动发现，博客页会自动展示所有标签并生成归档，无需在 `_config.yml` 或验证脚本中维护固定列表。迁移文章的原始中文分类仍保留在 front matter 的 `source_categories` 和 `migration-report.json` 中。
+
+日常内容维护请参阅 [CONTENT_GUIDE.md](CONTENT_GUIDE.md)。
 
 ## 本地预览
 
@@ -39,7 +42,7 @@ bundle exec jekyll serve
   --archive /home/magicat/00文档/blogs/20260711/archive
 ```
 
-构建完成后，验证文章、分页、图片、内部链接与技术内容：
+构建完成后，验证 121 篇迁移文章、任意数量的手写文章、动态分页、自动标签归档、图片与内部链接：
 
 ```bash
 ./scripts/verify_built_site.py

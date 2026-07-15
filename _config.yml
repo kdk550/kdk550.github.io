@@ -314,20 +314,7 @@ jekyll-archives:
       tags: "/blog/:type/:name/"
       categories: "/blog/:type/:name/"
 
-display_tags:
-  - data structures
-  - algorithm basics
-  - dynamic programming
-  - contest
-  - mathematics
-  - graph theory
-  - computational geometry
-  - posts
-  - miscellaneous
-  - constructive algorithms
-  - game theory
-  - AI
-display_categories: []
+# The blog page discovers tags automatically from each post's front matter.
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar
