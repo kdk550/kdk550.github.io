@@ -22,7 +22,7 @@
   }
 </style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%90%B1&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://kdk550.github.io/blog/page/11/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> magicat </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/news/">news </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <div class="header-bar"> <h1>magicat's blog</h1> <h2>Notes on competitive programming, data structures, and AI engineering</h2> </div> <div class="tag-category-list"> <ul class="p-0 m-0"> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/ai">AI</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/algorithm-basics">algorithm basics</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/computational-geometry">computational geometry</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/constructive-algorithms">constructive algorithms</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/contest">contest</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/data-structures">data structures</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/dynamic-programming">dynamic programming</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/game-theory">game theory</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/graph-theory">graph theory</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/mathematics">mathematics</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/miscellaneous">miscellaneous</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/posts">posts</a> </li> </ul> </div> <ul class="post-list"> <li> <h3> <a class="post-title" href="/blog/2023/cnblogs-17316484/">[USACO12MAR]Flowerpot S 单调队列</a> </h3> <p>[[USACO12MAR]Flowerpot S](https://www.luogu.com.cn/problem/P2698 "[USACO12MAR]Flowerpot S") tag:单调队列 很惭愧，今天发现自己连滑动窗口都不会了，遂做了一些题 两滴水的高度之差大于等于D的情况下的最小花盆宽度 暴力思路：对…</p> <p class="post-meta"> 4 分钟阅读   ·   2023-04-13 </p> <p class="post-tags"> <a href="/blog/2023"> <i class="fa-solid fa-calendar fa-sm"></i> 2023 </a>   ·   <a href="/blog/tag/algorithm-basics"> <i class="fa-solid fa-hashtag fa-sm"></i> algorithm basics</a>   <a href="/blog/tag/data-structures"> <i class="fa-solid fa-hashtag fa-sm"></i> data structures</a> </p> </li> <li> <h3> <a class="post-title" href="/blog/2023/cnblogs-17301315/">B. Plus and Multiply</a> </h3> <p>B. Plus and Multiply 手模拟了一下 观察每个式子，化简得到: $a^x + by = n $ 由于$a^x$是指数增长，直接枚举它的幂次即可，注意对$a=1$的情况特判</p> <p class="post-meta"> 3 分钟阅读   ·   2023-04-09 </p> <p class="post-tags"> <a href="/blog/2023"> <i class="fa-solid fa-calendar fa-sm"></i> 2023 </a>   ·   <a href="/blog/tag/contest"> <i class="fa-solid fa-hashtag fa-sm"></i> contest</a>   <a href="/blog/tag/constructive-algorithms"> <i class="fa-solid fa-hashtag fa-sm"></i> constructive algorithms</a> </p> </li> <li> <h3> <a class="post-title" href="/blog/2023/cnblogs-17301214/">B. Phoenix and Beauty</a> </h3> <p>B. Phoenix and Beauty 要求所有长度为 \(k\) 的子数组之和相同，观察样例可以发现，当原数组中不同的元素个数小于等于 \(k\) 时可以满足条件，同时输出的数组长度 \(m\) 很大，可以从这里入手 构造一个有所有元素的数组，当这个数组长度不足时，补其他元素进去，答案即为 \(\frac{10…</p> <p class="post-meta"> 4 分钟阅读   ·   2023-04-09 </p> <p class="post-tags"> <a href="/blog/2023"> <i class="fa-solid fa-calendar fa-sm"></i> 2023 </a>   ·   <a href="/blog/tag/contest"> <i class="fa-solid fa-hashtag fa-sm"></i> contest</a>   <a href="/blog/tag/constructive-algorithms"> <i class="fa-solid fa-hashtag fa-sm"></i> constructive algorithms</a> </p> </li> <li> <h3> <a class="post-title" href="/blog/2023/cnblogs-17282641/">New Year Tree</a> </h3> <p>New Year Tree 线段树，打标记，位运算 1. 操作1，区间赋值，很容易的线段树操作 2. 对于询问以 \(u\) 为根的子树上的所有节点的颜色数量，一开始我在线段树里开了一个大小61的数组，喜提MLE，但后续观察发现， \(1 &lt;&lt; 60 \leq \text{longlong}\) ，所以我们设每种颜色…</p> <p class="post-meta"> 1 分钟阅读   ·   2023-04-03 </p> <p class="post-tags"> <a href="/blog/2023"> <i class="fa-solid fa-calendar fa-sm"></i> 2023 </a>   ·   <a href="/blog/tag/data-structures"> <i class="fa-solid fa-hashtag fa-sm"></i> data structures</a> </p> </li> <li> <h3> <a class="post-title" href="/blog/2023/cnblogs-17282595/">TorCoder</a> </h3> <p>TorCoder 26棵线段树 1. 建树，对于每个字符在响应字母的位置上进行修改数量 2. 对于 \([l,r]\) 的重排，对26个字母进行区间查询出现的数量，判断是否可以组成，如果可以组成，将 \([l,r]\) 出现过字母的区间[l,r]赋值为0，然后根据字典序顺序对进行区间赋值操作 3. \(m\) 次操作…</p> <p class="post-meta"> 8 分钟阅读   ·   2023-04-03 </p> <p class="post-tags"> <a href="/blog/2023"> <i class="fa-solid fa-calendar fa-sm"></i> 2023 </a>   ·   <a href="/blog/tag/data-structures"> <i class="fa-solid fa-hashtag fa-sm"></i> data structures</a> </p> </li> </ul> <nav aria-label="Blog page navigation"> <ul class="af-pagination"> <li class="af-page-item "> <a class="af-page-link" href="/blog/page/10/" tabindex="-1" aria-disabled="10">&lt;</a> </li> <li class="af-page-item "> <a class="af-page-link" href="/blog/page/10/" title="blog - page 10">10</a> </li> <li class="af-page-item active"> <a class="af-page-link" href="/blog/page/11/" title="blog - page 11">11</a> </li> <li class="af-page-item "> <a class="af-page-link" href="/blog/page/12/" title="blog - page 12">12</a> </li> <li class="af-page-item "> <a class="af-page-link" href="/blog/page/13/" title="blog - page 13">13</a> </li> <li class="af-page-item "> <a class="af-page-link" href="/blog/page/14/" title="blog - page 14">14</a> </li> <li class="af-page-item "> <a class="af-page-link" href="/blog/page/12/">&gt;</a> </li> </ul> </nav> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 magicat . 使用 <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> 构建，由 <a href="https://pages.github.com/" rel="external nofollow noopener" target="_blank">GitHub Pages</a> 托管。 Last updated: July 15, 2026. </div> </footer> <script>
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> magicat </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/news/">news </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <div class="header-bar"> <h1>magicat's blog</h1> <h2>Notes on competitive programming, data structures, and AI engineering</h2> </div> <div class="tag-category-list"> <ul class="p-0 m-0"> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/ai">AI</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/algorithm-basics">algorithm basics</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/computational-geometry">computational geometry</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/constructive-algorithms">constructive algorithms</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/contest">contest</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/data-structures">data structures</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/dynamic-programming">dynamic programming</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/game-theory">game theory</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/graph-theory">graph theory</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/mathematics">mathematics</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/miscellaneous">miscellaneous</a> </li> <p>•</p> <li> <i class="fa-solid fa-hashtag fa-sm"></i> <a href="/blog/tag/posts">posts</a> </li> </ul> </div> <ul class="post-list"> <li> <h3> <a class="post-title" href="/blog/2023/usaco-2012-flowerpot-monotonic-queue/">[USACO12MAR]Flowerpot S 单调队列</a> </h3> <p>[[USACO12MAR]Flowerpot S](https://www.luogu.com.cn/problem/P2698 "[USACO12MAR]Flowerpot S") tag:单调队列 很惭愧，今天发现自己连滑动窗口都不会了，遂做了一些题 两滴水的高度之差大于等于D的情况下的最小花盆宽度 暴力思路：对…</p> <p class="post-meta"> 4 分钟阅读   ·   2023-04-13 </p> <p class="post-tags"> <a href="/blog/2023"> <i class="fa-solid fa-calendar fa-sm"></i> 2023 </a>   ·   <a href="/blog/tag/algorithm-basics"> <i class="fa-solid fa-hashtag fa-sm"></i> algorithm basics</a>   <a href="/blog/tag/data-structures"> <i class="fa-solid fa-hashtag fa-sm"></i> data structures</a> </p> </li> <li> <h3> <a class="post-title" href="/blog/2023/plus-and-multiply/">B. Plus and Multiply</a> </h3> <p>B. Plus and Multiply 手模拟了一下 观察每个式子，化简得到: $a^x + by = n $ 由于$a^x$是指数增长，直接枚举它的幂次即可，注意对$a=1$的情况特判</p> <p class="post-meta"> 3 分钟阅读   ·   2023-04-09 </p> <p class="post-tags"> <a href="/blog/2023"> <i class="fa-solid fa-calendar fa-sm"></i> 2023 </a>   ·   <a href="/blog/tag/contest"> <i class="fa-solid fa-hashtag fa-sm"></i> contest</a>   <a href="/blog/tag/constructive-algorithms"> <i class="fa-solid fa-hashtag fa-sm"></i> constructive algorithms</a> </p> </li> <li> <h3> <a class="post-title" href="/blog/2023/phoenix-and-beauty/">B. Phoenix and Beauty</a> </h3> <p>B. Phoenix and Beauty 要求所有长度为 \(k\) 的子数组之和相同，观察样例可以发现，当原数组中不同的元素个数小于等于 \(k\) 时可以满足条件，同时输出的数组长度 \(m\) 很大，可以从这里入手 构造一个有所有元素的数组，当这个数组长度不足时，补其他元素进去，答案即为 \(\frac{10…</p> <p class="post-meta"> 4 分钟阅读   ·   2023-04-09 </p> <p class="post-tags"> <a href="/blog/2023"> <i class="fa-solid fa-calendar fa-sm"></i> 2023 </a>   ·   <a href="/blog/tag/contest"> <i class="fa-solid fa-hashtag fa-sm"></i> contest</a>   <a href="/blog/tag/constructive-algorithms"> <i class="fa-solid fa-hashtag fa-sm"></i> constructive algorithms</a> </p> </li> <li> <h3> <a class="post-title" href="/blog/2023/new-year-tree/">New Year Tree</a> </h3> <p>New Year Tree 线段树，打标记，位运算 1. 操作1，区间赋值，很容易的线段树操作 2. 对于询问以 \(u\) 为根的子树上的所有节点的颜色数量，一开始我在线段树里开了一个大小61的数组，喜提MLE，但后续观察发现， \(1 &lt;&lt; 60 \leq \text{longlong}\) ，所以我们设每种颜色…</p> <p class="post-meta"> 1 分钟阅读   ·   2023-04-03 </p> <p class="post-tags"> <a href="/blog/2023"> <i class="fa-solid fa-calendar fa-sm"></i> 2023 </a>   ·   <a href="/blog/tag/data-structures"> <i class="fa-solid fa-hashtag fa-sm"></i> data structures</a> </p> </li> <li> <h3> <a class="post-title" href="/blog/2023/torcoder/">TorCoder</a> </h3> <p>TorCoder 26棵线段树 1. 建树，对于每个字符在响应字母的位置上进行修改数量 2. 对于 \([l,r]\) 的重排，对26个字母进行区间查询出现的数量，判断是否可以组成，如果可以组成，将 \([l,r]\) 出现过字母的区间[l,r]赋值为0，然后根据字典序顺序对进行区间赋值操作 3. \(m\) 次操作…</p> <p class="post-meta"> 8 分钟阅读   ·   2023-04-03 </p> <p class="post-tags"> <a href="/blog/2023"> <i class="fa-solid fa-calendar fa-sm"></i> 2023 </a>   ·   <a href="/blog/tag/data-structures"> <i class="fa-solid fa-hashtag fa-sm"></i> data structures</a> </p> </li> </ul> <nav aria-label="Blog page navigation"> <ul class="af-pagination"> <li class="af-page-item "> <a class="af-page-link" href="/blog/page/10/" tabindex="-1" aria-disabled="10">&lt;</a> </li> <li class="af-page-item "> <a class="af-page-link" href="/blog/page/10/" title="blog - page 10">10</a> </li> <li class="af-page-item active"> <a class="af-page-link" href="/blog/page/11/" title="blog - page 11">11</a> </li> <li class="af-page-item "> <a class="af-page-link" href="/blog/page/12/" title="blog - page 12">12</a> </li> <li class="af-page-item "> <a class="af-page-link" href="/blog/page/13/" title="blog - page 13">13</a> </li> <li class="af-page-item "> <a class="af-page-link" href="/blog/page/14/" title="blog - page 14">14</a> </li> <li class="af-page-item "> <a class="af-page-link" href="/blog/page/12/">&gt;</a> </li> </ul> </nav> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 magicat . 使用 <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> 构建，由 <a href="https://pages.github.com/" rel="external nofollow noopener" target="_blank">GitHub Pages</a> 托管。 Last updated: September 06, 2026. </div> </footer> <script>
   window.alFolio = {
     compatBootstrap: false
   };
@@ -62,7 +62,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2025/cnblogs-19161022/";
+            window.location.href = "/blog/2025/rtx-5060ti-xinference-setup/";
           
         },
       },{id: "post-npu配置xinference环境-并部署embedding和rerank模型",
@@ -73,7 +73,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2025/cnblogs-19161008/";
+            window.location.href = "/blog/2025/npu-xinference-embedding-reranker-deployment/";
           
         },
       },{id: "post-rtx-5060ti-部署llama-factory",
@@ -84,7 +84,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2025/cnblogs-19160805/";
+            window.location.href = "/blog/2025/rtx-5060ti-llama-factory-deployment/";
           
         },
       },{id: "post-xcpc最后的故事",
@@ -95,7 +95,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2024/cnblogs-18440950/";
+            window.location.href = "/blog/2024/final-xcpc-story/";
           
         },
       },{id: "post-三轮考核",
@@ -106,7 +106,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17786697/";
+            window.location.href = "/blog/2023/three-round-assessment/";
           
         },
       },{id: "post-算法",
@@ -117,7 +117,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17755661/";
+            window.location.href = "/blog/2023/algorithm-notes/";
           
         },
       },{id: "post-2022-china-collegiate-programming-contest-ccpc-weihai-site-eajgci",
@@ -128,7 +128,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17745941/";
+            window.location.href = "/blog/2023/2022-china-collegiate-programming-contest-ccpc-weihai-site-eajgci/";
           
         },
       },{id: "post-2022-china-collegiate-programming-contest-ccpc-mianyang-onsite-gchmad",
@@ -139,7 +139,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17735234/";
+            window.location.href = "/blog/2023/2022-china-collegiate-programming-contest-ccpc-mianyang-onsite-gchmad/";
           
         },
       },{id: "post-the-2021-china-collegiate-programming-contest-harbin-jbeidg",
@@ -150,7 +150,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17734624/";
+            window.location.href = "/blog/2023/2021-china-collegiate-programming-contest-harbin/";
           
         },
       },{id: "post-极光工作室",
@@ -161,7 +161,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17734570/";
+            window.location.href = "/blog/2023/aurora-studio/";
           
         },
       },{id: "post-2022年中国大学生程序设计竞赛女生专场-aceghil",
@@ -172,7 +172,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17713269/";
+            window.location.href = "/blog/2023/2022-china-collegiate-programming-contest-womens-special/";
           
         },
       },{id: "post-2021年中国大学生程序设计竞赛女生专场-akdgibc",
@@ -183,7 +183,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17706702/";
+            window.location.href = "/blog/2023/2021-china-collegiate-programming-contest-womens-special/";
           
         },
       },{id: "post-2022-international-collegiate-programming-contest-jinan-site-mkaedgc",
@@ -194,7 +194,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17706686/";
+            window.location.href = "/blog/2023/2022-icpc-jinan-site/";
           
         },
       },{id: "post-educational-codeforces-round-7-a-e",
@@ -205,7 +205,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17675933/";
+            window.location.href = "/blog/2023/educational-codeforces-round-7/";
           
         },
       },{id: "post-educational-codeforces-round-6-a-e",
@@ -216,7 +216,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17674500/";
+            window.location.href = "/blog/2023/educational-codeforces-round-6/";
           
         },
       },{id: "post-educational-codeforces-round-23-a-f",
@@ -227,7 +227,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17674011/";
+            window.location.href = "/blog/2023/educational-codeforces-round-23/";
           
         },
       },{id: "post-educational-codeforces-round-15-a-e",
@@ -238,7 +238,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17672888/";
+            window.location.href = "/blog/2023/educational-codeforces-round-15/";
           
         },
       },{id: "post-educational-codeforces-round-5-a-e",
@@ -249,7 +249,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17672708/";
+            window.location.href = "/blog/2023/educational-codeforces-round-5/";
           
         },
       },{id: "post-the-2022-icpc-asia-nanjing-regional-contest",
@@ -260,7 +260,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17670762/";
+            window.location.href = "/blog/2023/2022-icpc-asia-nanjing-regional-contest/";
           
         },
       },{id: "post-近段时间出现可以用multiset解决的题目",
@@ -271,7 +271,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17660205/";
+            window.location.href = "/blog/2023/multiset-solvable-problem-notes/";
           
         },
       },{id: "post-codeforces-round-894-div-3-abcdefg-ak",
@@ -282,7 +282,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17659255/";
+            window.location.href = "/blog/2023/codeforces-round-894/";
           
         },
       },{id: "post-2020-2021-acm-icpc-asia-nanjing-regional-contest-klmefah",
@@ -293,7 +293,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17655905/";
+            window.location.href = "/blog/2023/2020-2021-acm-icpc-asia-nanjing-regional-contest/";
           
         },
       },{id: "post-german-collegiate-programming-contest-2021-abcehijklg-namomo-camp-day1-baidhgcfe",
@@ -304,7 +304,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17652057/";
+            window.location.href = "/blog/2023/german-collegiate-programming-contest-2021/";
           
         },
       },{id: "post-the-2022-icpc-asia-regionals-online-contest-ii-ejfb",
@@ -315,7 +315,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17641079/";
+            window.location.href = "/blog/2023/2022-icpc-asia-regionals-online-contest-2/";
           
         },
       },{id: "post-the-2022-icpc-asia-regionals-online-contest-i-c-l-a",
@@ -326,7 +326,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17636155/";
+            window.location.href = "/blog/2023/2022-icpc-asia-regionals-online-contest-1/";
           
         },
       },{id: "post-百度之星初赛第一场游记",
@@ -337,7 +337,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17623748/";
+            window.location.href = "/blog/2023/baidu-star-preliminary-contest-1-trip/";
           
         },
       },{id: "post-2023-8-9-2023-8-11-做题",
@@ -348,18 +348,18 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17616549/";
+            window.location.href = "/blog/2023/problem-solving-notes-2023-08/";
           
         },
       },{id: "post-一些dp",
         
           title: "一些DP",
         
-        description: "一些做题节选 目录 - 一些做题节选 - P1273 有线电视网 - [P2279 [HNOI2003] 消防局的设立](/blog/2023/cnblogs-17611545/ p2279-hnoi2003-消防局的设立) - [P5662 [CSP-J2019] 纪念品](/blog/2023/cnblogs-1…",
+        description: "一些做题节选，整理动态规划、树形 DP 与图论题目的解题记录。",
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17611545/";
+            window.location.href = "/blog/2023/dynamic-programming-problem-notes/";
           
         },
       },{id: "post-p1273-有线电视网",
@@ -370,7 +370,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17593730/";
+            window.location.href = "/blog/2023/luogu-p1273-cable-television-network/";
           
         },
       },{id: "post-atcoder-beginner-contest-308-a-f",
@@ -381,7 +381,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17521119/";
+            window.location.href = "/blog/2023/atcoder-beginner-contest-308-af/";
           
         },
       },{id: "post-acwing-第110场周赛-智商药",
@@ -392,7 +392,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17521094/";
+            window.location.href = "/blog/2023/acwing-weekly-contest-110-intelligence-pill/";
           
         },
       },{id: "post-acwing-第108场周赛-拼接数组",
@@ -403,7 +403,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17521051/";
+            window.location.href = "/blog/2023/acwing-weekly-contest-108-array-concatenation/";
           
         },
       },{id: "post-atcoder-beginner-contest-302-abcdef",
@@ -414,7 +414,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17496565/";
+            window.location.href = "/blog/2023/atcoder-beginner-contest-302-abcdef/";
           
         },
       },{id: "post-atcoder-beginner-contest-240-d",
@@ -425,7 +425,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17467464/";
+            window.location.href = "/blog/2023/atcoder-beginner-contest-240-d/";
           
         },
       },{id: "post-p4942-小凯的数字",
@@ -436,7 +436,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17455881/";
+            window.location.href = "/blog/2023/luogu-p4942-xiaokais-number/";
           
         },
       },{id: "post-atcoder-beginner-contest-304-abcdef",
@@ -447,7 +447,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17455486/";
+            window.location.href = "/blog/2023/atcoder-beginner-contest-304-abcdef/";
           
         },
       },{id: "post-2021四川省赛",
@@ -458,7 +458,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17429104/";
+            window.location.href = "/blog/2023/2021-sichuan-contest/";
           
         },
       },{id: "post-师妹的整理",
@@ -469,7 +469,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17394093/";
+            window.location.href = "/blog/2023/junior-students-notes/";
           
         },
       },{id: "post-个人模板",
@@ -480,7 +480,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17385691/";
+            window.location.href = "/blog/2023/personal-templates/";
           
         },
       },{id: "post-数论分块总结",
@@ -491,7 +491,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17380982/";
+            window.location.href = "/blog/2023/number-theory-block-decomposition/";
           
         },
       },{id: "post-2023湖北省赛-vp-5题mchjf-1题k",
@@ -502,7 +502,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17380089/";
+            window.location.href = "/blog/2023/hubei-contest-vp-mchjf-k/";
           
         },
       },{id: "post-c-ehab-and-path-etic-mexs",
@@ -513,7 +513,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17378153/";
+            window.location.href = "/blog/2023/ehab-and-pathetic-mexs/";
           
         },
       },{id: "post-chemistry-experiment-codeforces-round-247-div-2-线段树动态开点-二分",
@@ -524,7 +524,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17368435/";
+            window.location.href = "/blog/2023/chemistry-experiment-segment-tree-binary-search/";
           
         },
       },{id: "post-区间不同数的个数-二维数点-离线-扫描线-离线-可持久化线段树-在线",
@@ -535,7 +535,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17365044/";
+            window.location.href = "/blog/2023/offline-distinct-count-and-persistent-segment-tree/";
           
         },
       },{id: "post-可持久化线段树模板-区间第k小数-区间前k大数之和",
@@ -546,7 +546,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17364818/";
+            window.location.href = "/blog/2023/persistent-segment-tree-kth-and-top-k-sum/";
           
         },
       },{id: "post-权值线段树模板",
@@ -557,7 +557,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17360427/";
+            window.location.href = "/blog/2023/segment-tree-over-values-template/";
           
         },
       },{id: "post-线段树的动态开点模板",
@@ -568,7 +568,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17359861/";
+            window.location.href = "/blog/2023/dynamic-segment-tree-template/";
           
         },
       },{id: "post-d-solve-the-maze",
@@ -579,7 +579,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17341063/";
+            window.location.href = "/blog/2023/solve-the-maze/";
           
         },
       },{id: "post-d-non-zero-segments",
@@ -590,7 +590,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17340896/";
+            window.location.href = "/blog/2023/non-zero-segments/";
           
         },
       },{id: "post-湖南省第十八届大学生计算机程序设计竞赛-hncpc2022-vp记录",
@@ -601,7 +601,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17325343/";
+            window.location.href = "/blog/2023/hncpc-2022-vp-record/";
           
         },
       },{id: "post-usaco12mar-flowerpot-s-单调队列",
@@ -612,7 +612,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17316484/";
+            window.location.href = "/blog/2023/usaco-2012-flowerpot-monotonic-queue/";
           
         },
       },{id: "post-b-plus-and-multiply",
@@ -623,7 +623,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17301315/";
+            window.location.href = "/blog/2023/plus-and-multiply/";
           
         },
       },{id: "post-b-phoenix-and-beauty",
@@ -634,7 +634,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17301214/";
+            window.location.href = "/blog/2023/phoenix-and-beauty/";
           
         },
       },{id: "post-new-year-tree",
@@ -645,7 +645,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17282641/";
+            window.location.href = "/blog/2023/new-year-tree/";
           
         },
       },{id: "post-torcoder",
@@ -656,7 +656,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17282595/";
+            window.location.href = "/blog/2023/torcoder/";
           
         },
       },{id: "post-noi-online-1-提高组-冒泡排序",
@@ -667,7 +667,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17282538/";
+            window.location.href = "/blog/2023/noi-online-1-bubble-sort/";
           
         },
       },{id: "post-usaco08feb-hotel-g",
@@ -678,7 +678,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17282481/";
+            window.location.href = "/blog/2023/usaco-2008-hotel-g/";
           
         },
       },{id: "post-scoi2010-序列操作",
@@ -689,7 +689,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17282382/";
+            window.location.href = "/blog/2023/scoi-2010-sequence-operations/";
           
         },
       },{id: "post-educational-codeforces-round-3-个人总结a-e",
@@ -700,7 +700,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17070875/";
+            window.location.href = "/blog/2023/educational-codeforces-round-3-summary/";
           
         },
       },{id: "post-educational-codeforces-round-2-个人总结a-e",
@@ -711,7 +711,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17069418/";
+            window.location.href = "/blog/2023/educational-codeforces-round-2-summary/";
           
         },
       },{id: "post-educational-codeforces-round-1-个人总结a-e",
@@ -722,7 +722,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17063289/";
+            window.location.href = "/blog/2023/educational-codeforces-round-1-summary/";
           
         },
       },{id: "post-标记一下cf教育场的网址",
@@ -733,7 +733,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17059064/";
+            window.location.href = "/blog/2023/codeforces-educational-rounds-link/";
           
         },
       },{id: "post-uva10404",
@@ -744,7 +744,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2023/cnblogs-17057781/";
+            window.location.href = "/blog/2023/uva-10404/";
           
         },
       },{id: "post-补题空间",
@@ -755,7 +755,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16945914/";
+            window.location.href = "/blog/2022/problem-solving-backlog/";
           
         },
       },{id: "post-2022-icpc沈阳合肥游记",
@@ -766,7 +766,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16916516/";
+            window.location.href = "/blog/2022/2022-icpc-shenyang-hefei-trip/";
           
         },
       },{id: "post-p4053-jsoi2007-建筑抢修",
@@ -777,7 +777,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16566709/";
+            window.location.href = "/blog/2022/luogu-p4053-building-repair/";
           
         },
       },{id: "post-上分准备-vp-codeforces-round-762-div-3-4题abce",
@@ -788,7 +788,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16536494/";
+            window.location.href = "/blog/2022/codeforces-round-762-vp-abce/";
           
         },
       },{id: "post-上分之路-vp-codeforces-round-744-div-3-abde",
@@ -799,7 +799,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16535726/";
+            window.location.href = "/blog/2022/codeforces-round-744-vp-abde/";
           
         },
       },{id: "post-e-gardener-and-tree-拓扑排序板子",
@@ -810,7 +810,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16535716/";
+            window.location.href = "/blog/2022/gardener-and-tree-topological-sort/";
           
         },
       },{id: "post-p1347-排序",
@@ -821,7 +821,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16535413/";
+            window.location.href = "/blog/2022/luogu-p1347-ranking/";
           
         },
       },{id: "post-p2853-usaco06dec-cow-picnic-s",
@@ -832,7 +832,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16535330/";
+            window.location.href = "/blog/2022/luogu-p2853-cow-picnic/";
           
         },
       },{id: "post-p1127-词链-欧拉图-欧拉回路-欧拉通路",
@@ -843,7 +843,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16535303/";
+            window.location.href = "/blog/2022/luogu-p1127-word-chain-euler-path/";
           
         },
       },{id: "post-p1807-最长路",
@@ -854,7 +854,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16535223/";
+            window.location.href = "/blog/2022/luogu-p1807-longest-path/";
           
         },
       },{id: "post-p4017-最大食物链计数",
@@ -865,7 +865,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16535206/";
+            window.location.href = "/blog/2022/luogu-p4017-maximum-food-chain-count/";
           
         },
       },{id: "post-p1113-杂务",
@@ -876,7 +876,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16535187/";
+            window.location.href = "/blog/2022/luogu-p1113-jobs/";
           
         },
       },{id: "post-p3916-图的遍历",
@@ -887,7 +887,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16535165/";
+            window.location.href = "/blog/2022/luogu-p3916-graph-traversal/";
           
         },
       },{id: "post-p5318-深基18-例3-查找文献",
@@ -898,7 +898,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16535143/";
+            window.location.href = "/blog/2022/luogu-p5318-document-search/";
           
         },
       },{id: "post-dag-有向无环图-拓扑排序-模板",
@@ -909,7 +909,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16535093/";
+            window.location.href = "/blog/2022/dag-topological-sort-template/";
           
         },
       },{id: "post-某次作业",
@@ -920,7 +920,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16358925/";
+            window.location.href = "/blog/2022/date-operator-overload-homework/";
           
         },
       },{id: "post-uva1589-象棋-xiangqi题解",
@@ -931,7 +931,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16301119/";
+            window.location.href = "/blog/2022/uva-1589-xiangqi/";
           
         },
       },{id: "post-某次作业",
@@ -942,7 +942,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16289041/";
+            window.location.href = "/blog/2022/teacher-cadre-inheritance-homework/";
           
         },
       },{id: "post-勾股数组表-10以内-数论概论习题3-1",
@@ -953,7 +953,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16276160/";
+            window.location.href = "/blog/2022/pythagorean-triples-and-number-theory-exercises/";
           
         },
       },{id: "post-友元函数求两点的距离",
@@ -964,7 +964,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16262095/";
+            window.location.href = "/blog/2022/friend-function-distance-between-two-points/";
           
         },
       },{id: "post-tokitsukaze-and-strange-inequality-codeforces-round-789-div-2-c",
@@ -975,7 +975,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16248802/";
+            window.location.href = "/blog/2022/tokitsukaze-strange-inequality-codeforces-round-789/";
           
         },
       },{id: "post-uva227-谜题-puzzle",
@@ -986,7 +986,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16246867/";
+            window.location.href = "/blog/2022/uva-227-puzzle/";
           
         },
       },{id: "post-stl算法总结",
@@ -997,7 +997,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16209267/";
+            window.location.href = "/blog/2022/stl-algorithm-summary/";
           
         },
       },{id: "post-uva156-反片语-ananagrams",
@@ -1008,7 +1008,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16206292/";
+            window.location.href = "/blog/2022/uva-156-ananagrams/";
           
         },
       },{id: "post-uva10815-安迪的第一个字典-andy-39-s-first-dictionary",
@@ -1019,7 +1019,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16205079/";
+            window.location.href = "/blog/2022/uva-10815-andys-first-dictionary/";
           
         },
       },{id: "post-uva10104",
@@ -1030,7 +1030,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16176722/";
+            window.location.href = "/blog/2022/uva-10104/";
           
         },
       },{id: "post-类实现明天的日期",
@@ -1041,7 +1041,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16175918/";
+            window.location.href = "/blog/2022/date-class-tomorrows-date/";
           
         },
       },{id: "post-c-复数的类",
@@ -1052,7 +1052,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16111971/";
+            window.location.href = "/blog/2022/cpp-complex-number-class/";
           
         },
       },{id: "post-4月记录贴",
@@ -1063,7 +1063,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16102198/";
+            window.location.href = "/blog/2022/april-notes/";
           
         },
       },{id: "post-3月记录帖",
@@ -1074,7 +1074,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2022/cnblogs-16084546/";
+            window.location.href = "/blog/2022/march-notes/";
           
         },
       },{id: "post-icpc2021上海热身two-point-removal",
@@ -1085,7 +1085,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15612896/";
+            window.location.href = "/blog/2021/icpc-2021-shanghai-warmup-two-point-removal/";
           
         },
       },{id: "post-educational-codeforces-round-117-rated-for-div-2-a-b",
@@ -1096,7 +1096,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15605008/";
+            window.location.href = "/blog/2021/educational-codeforces-round-117-ab/";
           
         },
       },{id: "post-uva11800-determine-the-shape",
@@ -1107,7 +1107,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15570283/";
+            window.location.href = "/blog/2021/uva-11800-determine-the-shape/";
           
         },
       },{id: "post-that-nice-euler-circuit-regionals-2004-gt-gt-asia-shanghai-uvalive-3263",
@@ -1118,7 +1118,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15559110/";
+            window.location.href = "/blog/2021/that-nice-euler-circuit-uvalive-3263/";
           
         },
       },{id: "post-cqoi2006-凸多边形-模板-半平面交",
@@ -1129,7 +1129,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15559073/";
+            window.location.href = "/blog/2021/cqoi-2006-convex-polygon-half-plane-intersection/";
           
         },
       },{id: "post-shoi2012信用卡凸包",
@@ -1140,7 +1140,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15559062/";
+            window.location.href = "/blog/2021/shoi-2012-credit-card-convex-hull/";
           
         },
       },{id: "post-usaco5-1-圈奶牛fencing-the-cows-模板-二维凸包",
@@ -1151,7 +1151,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15559029/";
+            window.location.href = "/blog/2021/usaco-5-1-fencing-the-cows-convex-hull/";
           
         },
       },{id: "post-poj3304",
@@ -1162,7 +1162,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15559024/";
+            window.location.href = "/blog/2021/poj-3304/";
           
         },
       },{id: "post-poj2318-amp-acwing-2983-玩具",
@@ -1173,7 +1173,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15559001/";
+            window.location.href = "/blog/2021/poj-2318-acwing-2983-toy/";
           
         },
       },{id: "post-uva11437-triangle-fun",
@@ -1184,7 +1184,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15558982/";
+            window.location.href = "/blog/2021/uva-11437-triangle-fun/";
           
         },
       },{id: "post-记录下目前学习状态",
@@ -1195,7 +1195,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15526781/";
+            window.location.href = "/blog/2021/current-learning-state/";
           
         },
       },{id: "post-计算几何uva11178-morley-39-s-theorem",
@@ -1206,7 +1206,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15526764/";
+            window.location.href = "/blog/2021/computational-geometry-uva-11178-morleys-theorem/";
           
         },
       },{id: "post-a-b快速幂",
@@ -1217,7 +1217,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15145188/";
+            window.location.href = "/blog/2021/a-to-the-b-fast-power/";
           
         },
       },{id: "post-两变量实现变量交换",
@@ -1228,7 +1228,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15089397/";
+            window.location.href = "/blog/2021/swap-two-variables/";
           
         },
       },{id: "post-洛谷p1009-noip1998-普及组-阶乘之和",
@@ -1239,7 +1239,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15089329/";
+            window.location.href = "/blog/2021/luogu-p1009-sum-of-factorials/";
           
         },
       },{id: "post-洛谷p2615-noip2015-提高组-神奇的幻方-题解",
@@ -1250,7 +1250,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15080790/";
+            window.location.href = "/blog/2021/luogu-p2615-magic-square/";
           
         },
       },{id: "post-三省吾身-no-1",
@@ -1261,7 +1261,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15077139/";
+            window.location.href = "/blog/2021/self-reflection-no-1/";
           
         },
       },{id: "post-队列",
@@ -1272,7 +1272,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15077000/";
+            window.location.href = "/blog/2021/queue/";
           
         },
       },{id: "post-vector-及被认为是移位运算符而编译错误",
@@ -1283,7 +1283,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15074331/";
+            window.location.href = "/blog/2021/vector-and-shift-operator-parse-error/";
           
         },
       },{id: "post-自用-曾经看到不懂的代码-三目运算符-二分-returnx-gt-y-typedef-define-vector-共用体union",
@@ -1294,7 +1294,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15070230/";
+            window.location.href = "/blog/2021/cpp-syntax-notes-ternary-binary-typedef-define-vector-union/";
           
         },
       },{id: "post-二分查找与二分答案-待补充",
@@ -1305,7 +1305,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15068443/";
+            window.location.href = "/blog/2021/binary-search-and-binary-answer/";
           
         },
       },{id: "post-memset在此作用域尚未声明-初始化int数组和对其他值初始化错误-洛谷p1618-三连击-升级版",
@@ -1316,7 +1316,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15061019/";
+            window.location.href = "/blog/2021/memset-scope-and-initialization-errors-luogu-p1618/";
           
         },
       },{id: "post-洛谷p2089-烤鸡",
@@ -1327,7 +1327,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15059076/";
+            window.location.href = "/blog/2021/luogu-p2089-roast-chicken/";
           
         },
       },{id: "post-快速排序-模板-洛谷p1177-模板-快速排序",
@@ -1338,7 +1338,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15057867/";
+            window.location.href = "/blog/2021/quick-sort-template-luogu-p1177/";
           
         },
       },{id: "post-选择排序",
@@ -1349,7 +1349,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15050384/";
+            window.location.href = "/blog/2021/selection-sort/";
           
         },
       },{id: "post-计数排序-洛谷p1271-深基9-例1-选举学生会",
@@ -1360,7 +1360,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15050262/";
+            window.location.href = "/blog/2021/counting-sort-luogu-p1271-student-council-election/";
           
         },
       },{id: "post-noip2015-普及组-扫雷游戏",
@@ -1371,7 +1371,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15047098/";
+            window.location.href = "/blog/2021/noip-2015-junior-mine-sweeper-game/";
           
         },
       },{id: "post-cin读取数字时遇到字符的总结-c-primer-plus-代码引起思考-为什么输入q使得程序结束",
@@ -1382,7 +1382,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2021/cnblogs-15022440/";
+            window.location.href = "/blog/2021/cin-number-input-and-character-encounter/";
           
         },
       },{id: "news-launched-the-new-website-and-migrated-121-posts-from-my-cnblogs-archive-including-markdown-formulas-images-code-blocks-and-tables",
