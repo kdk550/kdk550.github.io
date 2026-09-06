@@ -1,0 +1,190 @@
+---
+layout: post
+title: "UVA10815 安迪的第一个字典 Andy's First Dictionary"
+date: 2022-04-28 23:48:00 +0800
+updated: 2023-01-21 17:32:00 +0800
+description: "凌晨给卡了输入，应该是我少考虑一些情况了 晚上再写卡了一会输出 还是不太明白lrj 老师为什么放在set那里，vector，map也可以做,然后借这个机会学了set vector: map: set"
+excerpt: "凌晨给卡了输入，应该是我少考虑一些情况了 晚上再写卡了一会输出 还是不太明白lrj 老师为什么放在set那里，vector，map也可以做,然后借这个机会学了set vector: map: set"
+categories: []
+tags: ["algorithm basics"]
+comments: false
+related_posts: false
+---
+{% raw %}
+凌晨给卡了输入，应该是我少考虑一些情况了
+
+晚上再写卡了一会输出
+
+还是不太明白lrj 老师为什么放在set那里，vector，map也可以做,然后借这个机会学了set
+
+vector:
+
+
+
+```
+//  AC one more times
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string>
+#include<map>
+
+using namespace std;
+ 
+int main() {
+    string op;
+    vector<string> a;
+    char s;
+    while((s=getchar())!=EOF)
+    {
+        if(s<='Z'&&s>='A')  s+='a'-'A';
+        
+        if( s < 'a'|| s > 'z' )  
+        {
+            continue;
+        }
+        else
+        {
+            op+=s;
+            while((s=getchar())!=EOF)
+            {
+                if(s<='Z'&&s>='A')  s+='a'-'A';
+                
+                if(s>='a'&&s<='z')     op+=s;
+                else if(s<'a'||s>'z') 
+                {
+                    a.push_back(op);
+                    op.clear();
+                    break;
+                }
+           }
+        }
+        
+    }
+
+    sort(a.begin(),a.end());
+    a.erase(unique(a.begin(),a.end()),a.end());
+
+    for (auto iter=a.begin();iter!=a.end();iter++)
+        cout<<*iter<<endl;
+    return 0;
+}
+```
+
+
+
+map:
+
+
+
+```
+//  AC one more times
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string>
+#include<map>
+
+using namespace std;
+ 
+int main() {
+    string op;
+    map<string,int> a;
+    char s;
+    while((s=getchar())!=EOF)
+    {
+        if(s<='Z'&&s>='A')  s+='a'-'A';
+        
+        if( s < 'a'|| s > 'z' )  
+        {
+            continue;
+        }
+        else
+        {
+            op+=s;
+            while((s=getchar())!=EOF)
+            {
+                if(s<='Z'&&s>='A')  s+='a'-'A';
+                
+                if(s>='a'&&s<='z')     op+=s;
+                else if(s<'a'||s>'z') 
+                {
+                    a[op]++;
+                    op.clear();
+                    break;
+                }
+           }
+        }
+        
+    }
+
+    for(auto it : a)
+    {
+        cout<<it.first<<endl;
+    }    
+    return 0;
+}
+```
+
+
+
+set
+
+
+
+```
+//  AC one more times
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string>
+#include<map>
+#include<set>
+
+using namespace std;
+ 
+int main() {
+    string op;
+    set<string> a;
+    char s;
+    while((s=getchar())!=EOF)
+    {
+        if(s<='Z'&&s>='A')  s+='a'-'A';
+        
+        if( s < 'a'|| s > 'z' )  
+        {
+            continue;
+        }
+        else
+        {
+            op+=s;
+            while((s=getchar())!=EOF)
+            {
+                if(s<='Z'&&s>='A')  s+='a'-'A';
+                
+                if(s>='a'&&s<='z')     op+=s;
+                else if(s<'a'||s>'z') 
+                {
+                    a.insert(op);
+                    op.clear();
+                    break;
+                }
+           }
+        }
+        
+    }
+
+    for(auto it : a)
+    {
+        cout<<it<<endl;
+    }    
+    return 0;
+}
+```
+{% endraw %}

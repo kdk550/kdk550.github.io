@@ -1,0 +1,71 @@
+---
+layout: post
+title: "UVA156 反片语 Ananagrams"
+date: 2022-04-29 13:11:00 +0800
+updated: 2023-01-21 17:32:00 +0800
+description: "传送门：UVA156 反片语 Ananagrams lrj 老师的代码我没有看，先是写了一个暴力，睡个午觉，起来再看"
+excerpt: "传送门：UVA156 反片语 Ananagrams lrj 老师的代码我没有看，先是写了一个暴力，睡个午觉，起来再看"
+categories: []
+tags: ["algorithm basics"]
+comments: false
+related_posts: false
+---
+{% raw %}
+传送门：[UVA156 反片语 Ananagrams](https://www.luogu.com.cn/problem/UVA156)
+
+lrj 老师的代码我没有看，先是写了一个暴力，睡个午觉，起来再看
+
+
+
+```
+//  AC one more times
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string>
+#include<cstring>
+
+using namespace std;
+struct eng
+{
+    string op;　　　　//存要输出的答案
+    int a[30];　　　　//存每个字母的个数
+    bool st=true;　　//能不能输出的判断，单词字母相同就不能输出
+}ans[1000010];
+vector<string> ans1;
+int main() 
+{
+    int cnt=0;      string s;
+    while(cin>>s)
+    {
+        if(s[0]=='#')  break;
+        string hh=s;　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　//hh是要输出的答案，等会要转小写，所以找另一个变量存一下
+        int b[30],len=s.size(),check=0;  memset(b,0,sizeof b);　　　　　　　　　　//存每个字母的个数
+        for(int i=0;i<len;i++)  if(s[i]>='A'&&s[i]<='Z')    s[i]+='a'-'A';　　//转小写
+        for(int i=0;i<len;i++)   b[s[i]-'a'+1]++;        　　　　　　　　　　　　//统计各个字母的个数
+        for(int i=1;i<=cnt;i++)
+        {
+            int st=0;　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　//答案数组里面有没有和输入的单词各个字母都相同的单词
+            for(int j=1;j<=26;j++)  if(b[j]==ans[i].a[j])    st++;　　　　//判断
+            if(st==26)  　　　　//26个字母的个数都相等
+            {
+                ans[i].st=false;    check=1;　　　　　　　　　　　　　　　　//废掉已经存进去的，这个没存进去的s也做个记号不存进去
+            }
+        }
+        if(check==0)　　　　//存进去的没有与s相同
+        {
+            ans[++cnt].op=hh;　　　　//存进无小写化的单词
+            for(int i=1;i<=26;i++)   ans[cnt].a[i]=b[i];　　//记录26个字母个数
+        }
+    }
+    
+    for(int i=1;i<=cnt;i++)    if(ans[i].st==true)    ans1.push_back(ans[i].op);//将能输出的单词存进vettor，为了方便排序　　
+    sort(ans1.begin(),ans1.end());　　//字典序排序
+    for(auto &it : ans1)　　//输出
+        cout<<it<<endl;
+    return 0;
+}
+```
+{% endraw %}

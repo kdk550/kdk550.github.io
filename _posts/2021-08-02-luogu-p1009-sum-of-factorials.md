@@ -1,0 +1,115 @@
+---
+layout: post
+title: "洛谷P1009 [NOIP1998 普及组] 阶乘之和"
+date: 2021-08-02 11:56:00 +0800
+updated: 2023-01-21 17:44:00 +0800
+description: "本质上是高精度模板的运用 但我听说用python打表更快，羡慕了 比较容易写错，这里少了一些，那里字母又打错 错误总结： 有些表达式也有可能写错 还有判断数组有效数字长度的错误，算出来的是数组的长度，不是需要计算或打印的 由于是阶乘的计算，名命名一个全局变量，从头用到尾 AC代码： 用两个数组存储，一个处理结果（阶乘…"
+excerpt: "本质上是高精度模板的运用 但我听说用python打表更快，羡慕了 比较容易写错，这里少了一些，那里字母又打错 错误总结： 有些表达式也有可能写错 还有判断数组有效数字长度的错误，算出来的是数组的长度，不是需要计算或打印的 由于是阶乘的计算，名命名一个全局变量，从头用到尾 AC代码： 用两个数组存储，一个处理结果（阶乘…"
+categories: []
+tags: ["algorithm basics"]
+comments: false
+related_posts: false
+---
+{% raw %}
+本质上是高精度模板的运用
+
+但我听说用python打表更快，羡慕了
+
+比较容易写错，这里少了一些，那里字母又打错
+
+错误总结：
+
+有些表达式也有可能写错
+
+
+
+```
+ cheng[i + 1] =cheng[i+1]+cheng[i] / 10;//这里我第一次写就少了等号右边的cheng[i+1]，并在n=5的阶乘之和发现，并调试修改
+```
+
+
+
+还有判断数组有效数字长度的错误，算出来的是数组的长度，不是需要计算或打印的
+
+
+
+```
+length=sizeof(sum)/sizeof(sum[0]);
+```
+
+
+
+由于是阶乘的计算，名命名一个全局变量，从头用到尾
+
+AC代码：
+
+用两个数组存储，一个处理结果（阶乘），一个用于表达阶乘
+
+
+
+```
+#include<iostream>
+#include<string>
+#include<cmath>
+using namespace std;
+int cheng[5500];//表达阶乘
+int ans[5500];//表达阶乘的和
+int length = 1;
+void gaojia();
+void gaocheng(int x)    
+{
+    
+    int yinzi = x;
+    for (int i = 0; i < length; i++)
+        cheng[i] = cheng[i] * yinzi;        //每个数乘以因子
+    
+    
+    for (int i = 0; i < length; i++)
+    {
+        cheng[i + 1] =cheng[i+1]+cheng[i] / 10;
+        cheng[i] = cheng[i] % 10;
+    }
+    if (cheng[length++] == 0)
+        length--;
+    //高精度A*B的模板
+    
+    
+    
+    gaojia();//将阶乘加到总和ans
+
+}
+void gaojia()
+{
+    for (int i = 0; i < length; i++)
+        ans[i] = ans[i] + cheng[i];
+    for (int i = 0; i < length; i++)
+    {
+        ans[i + 1] = ans[i+1]+ans[i] / 10;
+        ans[i] = ans[i] % 10;
+    }
+    if (ans[length++] == 0)
+        length--;
+    
+    //高精度A+B模板
+    
+}
+int main()
+{
+    int n;
+    cin >> n;
+    ans[0] = 0;
+    cheng[0] = 1;
+
+    for (int i = 1; i <= n; i++)
+    {
+        gaocheng(i);    //传递要乘数字给函数
+    }
+
+    for (int i = length - 1; i >= 0; i--)
+        cout << ans[i];
+    //输出
+
+    return 0;
+}
+```
+{% endraw %}

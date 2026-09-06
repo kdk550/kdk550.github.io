@@ -1,0 +1,191 @@
+---
+layout: post
+title: "P1127 词链 欧拉图，欧拉回路，欧拉通路"
+date: 2022-07-30 16:41:00 +0800
+updated: 2022-07-31 10:08:00 +0800
+description: "P1127 词链 欧拉通路： - 有向图：图连通，一个顶点 出度-入度=1 此点为起点，一个顶点 入度-出度=1 此点为终点，其余点入度=出度 - 无向图：图连通，只有两个顶点为奇数度，其余都是偶数度 关于欧拉通路度数判断： 欧拉回路： - 有向图：图连通，所有顶点 入度=出度 - 无向图：图连通，所有顶点都是偶数度…"
+excerpt: "P1127 词链 欧拉通路： - 有向图：图连通，一个顶点 出度-入度=1 此点为起点，一个顶点 入度-出度=1 此点为终点，其余点入度=出度 - 无向图：图连通，只有两个顶点为奇数度，其余都是偶数度 关于欧拉通路度数判断： 欧拉回路： - 有向图：图连通，所有顶点 入度=出度 - 无向图：图连通，所有顶点都是偶数度…"
+categories: []
+tags: ["graph theory"]
+comments: false
+related_posts: false
+---
+{% raw %}
+# [P1127 词链](https://www.luogu.com.cn/problem/P1127)
+
+欧拉通路：
+
+- 有向图：图连通，一个顶点   出度-入度=1  此点为起点，一个顶点 入度-出度=1 此点为终点，其余点入度=出度
+- 无向图：图连通，只有两个顶点为奇数度，其余都是偶数度
+
+关于欧拉通路度数判断：
+
+
+
+```
+    int x=0,y=0,z=0;
+    for(int i=1;i<=n;i++)
+    {
+        if(in[i]+1==out[i])
+            y++,x=i;
+        if(out[i]!=in[i])
+            z++;
+    }
+    if(!(!z || (y==1 && z==2)))
+    {
+        cout<<"No"<<endl;
+        return;
+    }
+```
+
+
+
+ 
+
+欧拉回路：
+
+- 有向图：图连通，所有顶点 入度=出度
+- 无向图：图连通，所有顶点都是偶数度
+
+关于欧拉回路度数判断：
+
+
+
+```
+    int x=0,y=0;
+    for(int i=1;i<=n;i++)
+        if(d[i]&1)　　//d为顶点度数
+            x=i,y++;
+    if(y&&y!=2)
+    {
+        cout<<"No"<<endl;   return;
+    }
+    if(!x)
+        for(int i=1;i<=n;i++)
+            if(d[i])
+                x=i;
+```
+
+
+
+ 
+
+**实现字典序最小的欧拉路通过对边进行排序实现**
+
+**在P1127中**
+
+**步骤：**
+
+1. 建图，例如 abc 建立 a->c 的图，这里的vector的元素为一个结构体，存元素，字符串的编号，字符串。  
+   同时入度in[c]++,出度out[a]++
+2. 对边进行排序，以字典序对vector的边进行排序
+3. 寻找起点，第一个 入度-出度=-1的顶点（出度=入度+1），没有就找 第一个（入度=出度的点），还没有就构不成欧拉图了
+4. 对图从起点进行dfs，套模板
+5. 最后如果能访问所有单词就说明图是欧拉图，所以在4.记录一下dfs的点和记录一下搜索顺序，最后通过字符串编号输出答案
+
+ 
+
+**代码：**
+
+
+
+```
+#include<iostream>
+#include<algorithm>
+#include<string>
+#include<cstring>
+#include<vector>
+
+
+using namespace std;
+int n,m;
+int in[27],out[27],f[27],len[27];
+int cnt=0;
+string op[1010];
+int c[1010],l=0;
+
+struct node
+{
+    int y;
+    int idx;
+    string s;
+    node(int _y,int _idx,string _s)
+    {
+        y=_y,idx=_idx,s=_s;
+    }
+    bool operator < (node &a)
+    {
+        return s<a.s;
+    }
+};
+vector<node> edge[27];
+void dfs(int x)
+{
+    while(f[x]<len[x])
+    {
+        int y=edge[x][f[x]].y;
+        int idx=edge[x][f[x]].idx;
+        f[x]++;
+        dfs(y);
+        c[++l]=idx;
+    }
+}
+void Euler()
+{
+    int x=0;
+    for(int i=1;i<=n;i++)
+    {
+        if(in[i]-out[i]==-1)
+        {
+            x=i;break;
+        } 
+    }
+    if(!x)
+    {
+        for(int i=1;i<=n;i++)
+        {
+            if(in[i]==out[i]&&len[i]>0)
+            {
+                x=i;    
+                break;
+            }
+        }
+        if(!x)
+        {
+            cout<<"***"<<endl;  return;
+        }
+    }
+    dfs(x);
+    if(l!=m)
+    {
+        cout<<"***"<<endl;return;
+    }
+    for(int i=l;i;i--)
+    {
+        cout<<op[c[i]];
+        if(i!=1)    cout<<".";
+    }
+    cout<<endl;
+}
+
+int main()
+{
+    n=26;   cin>>m;
+    for(int i=1;i<=m;i++)
+    {
+        cin>>op[i];
+        int x=op[i][0]-'a'+1;
+        int y=op[i][op[i].size()-1]-'a'+1;
+        in[y]++,out[x]++;
+        edge[x].push_back(node(y,++cnt,op[i]));
+    }
+    for(int i=1;i<=n;i++)
+    {
+        len[i]=edge[i].size();
+        sort(edge[i].begin(),edge[i].end());
+    }
+    Euler();
+    return 0;
+}
+```
+{% endraw %}

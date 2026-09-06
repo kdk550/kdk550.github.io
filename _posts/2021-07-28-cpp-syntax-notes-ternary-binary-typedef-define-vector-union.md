@@ -1,0 +1,192 @@
+---
+layout: post
+title: "自用(曾经看到不懂的代码）三目运算符  二分  returnx>=y;    typedef  #define  vector   共用体union"
+date: 2021-07-28 14:12:00 +0800
+updated: 2021-08-05 19:51:00 +0800
+description: "三目运算符： 提供了一种表达简单 if-else 语句的简写方法。该运算符由问号（？）和冒号（:）组成，其格式如下： 两种写法作用相等 二分： -------------------------------------------------------------------- x y是个判断语句 返回值为true…"
+excerpt: "三目运算符： 提供了一种表达简单 if-else 语句的简写方法。该运算符由问号（？）和冒号（:）组成，其格式如下： 两种写法作用相等 二分： -------------------------------------------------------------------- x y是个判断语句 返回值为true…"
+categories: []
+tags: ["posts"]
+comments: false
+related_posts: false
+---
+{% raw %}
+**三目运算符：**
+
+**提供了一种表达简单 [if-else](http://c.biancheng.net/view/1355.html) 语句的简写方法。该运算符由问号（？）和冒号（:）组成，其格式如下：**
+
+
+
+```
+表达式 ? 表达式 : 表达式 ;
+```
+
+
+
+
+
+```
+if(x>50)
+    x++;
+else
+    x--;
+```
+
+
+
+
+
+```cpp
+x>50?x++:x--;
+```
+
+
+
+**两种写法作用相等**
+
+**二分：**
+
+
+
+```
+int mid= (left + right )>>1;
+```
+
+
+
+ --------------------------------------------------------------------
+
+
+
+```
+return x>=y;
+```
+
+
+
+**x>y是个判断语句**  
+**返回值为true或false**  
+**如果x>y成立,返回true，否则返回false**
+
+-----------------------------------------------------------------------
+
+**typedef：**
+
+**详细：<https://www.runoob.com/cprogramming/c-typedef.html>**
+
+
+
+```
+#include<iostream>
+using namespace std;
+typedef long long LL;
+int main()
+{
+    LL sum = 0;
+    for (LL i = 1; i <= 100; i++)
+        sum += i;
+    cout << sum;
+    return 0;
+}
+```
+
+
+
+**#define**
+
+
+
+```
+#include<iostream>
+#include<cstdio>
+using namespace std;
+#define rep(i,a,b) for(int i=a;i<=b;i++)
+
+int main()
+{
+    rep(a, 1, 3)
+        cout << a;
+    return 0;
+}
+```
+
+
+
+**#define ass(a,b)　a\*b**
+
+**又写ass(a+b,c)**
+
+**会被程序理解为a+b\*c**
+
+**而非(a+b)\*c**
+
+**所以使用是要广用括号#define ass(a,b)  (a)\*(b)**
+
+**-------------------------------------------------------------------**
+
+**vector**
+
+**从零开始存储**
+
+# [洛谷P3156 【深基15.例1】询问学号](https://www.luogu.com.cn/problem/P3156)
+
+
+
+```
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main()
+{
+    vector<int> stu;
+    int n, m, tmp;
+    cin >> n >> m;
+    for (int i = 1; i <= n; i++)
+    {
+        cin >> tmp;
+        stu.push_back(tmp);
+    }
+    for (int j = 1; j <= m; j++)
+    {
+        cin >> tmp;
+        cout << stu[tmp - 1] << endl;
+        //
+    }
+    return 0;
+
+}
+```
+
+
+
+**共用体union：**
+
+**同一时间只能存储一个，****测试代码**
+
+**如果ID为整数或者字母可以节省空间**
+
+
+
+```
+#include<iostream>
+#include<cstdio>
+using namespace std;
+union one4all
+{
+    int in;
+    double dou;
+};
+
+int main()
+{
+    one4all kk;
+    kk.in = 15;
+    cout << kk.in;
+    kk.dou = 1.38;
+    cout << kk.dou;
+    cout << kk.in;
+    return 0;
+}
+```
+{% endraw %}

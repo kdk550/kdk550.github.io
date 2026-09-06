@@ -1,0 +1,666 @@
+---
+layout: post
+title: "2022 International Collegiate Programming Contest, Jinan Site MKAEDGC"
+date: 2023-09-16 14:08:00 +0800
+updated: 2023-09-16 14:09:00 +0800
+description: "2022 International Collegiate Programming Contest, Jinan Site 目录 - 2022 International Collegiate Programming Contest, Jinan Site - VP概况 - M - Best Carry Player…"
+excerpt: "2022 International Collegiate Programming Contest, Jinan Site 目录 - 2022 International Collegiate Programming Contest, Jinan Site - VP概况 - M - Best Carry Player…"
+categories: []
+tags: ["mathematics", "data structures", "dynamic programming", "contest"]
+comments: false
+related_posts: false
+---
+{% raw %}
+# [2022 International Collegiate Programming Contest, Jinan Site](https://codeforces.com/gym/104076)
+
+目录
+
+- [2022 International Collegiate Programming Contest, Jinan Site](/blog/2023/2022-icpc-jinan-site/#2022-international-collegiate-programming-contest-jinan-site)
+  - [VP概况](/blog/2023/2022-icpc-jinan-site/#vp概况)
+  - [M - Best Carry Player](/blog/2023/2022-icpc-jinan-site/#m---best-carry-player)
+  - [K - Stack Sort](/blog/2023/2022-icpc-jinan-site/#k---stack-sort)
+  - [A - Tower](/blog/2023/2022-icpc-jinan-site/#a---tower)
+  - [E - Identical Parity](/blog/2023/2022-icpc-jinan-site/#e---identical-parity)
+  - [D - Frozen Scoreboard](/blog/2023/2022-icpc-jinan-site/#d---frozen-scoreboard)
+  - [G - Quick Sort](/blog/2023/2022-icpc-jinan-site/#g---quick-sort)
+  - [C - DFS Order 2](/blog/2023/2022-icpc-jinan-site/#c---dfs-order-2)
+
+## VP概况
+
+![image](/assets/img/blog/posts/68f50b6954bf46d1bc209bea23de7abb6499fc7524ff8126a4fd63f0fa8263c3.png)  
+![image](/assets/img/blog/posts/5fceeda16281cc22914c45dc35001506761b8a6ea415cc131c80a627ac767555.png)
+
+没有罚时的情况下拿下签到，E因为打的表太小，猜错了结论，后面让队友读完大模拟来写，也很顺利，看榜发现后面的题不可做，补题的时候发现也不是1小时可以写出来的，下次比赛按照打满的思路来
+
+## [M - Best Carry Player](https://codeforces.com/gym/104076/problem/M)
+
+推导得知运算顺序不影响答案，直接模拟
+
+
+
+```cpp
+int n;	
+void solve()
+{
+	cin>>n;
+	vector<int> a, b, res;
+	int x;	cin>>x;
+	int ans = 0;
+	while(x)
+	{
+		a.push_back(x % 10);
+		x /= 10;
+	}
+	for(int i = 2; i <= n; i++)
+	{
+		cin>>x;
+		b.clear();
+		res.clear();
+ 
+		while(x)
+		{
+			b.push_back(x % 10);
+			x /= 10;
+		}
+ 
+		int len1 = a.size(), len2 = b.size();
+		int add = 0;
+		for(int j = 0; j < max(len1, len2); j++)
+		{
+			int t1 = 0, t2 = 0;
+			if(j < len1)
+				t1 = a[j];
+			if(j < len2)
+				t2 = b[j];
+			int s = t1 + t2 + add;
+			// cout<<s<<'\n';
+			res.push_back(s % 10);
+			// cout<<i<<" "<<j<<" "<<add<<'\n';
+			add = s / 10;
+			if(add == 1)
+				ans++;
+		}
+		if(add)
+			res.push_back(add);
+		swap(a, res);
+		// a = res;
+	}
+	cout<<ans<<'\n';
+}
+```
+
+
+
+## [K - Stack Sort](https://codeforces.com/gym/104076/problem/K)
+
+看有多少个相邻段在数值上和数组下标上是连续的
+
+
+
+```cpp
+const int N = 5e5 + 10;
+ 
+int n, a[N], pos[N];
+void solve()
+{       
+    cin>>n;
+    int res = 0;
+    for(int i = 1; i <= n; i++)
+    {
+        cin>>a[i];
+        pos[a[i]] = i;
+    }
+    for(int i = n; i >= 1; i--)
+    {
+        int j = i;
+        while(j >= 2 && pos[j - 1] >= pos[j])
+            j--;
+        res++;
+        i = j;
+    }
+    cout<<res<<'\n';
+ 
+    return;
+}
+```
+
+
+
+## [A - Tower](https://codeforces.com/gym/104076/problem/A)
+
+如果所有数字都要变成 <span class="math inline">\(x\)</span> ，那么就是一个中位数问题了，其区别在于除 <span class="math inline">\(2\)</span> 的操作，除 <span class="math inline">\(2\)</span> 代表可以有更多的中位数选择，那么可能得中位数数量有 <span class="math inline">\(O(N \log V)\)</span> 种，然后去判断每个数到达 <span class="math inline">\(x\)</span> 的最小操作次数，总共时间复杂度 <span class="math inline">\(N^2 \log V \times (\log V + \log N)\)</span> ，这里包括排序的复杂度
+
+
+
+```cpp
+int n, m, a[510];
+vector<int> b;
+ 
+ll check(int x)
+{
+	ll ans = 0;
+	vector<int> c;
+	// cout<<"X : ";
+	for(int i = 1; i <= n; i++)
+	{
+		if(a[i] <= x)
+		{
+			c.push_back(x - a[i]);
+			// cout<<x - a[i]<<"  ";
+			continue;
+		}
+		int y = a[i];
+		int cost = a[i] - x;
+		int t = 0;
+		while(y)
+		{
+			cost = min(abs(y - x) + t, cost);
+			y /= 2;
+			t++;
+		}
+		c.push_back(cost);
+	}
+	sort(c.begin(), c.end());
+	reverse(c.begin(), c.end());
+	for(int i = m; i < n; i++)
+		ans += c[i];
+	return ans;
+}
+void solve()
+{
+	b.clear();
+	cin>>n>>m;
+	for(int i = 1; i <= n; i++)
+	{
+		cin>>a[i];
+		int x = a[i];
+		while(x)
+		{
+			b.push_back(x);
+			x /= 2;
+		}	
+	}
+	b.push_back(0);
+	sort(b.begin(), b.end());
+	b.erase(unique(b.begin(), b.end()), b.end());
+	ll res = 1e18;
+	for(auto it : b)
+		res = min(check(it), res);
+	cout<<res<<'\n';
+}
+```
+
+
+
+## [E - Identical Parity](https://codeforces.com/gym/104076/problem/E)
+
+我是打表找规律做的，队内的两位数学手没做出来，我先打表打出来了
+
+规律如下，表中 <span class="math inline">\(1\)</span> 代表 `YES`在 <span class="math inline">\(k\)</span> 为奇数的时候，YES 情况成等差数列分布
+
+<span class="math inline">\(k = 1, 10\)</span>
+
+<span class="math inline">\(k = 3, 111010\)</span>
+
+<span class="math inline">\(k = 5, 11111011100010\)</span>
+
+<span class="math inline">\(\dots\)</span>
+
+<span class="math inline">\(1\)</span> 和 <span class="math inline">\(0\)</span>的数量分部刚好等于 <span class="math inline">\(k + 1\)</span> ，就很好的去做这个规律了
+
+
+
+```
+k:    1  2  3  4  5  6  7  8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25
+n : 1  1
+n : 2  0 1
+n : 3  0 1 1
+n : 4  0 1 1 1
+n : 5  0 1 1 1 1
+n : 6  0 1 0 1 1 1
+n : 7  0 1 1 1 1 1 1
+n : 8  0 1 0 1 1 1 1 1
+n : 9  0 1 0 1 1 1 1 1 1
+n : 10 0 1 0 1 0 1 1 1 1 1
+n : 11 0 1 0 1 1 1 1 1 1 1 1
+n : 12 0 1 0 1 1 1 1 1 1 1 1 1
+n : 13 0 1 0 1 1 1 1 1 1 1 1 1 1
+n : 14 0 1 0 1 0 1 0 1 1 1 1 1 1 1
+n : 15 0 1 0 1 0 1 1 1 1 1 1 1 1 1 1
+n : 16 0 1 0 1 0 1 1 1 1 1 1 1 1 1 1 1
+n : 17 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+n : 18 0 1 0 1 0 1 1 1 0 1 1 1 1 1 1 1 1 1
+n : 19 0 1 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+n : 20 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1
+n : 21 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+n : 22 0 1 0 1 0 1 0 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1
+n : 23 0 1 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+n : 24 0 1 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+n : 25 0 1 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+```
+
+
+
+打表代码（丢失了）
+
+AC代码：
+
+
+
+```cpp
+typedef long long ll;
+void solve()
+{
+	ll n, k;
+	cin>>n>>k;
+	if(n == 1)
+	{
+		cout<<"YES\n";
+		return;
+	}
+	if(k == 1)
+	{
+		cout<<"NO\n";
+		return;
+	}
+	if(k % 2 == 0)
+	{
+		cout<<"YES\n";
+		return;
+	}
+	ll m = (n + 1) / 2;
+	ll x = k;
+	ll t = (n - (k - 1))  / (x + 1), r = (n - (k - 1)) % (x + 1);
+	if(r != 0)	t++;
+	if(r == 0) r = x + 1;
+	ll d = 1ll + (t - 1) * 2;
+	// cout<<"t: "<<t<<" m: "<<m<<" r:  "<<r<<"  d:  "<<d<<"\n";
+	if(t <= m && r <= x + 1 - d)
+		cout<<"YES\n";
+	else
+		cout<<"NO\n";
+}
+```
+
+
+
+## [D - Frozen Scoreboard](https://codeforces.com/gym/104076/problem/D)
+
+大模拟
+
+对于要求的总时间先减去已经确定的时间，即是封榜前AC的题的罚时，再枚举 <span class="math inline">\(S\)</span> 其二进制下第 <span class="math inline">\(i\)</span> 位为 <span class="math inline">\(1\)</span> 代表通过第 <span class="math inline">\(i - 1\)</span> 题，对于状态 <span class="math inline">\(S\)</span> 封榜后通过的题，总时间减去<span class="math inline">\(240\)</span> 的基础时间，再用罚时消耗总时间，剩下的时间再用封榜后的60min消耗
+
+并不难，细节多而已，代码的注释更清楚
+
+
+
+```cpp
+array<int, 3> a[15];
+array<int, 4> res[15];
+ 
+int n, m;
+void solve()
+{
+	int ac, time;	cin>>ac>>time;
+	for(int i = 0; i < m; i++)
+	{
+		char opt;	cin>>opt;
+		if(opt == '.')	
+		{
+			res[i] = {0, 0, 0, 0};
+			a[i] = {0, 0, 0};
+		}
+		else if(opt == '+')	
+		{
+			int x, y;	cin>>x>>opt>>y;
+			time -= ((x - 1) * 20 + y);
+			a[i] = {1, x, y};
+			res[i] = {1, x, y, 0};
+		}
+		else if(opt == '?')
+		{
+			int x, y;	cin>>x>>y;
+			a[i] = {2, x, y};
+			res[i] = {2, 0, 0, 0};
+		}	
+		else if(opt == '-')
+		{
+			int x;	cin>>x;
+			a[i] = {3, 0, x};
+			res[i] = {3, 0, x, 0};
+		}
+	}
+	// cout<<time<<'\n';
+	for(int S = 0; S < (1 << m); S++)
+	{
+		bool ok = true;
+		int cnt = 0;
+		for(int i = 0; i < m; i++)
+		{
+			if((a[i][0] == 0 || a[i][0] == 3) && ((S >> i) & 1) == 0)
+				ok = false;
+			if(a[i][0] == 1 && ((S >> i) & 1) == 0)
+				ok = false;
+		}
+		for(int i = 0; i < m; i++)
+		{
+			if(a[i][0] == 1)	cnt++;
+			else if(a[i][0] == 2 && ((S >> i) & 1) == 1)	cnt++;
+		}
+ 
+		if(!ok || ac != cnt)	continue;
+		int T = time;
+		//  过题时间   罚时次数
+		for(int i = 0; i < m; i++)
+			if(((S >> i) & 1) && a[i][0] == 2)
+			{
+				T -= 240;
+				T -= (a[i][2] - a[i][1]) * 20;
+			}
+		if(T < 0)	continue;
+ 
+		// T 基础罚时
+ 
+		
+		// 优先消耗封榜的罚时 20 倍数
+		// cout<<T<<'\n';
+		for(int i = 0; i < m; i++)
+			if(((S >> i) & 1) && a[i][0] == 2)
+			{
+				int c = min(a[i][1] - 1, T / 20);
+				T -= c * 20; 
+			}		
+ 
+		// 消耗罚时时间
+		for(int i = 0; i < m; i++)
+			if(((S >> i) & 1) && a[i][0] == 2)
+				T -= min(59, T);
+ 
+ 
+		if(T == 0)	//输出答案
+		{
+			T = time;
+			for(int i = 0; i < m; i++)
+				if(((S >> i) & 1) && a[i][0] == 2)
+				{
+					T -= 240;
+					T -= (a[i][2] - a[i][1]) * 20;
+				}			
+ 
+			// T 基础罚时
+ 
+			// 优先消耗封榜的罚时 20 倍数
+			for(int i = 0; i < m; i++)
+				if(((S >> i) & 1) && a[i][0] == 2)
+				{
+					int c = min(a[i][1] - 1, T / 20);
+					T -= c * 20; 
+					res[i] = {1, a[i][2] - a[i][1] + c + 1, 240, 0};
+					//           封榜前次数         封榜后的第几次
+				}	
+			// 消耗罚时时间
+			for(int i = 0; i < m; i++)
+				if(((S >> i) & 1) && a[i][0] == 2)
+				{
+					res[i][0] = 1;
+					res[i][2] += min(59, T);
+					T -= min(59, T);
+				}
+			cout<<"Yes\n";
+			for(int i = 0; i < m; i++)
+			{
+				if(a[i][0] == 0)
+					cout<<".\n";
+				else if(a[i][0] == 1)
+					cout<<"+ "<<res[i][1]<<"/"<<res[i][2]<<'\n';
+				else if(a[i][0] == 2 && ((S >> i) & 1) == 1)
+					cout<<"+ "<<res[i][1]<<"/"<<res[i][2]<<'\n';
+				else if(a[i][0] == 2 && ((S >> i) & 1) == 0)
+					cout<<"- "<<a[i][2]<<"\n";
+				else 
+					cout<<"- "<<a[i][2]<<"\n";
+			}	
+			return;
+		}
+ 
+	}
+	cout<<"No\n";
+ 
+}
+```
+
+
+
+## [G - Quick Sort](https://codeforces.com/gym/104076/problem/G)
+
+因为递归次数只有 <span class="math inline">\(\log n\)</span> 次，则交换次数最多 <span class="math inline">\(n \log n\)</span> 次，所以可以直接做
+
+每个数字只会出现 <span class="math inline">\(1\)</span> 次，用数据结构维护区间最大值，区间最小值即可
+
+细节要注意的地方：par函数内，找到的下标不在范围内，那么我们就要找更大或更小的，为什么呢？因为 <span class="math inline">\(pivot\)</span> swap了，导致 <span class="math inline">\(\geq\)</span> 或 <span class="math inline">\(\leq\)</span> <span class="math inline">\(pivot\)</span>不在范围内
+
+
+
+```cpp
+const int N = 5e5 + 10;
+ 
+int n, a[N], res;
+struct segtree
+{
+    int w1, w2;
+}seg[N * 4];
+ 
+void update(int id)
+{
+    seg[id].w1 = max(seg[id * 2].w1, seg[id * 2 + 1].w1);
+    seg[id].w2 = min(seg[id * 2].w2, seg[id * 2 + 1].w2);
+}
+ 
+void build(int id, int l, int r)
+{
+    seg[id] = {0, 0};
+    if(l == r)
+    {
+        seg[id] = {a[l], a[l]};
+        return;
+    }
+    int mid = (l + r) >> 1;
+    build(id * 2, l, mid);
+    build(id * 2 + 1, mid + 1, r);
+    update(id);
+}
+ 
+void change(int id, int l, int r, int pos)
+{
+    if(l == r)
+    {
+        seg[id] = {a[l], a[l]};
+        return;
+    }
+    int mid = (l + r) >> 1;
+    if(pos <= mid)
+        change(id * 2, l, mid, pos);
+    else
+        change(id * 2 + 1, mid + 1, r, pos);
+    update(id);
+}
+ 
+int query1(int id, int l, int r, int val)
+{
+    if(l == r)
+        return l;
+    int mid = (l + r) >> 1;
+    if(seg[id * 2].w1 >= val)
+        return query1(id * 2, l, mid, val);
+    else
+        return query1(id * 2 + 1, mid + 1, r, val);
+}
+ 
+int query2(int id, int l, int r, int val)
+{
+    if(l == r)
+        return l;
+    int mid = (l + r) >> 1;
+    if(seg[id * 2 + 1].w2 <= val)
+        return query2(id * 2 + 1, mid + 1, r, val);
+    else
+        return query2(id * 2, l, mid, val);
+}
+ 
+int par(int l, int r)
+{
+    int tl = l - 1, tr = r + 1;
+    int val = a[(l + r) / 2];
+    while(1)
+    {
+        int p1 = query1(1, 1, n, val);
+        if(p1 <= tl)    p1 = query1(1, 1, n, val + 1);
+        int p2 = query2(1, 1, n, val);
+        if(p2 >= tr)    p2 = query2(1, 1, n, val - 1);
+        if(p1 >= p2)
+            return p2;
+        swap(a[p1], a[p2]);
+        change(1, 1, n, p1);        change(1, 1, n, p2);
+        res++;
+        tl = p1, tr = p2;
+    }   
+}
+void quicksort(int l, int r)
+{
+    if(l >= r || l < 0 || r < 0)  return;
+    int p = par(l, r);
+    quicksort(l, p);
+    quicksort(p + 1, r);
+}
+ 
+void solve()
+{       
+    cin>>n;
+    for(int i = 1; i <= n; i++)
+        cin>>a[i];
+    res = 0;
+    build(1, 1, n);
+    quicksort(1, n);
+    cout<<res<<'\n';
+    return;
+}
+```
+
+
+
+## [C - DFS Order 2](https://codeforces.com/gym/104076/problem/C)
+
+回退背包，第一次见耶
+
+[2022 ICPC 济南站 C (回退背包) - 严格鸽的文章 - 知乎](https://zhuanlan.zhihu.com/p/587399484)
+
+
+
+```cpp
+typedef long long ll;
+ 
+const int mod = 998244353;
+const int N = 500 + 10;
+ll qmi(ll a, ll b, ll mod)
+{
+    ll ans = 1 % mod;
+    while(b)
+    {
+        if(b & 1) ans = ans * a % mod;
+        a = a * a % mod;
+        b >>= 1;
+    }
+    return ans;
+}
+vector<int> e[N];
+int n;
+ll son[N], sz[N], fac[N];
+ll f[N][N], g[N][N], h[N];
+ 
+ll dfs1(int u, int from)
+{
+    son[u] = 0;
+    sz[u] = 1;
+    ll res = 1;
+    for(auto v : e[u])
+    {
+        if(v == from)   continue;
+        res = (res * dfs1(v, u)) % mod;
+        sz[u] += sz[v];
+        son[u]++;
+    }
+    res = (res * fac[son[u]]) % mod;
+    return res;
+}
+ 
+ 
+void dfs(int u, int from)
+{
+    memset(g, 0, sizeof g);
+    g[0][0] = 1;
+    for(auto v : e[u])
+    {
+        if(v == from)   continue;
+        for(int i = son[u]; i >= 1; i--)
+            for(int j = sz[u]; j >= sz[v]; j--)
+                g[i][j] = (g[i][j] + g[i - 1][j - sz[v]]) % mod;
+    }
+ 
+    for(auto v : e[u])
+    {
+        if(v == from)   continue;
+        for(int i = 1; i <= son[u]; i++)
+            for(int j = sz[v]; j <= sz[u]; j++)
+                g[i][j] = (g[i][j] - g[i - 1][j - sz[v]] + mod) % mod;
+ 
+        memset(h, 0, sizeof h);
+        for(int i = 0; i <= son[u] - 1; i++)
+            for(int k = 0; k <= sz[u]; k++)
+                h[k + 1] = (h[k + 1] + (fac[i] * fac[son[u] - 1 - i] % mod) * g[i][k]) % mod;
+        
+        for(int i = 1; i <= n; i++)
+            for(int k = 1; k <= n; k++)
+                if(i + k <= n)
+                    f[v][i + k] = (f[v][i + k] + f[u][i] * h[k]) % mod;
+ 
+        for(int i = son[u]; i >= 1; i--)
+            for(int j = sz[u]; j >= sz[v]; j--)
+                g[i][j] = (g[i][j] + g[i - 1][j - sz[v]]) % mod;                
+    }
+    for(auto v : e[u])
+    {
+        if(v == from)   continue;
+        dfs(v, u);
+    }
+}
+ 
+void solve()
+{       
+    cin>>n;
+    fac[0] = 1;
+    for(int i = 1; i < N; i++)    fac[i] = (fac[i - 1] * i) % mod;
+    for(int i = 1; i <= n - 1; i++)
+    {
+        int u, v;   cin>>u>>v;
+        e[u].push_back(v);
+        e[v].push_back(u);
+    }
+    f[1][1] = dfs1(1, 0);
+    dfs(1, 0);
+    for(int i = 1; i <= n; i++)
+    {
+        ll sum = 0;
+        for(int k = 1; k <= n; k++) sum += f[i][k];
+        sum %= mod;
+        ll inv = qmi(sum, mod - 2, mod);
+ 
+ 
+        for(int k = 1; k <= n; k++)
+            cout<<(f[i][k] * f[1][1] % mod) * inv % mod<<" ";
+        cout<<'\n';
+    }
+    return;
+}
+ 
+```
+{% endraw %}

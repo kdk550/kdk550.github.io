@@ -1,78 +1,199 @@
-# 内容维护说明
+# 博客维护教程
 
-本文档说明如何在 WSL 中新增、修改、预览和发布博客内容。
+本文是这个 GitHub Pages 博客的日常维护手册。所有文章都使用同一套规则，不区分来源或迁移时间。
 
-## 仓库边界
+## 1. 仓库和目录
 
-日常编辑只在 GitHub Pages 仓库中进行：
-
-```text
-/home/magicat/00文档/kdk550.github.io
-```
-
-下列目录是原始归档，保持只读：
+站点仓库位于：
 
 ```text
-/home/magicat/00文档/blogs/20260711
+/home/magicat/workspace/00文档/blogs/kdk550.github.io
 ```
 
-## 新增博客文章
-
-在 `_posts/` 中创建 `YYYY-MM-DD-slug.md`。`slug` 必须只使用小写英文、数字和连字符。例如：
+它是一个独立的 Git 仓库，远程地址是：
 
 ```text
-_posts/2026-07-15-my-new-post.md
+git@github.com-kdk550:kdk550/kdk550.github.io.git
 ```
 
-最小可用模板：
+主要目录：
+
+| 路径 | 用途 |
+| --- | --- |
+| `_posts/` | 已发布的博客文章 |
+| `_drafts/` | 尚未发布的草稿 |
+| `_pages/` | About、Blog、404 等固定页面 |
+| `_news/` | News 页面中的公告 |
+| `assets/img/blog/posts/` | 文章图片 |
+| `scripts/verify_built_site.py` | 当前站点的构建验收工具 |
+| `scripts/normalize_blog_posts.py` | 本次统一命名使用的一次性整理工具，不用于日常写作 |
+| `scripts/migrate_cnblogs_to_al_folio.py` | 历史归档迁移脚本，禁止对当前站点重新运行 |
+| `migration-report.json` | 历史迁移报告，不是当前文章的事实来源 |
+
+博客园的完整原始归档位于：
+
+```text
+/home/magicat/workspace/00文档/blogs/20260711
+```
+
+除非要查历史资料，否则不要修改归档目录。
+
+## 2. 文章文件名和 URL
+
+文章放在 `_posts/`，文件名必须是：
+
+```text
+YYYY-MM-DD-english-semantic-slug.md
+```
+
+例如：
+
+```text
+_posts/2023-09-28-2022-china-collegiate-programming-contest-ccpc-mianyang-onsite-gchmad.md
+```
+
+文件名规则：
+
+- 日期使用文章的发布日期。
+- slug 使用英文语义名称，不使用拼音。
+- 只使用小写英文字母、数字和短横线。
+- 中文、空格、括号、斜杠、冒号等符号转换为短横线或删除。
+- 文件名中不要写博客园文章 ID，也不要使用 `cnblogs-数字`。
+- 如果两个标题相同，为 slug 添加能区分主题的英文词，例如 `...-segment-tree` 和 `...-dynamic-programming`。
+
+Jekyll 根据文件名和 `_config.yml` 中的规则生成 URL：
+
+```text
+/blog/<年份>/<slug>/
+```
+
+不要在文章 front matter 中写 `slug:` 或 `permalink:`。修改文件名会改变公开 URL，因此改名后要搜索并同步站内链接。
+
+## 3. 新增文章
+
+进入仓库：
+
+```bash
+cd /home/magicat/workspace/00文档/blogs/kdk550.github.io
+```
+
+在 `_posts/` 创建文件，例如：
+
+```text
+_posts/2026-09-06-my-new-algorithm-note.md
+```
+
+推荐从下面的模板开始：
 
 ```markdown
 ---
 layout: post
 title: "文章标题"
-date: 2026-07-15 20:00:00 +0800
-description: "显示在博客列表和搜索结果中的摘要。"
+date: 2026-09-06 20:00:00 +0800
+updated: 2026-09-06 20:00:00 +0800
+description: "一两句话概括文章内容。"
+excerpt: "一两句话概括文章内容。"
 categories: []
-tags: ["AI", "posts"]
+tags: ["algorithm basics"]
 comments: false
 related_posts: false
 ---
 
-这里是正文。
+正文从这里开始。
 ```
 
-手写文章不要添加 `cnblogs_post_id`，文件名也不要使用 `cnblogs-数字` 格式。front matter 中不要设置 `slug` 或 `permalink`；站点会根据文件名自动生成稳定 URL。这样重新运行迁移脚本时不会删除手写文章。
+`title` 可以是中文，也可以是英文；只有文件名和 URL 必须使用英文 slug。常用字段含义如下：
 
-暂未准备发布的文章请放入 `_drafts/`，不要在 `_posts/` 中使用未来日期或 `published: false`。验证器会要求 `_posts/` 中的每个手写文章都出现在构建结果中。
+- `layout: post`：使用博客文章布局。
+- `title`：页面标题。
+- `date`：发布日期和时间，决定文章排序以及 URL 年份。
+- `updated`：最后修改时间。
+- `description`、`excerpt`：列表页、搜索和分享摘要。
+- `categories`：当前站点统一留空，分类用标签代替。
+- `tags`：文章标签，例如 `"dynamic programming"`、`"graph theory"`。
+- `comments`：是否显示评论区域。
+- `related_posts`：是否显示相关文章。
 
-## 标签自动识别
-
-在文章 front matter 的 `tags` 中直接填写标签：
+不要添加以下历史字段：
 
 ```yaml
-tags: ["AI", "model deployment"]
+canonical:
+source_url:
+source_categories:
+source_platform_tags:
+promoted_body_tags:
+permalink:
+cnblogs_post_id:
 ```
 
-站点会自动：
+## 4. 草稿
 
-1. 从所有文章收集标签。
-2. 在 Blog 页展示标签。
-3. 将标签转换为 URL slug，并生成 `/blog/tag/<slugified-tag>/` 归档页。
-4. 在本地验证时动态核对标签链接和归档。
+文章还没写完时放入 `_drafts/`，例如：
 
-新增标签时无需修改 `_config.yml` 或验证脚本。标签名称仍由作者决定，站点不会根据正文猜测语义标签。为保持现有 taxonomy 一致，标签必须使用简短、英文、可复用的名称。
+```text
+_drafts/unfinished-graph-note.md
+```
 
-## 公式、代码、图片和表格
+草稿不会被正常生产构建发布。完成后再移入 `_posts/`，并改成带日期的英文文件名。
+
+## 5. 修改已有文章
+
+可以按标题搜索文章：
+
+```bash
+rg -l 'title: "文章标题"' _posts
+```
+
+直接编辑 Markdown 正文和 front matter。修改后应同步更新 `updated` 时间。
+
+如果修改了文件名，先记录旧 URL 和新 URL，再搜索仓库中的旧路径：
+
+```bash
+rg -n '旧的文章 slug|/blog/2023/旧的文章 slug/' .
+```
+
+目录、相关文章和其他文章中的链接都要改成新的 `/blog/年份/新 slug/`。
+
+历史迁移脚本会重新生成旧格式文章并覆盖正文，不能用于日常编辑：
+
+```text
+scripts/migrate_cnblogs_to_al_folio.py
+```
+
+它和 `migration-report.json` 仅用于保存历史迁移过程。当前站点的文章以 `_posts/` 为唯一事实来源。
+
+## 6. 图片
+
+建议为每篇文章建立独立图片目录：
+
+```text
+assets/img/blog/posts/my-new-algorithm-note/example.png
+```
+
+Markdown 中使用根相对路径：
+
+```markdown
+![算法流程图](/assets/img/blog/posts/my-new-algorithm-note/example.png)
+```
+
+注意事项：
+
+- 路径大小写必须和真实文件名完全一致。
+- 不要使用电脑上的绝对路径，例如 `/home/magicat/...`。
+- 不要把新图片放入历史目录 `assets/img/blog/cnblogs/`。
+- 图片文件名建议只使用英文、数字、短横线和常见扩展名。
+- 图片和文章一起提交到 Git。
+
+## 7. Markdown 写法
 
 行内公式：
 
 ```markdown
-The complexity is \(O(n\log n)\).
+时间复杂度是 \(O(n\log n)\)。
 ```
 
 独立公式：
 
-<!-- prettier-ignore -->
 ```markdown
 \[
 f(x)=\sum_{i=1}^{n}x_i
@@ -94,94 +215,133 @@ int main() {
 表格：
 
 ```markdown
-| Method  | Complexity     |
-| ------- | -------------- |
-| Sorting | \(O(n\log n)\) |
-| Hashing | \(O(n)\)       |
+| 方法 | 复杂度 |
+| --- | --- |
+| 排序 | \(O(n\log n)\) |
+| 哈希 | \(O(n)\) |
 ```
 
-图片建议按文章单独建目录：
-
-```text
-assets/img/blog/posts/my-new-post/example.png
-```
-
-在 Markdown 中引用：
+普通站内文章链接：
 
 ```markdown
-![图片说明](/assets/img/blog/posts/my-new-post/example.png)
+[上一篇文章](/blog/2023/algorithm-notes/)
 ```
 
-不要把手写文章的图片放入 `assets/img/blog/cnblogs/`；该目录由迁移脚本管理，重新迁移时会被重建。
-
-## 修改已迁移文章
-
-先按标题查找文件：
-
-```bash
-cd /home/magicat/00文档/kdk550.github.io
-rg -l 'title: "文章标题"' _posts
-```
-
-迁移文章的正文位于 `{% raw %}` 和 `{% endraw %}` 之间，直接在两个标记之间编辑。修改公开标签时只改 `tags`；`source_categories`、`source_platform_tags` 和 `promoted_body_tags` 是原始数据追溯信息。
-
-需要注意：`scripts/migrate_cnblogs_to_al_folio.py` 会重新生成所有带 `cnblogs_post_id` 的文章。直接对迁移文章做的正文修改，在下次重新迁移时会被覆盖。
-
-## About 和 News
-
-- About 页：`_pages/about.md`
-- Blog 页布局：`_pages/blog.md`
-- News 列表页：`_pages/news.md`
-- News 内容：`_news/YYYY-MM-DD-slug.md`
-
-News 文件示例：
+外部链接直接使用完整 URL：
 
 ```markdown
----
-layout: post
-date: 2026-07-15 20:00:00 +0800
-inline: true
-related_posts: false
----
-
-Published a new article.
+[Codeforces](https://codeforces.com/)
 ```
 
-## 本地预览和验证
+## 8. 本地预览
 
-使用 Docker 预览：
+Docker 方式：
 
 ```bash
-cd /home/magicat/00文档/kdk550.github.io
+cd /home/magicat/workspace/00文档/blogs/kdk550.github.io
 docker compose up
 ```
 
-然后访问 <http://localhost:8080>。
+然后打开 <http://localhost:8080>。结束预览时按 `Ctrl+C`。
 
-已安装 Ruby 和 Bundler 时：
+如果已经安装 Ruby 和 Bundler，也可以使用：
 
 ```bash
 bundle install
 bundle exec jekyll serve
 ```
 
-发布前生成生产站点并验证：
+## 9. 发布前检查
+
+先构建生产站点：
 
 ```bash
 JEKYLL_ENV=production bundle exec jekyll build
+```
+
+再运行验收工具：
+
+```bash
 ./scripts/verify_built_site.py
 ```
 
-验证器会严格核对 121 篇迁移文章，同时允许任意数量的手写文章。它会根据 `_posts/` 源文件动态计算手写文章和预期分页，再与实际构建的文章、分页、标签链接和标签归档交叉核对。
+它会检查：
 
-## 提交和发布
+- 所有 `_posts/` 文件名和日期格式。
+- 文章是否含有已经废弃的历史字段。
+- 每篇文章是否生成对应 HTML。
+- 文章页面是否有必要的 article 元数据。
+- 文章、图片、脚本、样式和站内链接是否有效。
+- Blog 分页和标签归档是否一致。
+- 首页、Blog、News 导航是否存在。
+
+提交前再运行：
+
+```bash
+git diff --check
+git status
+```
+
+## 10. 提交和发布到 GitHub
+
+确认变更内容：
 
 ```bash
 git status
-git diff --check
-git add _posts/ assets/img/blog/ _news/ _pages/ CONTENT_GUIDE.md
-git commit -m "Add new blog post"
+git diff --stat
+git diff -- _posts/某篇文章.md
+```
+
+提交：
+
+```bash
+git add _posts assets/img/blog/posts _pages _news CONTENT_GUIDE.md scripts/verify_built_site.py
+git commit -m "Update blog content"
+```
+
+推送：
+
+```bash
 git push origin master
 ```
 
-推送到 `master` 后，GitHub Actions 会构建站点并发布到 `gh-pages`。线上地址为 <https://kdk550.github.io/>。
+GitHub Actions 会构建并发布 GitHub Pages。线上地址是：
+
+<https://kdk550.github.io/>
+
+## 11. 常见问题
+
+### 文件名含中文或大写字母
+
+把文件名改成小写英文 slug，例如：
+
+```text
+2026-09-06-graph-algorithm-note.md
+```
+
+### Front matter 解析失败
+
+确认文件第一行是 `---`，并且字段末尾还有第二个独立的 `---`。YAML 字符串中含冒号、方括号或引号时，使用双引号包裹。
+
+### 图片显示不出来
+
+检查图片是否位于 `assets/img/blog/posts/`，并确认 Markdown 路径以 `/assets/` 开头、大小写完全一致。
+
+### 验证器提示旧字段
+
+删除文章中的 `canonical`、`source_url`、`source_categories`、`source_platform_tags`、`promoted_body_tags`、`permalink` 和 `cnblogs_post_id`。历史报告中的这些字段可以保留，因为它不属于活动文章。
+
+### 改名后链接失效
+
+用 `rg` 搜索旧 slug，更新目录、相关文章和其他文章中的链接，然后重新构建验证。
+
+### Git push 失败
+
+先检查远程地址和 SSH 身份：
+
+```bash
+git remote -v
+ssh -T git@github.com-kdk550
+```
+
+如果看到 `Hi kdk550! You've successfully authenticated`，说明 SSH 认证成功；随后检查当前分支、提交状态以及网络连接。

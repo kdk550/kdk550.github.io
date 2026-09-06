@@ -1,0 +1,122 @@
+---
+layout: post
+title: "某次作业"
+date: 2022-06-09 13:12:00 +0800
+updated: 2023-01-21 16:54:00 +0800
+description: "只做了后两个，PPT哪一页我找不到了"
+excerpt: "只做了后两个，PPT哪一页我找不到了"
+categories: []
+tags: ["posts"]
+comments: false
+related_posts: false
+---
+{% raw %}
+只做了后两个，PPT哪一页我找不到了
+
+
+
+```
+/*
+c++
+1.对自加运算符重载的函数体（ppt里可以找到）进行四合一的操作
+2.日期自增考虑实际输出
+3.用友元重载前缀自加运算符
+*/
+
+#include<iostream>
+
+using namespace std;
+int day[]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+
+class Date
+{
+    public:
+        Date(int a=1900,int b=1,int c=1):y(a),m(b),d(c){}    
+        /*Date operator ++ ()
+        {
+            if(y%400==0 || (y%4==0||y%100!=0)) day[2]++;
+            if(d+1>day[m])    
+            {
+                d=1;
+                m++;
+            }
+            else d++;
+            if(m==13) 
+            {
+                y++;m=1;
+            }    
+            if(y%400==0 || (y%4==0||y%100!=0)) day[2]--;
+            return d;
+        }
+        Date operator ++ (int)
+        {
+            if(y%400==0 || (y%4==0||y%100!=0)) day[2]++;
+            if(d+1>day[m])    
+            {
+                d=1;
+                m++;
+            }
+            else d++;
+            if(m==13) 
+            {
+                y++;m=1;
+            }    
+            if(y%400==0 || (y%4==0||y%100!=0)) day[2]--;
+            return d;            
+        }*/
+        friend Date operator ++ (Date &d,int)
+        {
+            if(d.y%400==0 || (d.y%4==0||d.y%100!=0)) day[2]++;
+            if(d.d+1>day[d.m])    
+            {
+                d.d=1;
+                d.m++;
+            }
+            else d.d++;
+            if(d.m==13) 
+            {
+                d.y++;d.m=1;
+            }    
+            if(d.y%400==0 || (d.y%4==0||d.y%100!=0)) day[2]--;
+            return d;    
+        }
+        friend Date operator ++ (Date &d)
+        {
+            if(d.y%400==0 || (d.y%4==0||d.y%100!=0)) day[2]++;
+            if(d.d+1>day[d.m])    
+            {
+                d.d=1;
+                d.m++;
+            }
+            else d.d++;
+            if(d.m==13) 
+            {
+                d.y++;d.m=1;
+            }    
+            if(d.y%400==0 || (d.y%4==0||d.y%100!=0)) day[2]--;
+            return d;    
+        }
+        void print()
+        {
+            cout<<y<<" "<<m<<" "<<d<<endl;
+        }
+    private:
+        int y,m,d;
+
+};
+/*
+2004 2 28
+*/
+
+int main()
+{
+    int a,b,c;cin>>a>>b>>c;
+
+    Date d(a,b,c);
+    ++d;
+    d.print();
+    d++;
+    d.print();
+}
+```
+{% endraw %}

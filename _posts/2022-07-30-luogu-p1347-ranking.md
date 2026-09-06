@@ -1,0 +1,124 @@
+---
+layout: post
+title: "P1347 排序"
+date: 2022-07-30 17:21:00 +0800
+updated: 2023-01-21 16:51:00 +0800
+description: "P1347 排序 通过给出的关系，去确定大写字母的关系，并打印出 步骤： 1. 先将关系存下来。见题意，不可能建完图再遍历 因为确定 n 个元素的顺序后即可结束程序，可以不用考虑确定顺序之后出现矛盾的情况） 2. 1 m条边，每在图上建一条边就检查当前图是否确定n个元素的关系，亦或者图是否存在矛盾（有环的情况，自己和…"
+excerpt: "P1347 排序 通过给出的关系，去确定大写字母的关系，并打印出 步骤： 1. 先将关系存下来。见题意，不可能建完图再遍历 因为确定 n 个元素的顺序后即可结束程序，可以不用考虑确定顺序之后出现矛盾的情况） 2. 1 m条边，每在图上建一条边就检查当前图是否确定n个元素的关系，亦或者图是否存在矛盾（有环的情况，自己和…"
+categories: []
+tags: ["graph theory"]
+comments: false
+related_posts: false
+---
+{% raw %}
+# [P1347 排序](https://www.luogu.com.cn/problem/P1347)
+
+通过给出的关系，去确定大写字母的关系，并打印出
+
+步骤：
+
+1. 先将关系存下来。见题意，不可能建完图再遍历  
+   因为确定 <span class="katex"><span class="katex-mathml">n<span class="katex-html"><span class="base"><span class="strut"><span class="mord mathnormal"> 个元素的顺序后即可结束程序，可以不用考虑确定顺序之后出现矛盾的情况）<br/><br/></span></span></span></span></span></span>
+2. <span class="katex" style="font-size: 14pt"><span class="katex-mathml"><span class="katex-html"><span class="base"><span class="strut"><span class="mord mathnormal">1~m条边，每在图上建一条边就检查当前图是否确定n个元素的关系，亦或者图是否存在矛盾（有环的情况，自己和自己的关系式）</span></span></span></span></span></span>
+3. <span class="katex" style="font-size: 14pt"><span class="katex-mathml"><span class="katex-html"><span class="base"><span class="strut"><span class="mord mathnormal">检查图是否存在环，就将加入的边的顶点dfs，看是否会重新遍历到自身。当出现矛盾就输出<br/>Inconsistency found after x relations.<br/></span></span></span></span></span></span>
+4. 检查当前图是否确定n个元素的关系，进行拓扑排序，将入度为0的点加入队列然后退出循环（这里是因为有大小顺序，所以只能以一个元素作为起点），记录下拓扑排序是否访问了n个元素，同时记录下当前元素有几个元素加入队列，大于1说明出现矛盾。  
+   如果访问了n个元素，且一个元素的bfs中没有大于1以上数量的元素加入队列。  
+   那么打印拓扑排序
+5. 如果m条边既没有矛盾也没有确定关系顺序  
+   输出Sorted sequence cannot be determined.
+
+并查集好像也可以判断环
+
+见代码：
+
+
+
+```
+#include<iostream>
+#include<algorithm>
+#include<string>
+#include<cstring>
+#include<queue>
+#include<vector>
+#include<set>
+
+using namespace std;
+string op[610];
+vector<int> edge[27];
+int n,m,fa[27],in[27],out[27];
+bool st[27],st1=false,st2=false;
+set<string> s;
+void dfs(int x,int y)
+{
+    st[x]=true;
+    for(auto v:edge[x])
+        if(v==y)    st1=true;
+        else dfs(v,y);    
+}
+bool check(int x)
+{
+    dfs(x,x);
+    if(st1) return true;
+    else return false;
+}
+bool toposort(int num)
+{
+    int c[27],l=0;
+    queue<int> q;
+    for(int i=1;i<=26;i++)
+        if(in[i]==0&&edge[i].size()!=0)
+            {    q.push(i);  break;        }
+    int d[27];
+    for(int i=1;i<=26;i++)
+        d[i]=in[i];
+    int number=0;
+    while(!q.empty())
+    {
+        number++;
+        auto u=q.front();q.pop();   int cnt=0;
+        c[++l]=u;
+        for(auto v:edge[u])
+        {
+            if(--d[v]==0)
+            {
+                q.push(v);cnt++;
+            }
+        }
+        if(cnt>=2)    st2=true;
+    }
+    if(st2==false&&number==n)
+    {
+        cout<<"Sorted sequence determined after ";
+        cout<<num<<" relations: ";
+        for(int i=l;i;i--)    cout<<((char)(c[i]+'A'-1));
+        cout<<"."<<endl;
+        return true;
+    }
+    return false;
+}
+int main()
+{
+    cin>>n>>m;
+    for(int i=1;i<=m;i++)   cin>>op[i];
+    for(int i=1;i<=m;i++)
+    {
+        if(s.count(op[i])) continue;
+        else s.insert(op[i]); 
+        int x=op[i][0]-'A'+1;
+        int y=op[i][2]-'A'+1;
+
+        in[x]++,out[y]++;
+        edge[y].push_back(x);
+        memset(st,false,sizeof st);
+        if(check(y)||x==y)
+        {
+            cout<<"Inconsistency found after "<<i<<" relations."<<endl;
+            return 0;
+        }
+        if(toposort(i))    return 0;
+    }
+    cout<<"Sorted sequence cannot be determined."<<endl;
+    return 0;
+}
+```
+{% endraw %}

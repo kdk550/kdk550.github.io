@@ -1,0 +1,244 @@
+---
+layout: post
+title: "区间不同数的个数 二维数点（离线）  扫描线（离线）  可持久化线段树（在线）"
+date: 2023-04-30 11:08:00 +0800
+updated: 2023-04-30 11:46:00 +0800
+description: "[[SDOI2009] HH的项链](https://www.luogu.com.cn/problem/P1972 \" [SDOI2009] HH的项链\") 按时间先后顺序对应：二维数点（离线） 扫描线（离线） 可持久化线段树（在线） 写的比较粗糙，偏主观理解 二维数点，对于询问的 \\([l, r]\\) 区间我们只需…"
+excerpt: "[[SDOI2009] HH的项链](https://www.luogu.com.cn/problem/P1972 \" [SDOI2009] HH的项链\") 按时间先后顺序对应：二维数点（离线） 扫描线（离线） 可持久化线段树（在线） 写的比较粗糙，偏主观理解 二维数点，对于询问的 \\([l, r]\\) 区间我们只需…"
+categories: []
+tags: ["data structures"]
+comments: false
+related_posts: false
+---
+{% raw %}
+[[SDOI2009] HH的项链](https://www.luogu.com.cn/problem/P1972 " [SDOI2009] HH的项链")
+
+按时间先后顺序对应：二维数点（离线） 扫描线（离线） 可持久化线段树（在线）  
+![image](/assets/img/blog/posts/2f502f8af48783f95538b1863490c2884bad3127ba376845a90b83c88f6b0666.png)
+
+写的比较粗糙，偏主观理解
+
+二维数点，对于询问的<span class="math inline">\([l, r]\)</span>区间我们只需要统计有多少个数上一次出现的位置<span class="math inline">\(pos\)</span> 满足<span class="math inline">\(pos \leq l\)</span>，即可。
+
+
+
+```cpp
+template<class T>
+struct BIT {
+    T c[N];
+    int size;
+    void resize(int s) { size = s;}
+    T query(int x) { // 1 ... x
+        assert(x <= size);
+        T s = 0;
+        for (; x; x -= x & (-x)) {
+            s += c[x];
+        }
+        return s;
+    }
+
+    void modify(int x, T s) { // a[x] += s
+        assert(x != 0);
+        for (; x <= size; x += x & (-x)) {
+            c[x] += s;
+        }
+    } 
+};
+BIT<int> tr;
+int n, q, pos[N];
+int a[N], ans[N];
+vector<pii> qu[N];
+void solve()
+{   
+    cin>>n;
+    for(int i = 1; i <= n; i++)   cin>>a[i];
+    cin>>q;
+ 	for(int i = 1; i <= q; i++)
+	{
+		int l, r;	cin>>l>>r;
+		qu[r].pb({l, i});
+	} 
+	tr.resize(n);
+	for(int r = 1; r <= n; r++)
+	{
+		int last = pos[a[r]];
+		tr.modify(last + 1, 1);
+		tr.modify(r + 1, -1);
+		for(auto it : qu[r])
+			ans[it.second] = tr.query(it.fi);
+		pos[a[r]] = r; 
+	}
+ 	for(int i = 1; i <= q; i++)
+ 		cout<<ans[i]<<endl;
+ 
+    return;
+}
+```
+
+
+
+扫描线
+
+对数组预处理这个数上一次出现的位置，然后进行常规的扫描线操作
+
+为什么（代码这样写）可以这样做，区间<span class="math inline">\([l,r]\)</span>答案为<span class="math inline">\([1,r] - [1, l - 1]\)</span>，而在排序中，我们数组存的第一关键字是上一次出现的位置，所以始终第一个出现在<span class="math inline">\([l,r]\)</span>区间的数会快询问一步在树状数组进行modify，保证一个数只会被算到一次
+
+
+
+```cpp
+const int N = 1000010;
+
+int n, q, pre[N];
+int a[N], ans[N];
+vector<array<int, 4>> event;
+
+template<class T>
+struct BIT {
+    T c[N];
+    int size;
+    void resize(int s) { size = s;}
+    T query(int x) { // 1 ... x
+        assert(x <= size);
+        T s = 0;
+        for (; x; x -= x & (-x)) {
+            s += c[x];
+        }
+        return s;
+    }
+
+    void modify(int x, T s) { // a[x] += s
+        assert(x != 0);
+        for (; x <= size; x += x & (-x)) {
+            c[x] += s;
+        }
+    } 
+};
+BIT<int> tr;
+void solve()
+{   
+    cin>>n;
+    for(int i = 1; i <= n; i++)   
+    {
+        cin>>a[i];
+        event.pb({pre[a[i]], 0, i});
+        pre[a[i]] = i;
+    }
+    cin>>q;
+    for(int i = 1; i <= q; i++)
+    {
+        int l, r;    cin>>l>>r;
+        event.pb({l, -1, r, i});
+    }
+    sort(all(event));
+    tr.resize(n);
+    for(auto eve : event)
+    {
+        if(eve[1] == 0)
+        {
+            tr.modify(eve[2], 1);
+        }
+        else
+        {
+            ans[eve[3]] -= tr.query(eve[0] - 1);
+            ans[eve[3]] += tr.query(eve[2]);
+        }
+    }
+    for(int i = 1; i <= q; i++)
+        cout<<ans[i]<<endl;
+    return;
+}
+```
+
+
+
+可持久化线段树  
+还是统计有多少个点上一次出现在区间<span class="math inline">\([1, l]\)</span>里，对先后版本<span class="math inline">\(rt[r] - rt[l - 1]\)</span>进行前缀和即可，所以稍微改一改第k小数板子即可
+
+
+
+```cpp
+const int N = 1e6 + 10;
+
+struct segtree
+{
+	int l, r, s;
+}seg[N * 30];
+
+vector<int> vx; 
+int n, q, a[N], rt[N], last[N], tot;
+
+void update(int id)
+{
+	seg[id].s = seg[seg[id].l].s + seg[seg[id].r].s;
+}
+
+int build(int l, int r)
+{
+	int id = ++tot;
+	if(l == r)	
+	{
+		return id;
+	}
+	int mid = (l + r) >> 1;
+	seg[id].l = build(l, mid);
+	seg[id].r = build(mid + 1, r);
+	update(id);
+	return id;
+}
+
+int change(int  u, int l, int r, int pos)
+{
+	int id = ++tot;
+	seg[id] = seg[u];
+	if(l == r)
+	{
+		seg[id].s = seg[id].s + 1;
+		return id;
+	}
+	int mid = (l + r) >> 1;
+	if(pos <= mid)
+		seg[id].l = change(seg[id].l, l, mid, pos);
+	else
+		seg[id].r = change(seg[id].r, mid + 1, r, pos);
+	update(id);
+	return id;
+}
+
+int query(int v, int u, int l, int r, int ql, int qr)
+{
+	if(l == ql && r == qr)
+	{
+		return seg[u].s - seg[v].s;
+	}
+	int mid = (l + r) >> 1;
+	if(qr <= mid)
+		return query(seg[v].l, seg[u].l, l, mid, ql, qr);
+	else if(ql > mid)
+		return query(seg[v].r, seg[u].r, mid + 1, r, ql, qr);
+	else
+		return query(seg[v].l, seg[u].l, l, mid, ql, mid) +
+			query(seg[v].r, seg[u].r, mid + 1, r, mid + 1, qr);
+}
+
+void solve()
+{   
+	cin>>n;
+	int m = N - 10;
+	rt[0] = build(1, m);
+	
+	for(int i = 1; i <= n; i++)
+	{
+		cin>>a[i];
+		rt[i] = change(rt[i - 1], 1, m, last[a[i]] + 1);
+		last[a[i]] = i;
+	}
+	cin>>q;
+	
+	for(int i = 1; i <= q; i++)
+	{
+		int l, r;	cin>>l>>r;
+		cout<<query(rt[l - 1], rt[r], 1, m, 1, l)<<endl;
+	}	
+}
+```
+{% endraw %}

@@ -1,0 +1,570 @@
+---
+layout: post
+title: "Educational Codeforces Round 23 A - F"
+date: 2023-09-02 18:09:00 +0800
+updated: 2023-09-02 18:09:00 +0800
+description: "Educational Codeforces Round 23 目录 - Educational Codeforces Round 23 - A - Treasure Hunt - B - Makes And The Product - C - Really Big Numbers - D - Imbalanced…"
+excerpt: "Educational Codeforces Round 23 目录 - Educational Codeforces Round 23 - A - Treasure Hunt - B - Makes And The Product - C - Really Big Numbers - D - Imbalanced…"
+categories: []
+tags: ["mathematics", "data structures", "contest", "algorithm basics"]
+comments: false
+related_posts: false
+---
+{% raw %}
+# [Educational Codeforces Round 23](https://codeforces.com/contest/817)
+
+目录
+
+- [Educational Codeforces Round 23](/blog/2023/educational-codeforces-round-23/#educational-codeforces-round-23)
+  - [A - Treasure Hunt](/blog/2023/educational-codeforces-round-23/#a---treasure-hunt)
+  - [B - Makes And The Product](/blog/2023/educational-codeforces-round-23/#b---makes-and-the-product)
+  - [C - Really Big Numbers](/blog/2023/educational-codeforces-round-23/#c---really-big-numbers)
+  - [D - Imbalanced Array](/blog/2023/educational-codeforces-round-23/#d---imbalanced-array)
+  - [E - Choosing The Commander](/blog/2023/educational-codeforces-round-23/#e---choosing-the-commander)
+  - [F - MEX Queries](/blog/2023/educational-codeforces-round-23/#f---mex-queries)
+
+## [A - Treasure Hunt](https://codeforces.com/contest/817/problem/A)
+
+往四个方向走，每次操作会变动横坐标和纵坐标，横纵坐标的绝对值要能整除操作的改变量，同时横纵坐标的操作次数的奇偶性相同
+
+
+
+```cpp
+void solve()
+{       
+    int a, b, c, d; cin>>a>>b>>c>>d;
+    int t1 = abs(a - c);
+    int t2 = abs(b - d);
+    int x, y;   cin>>x>>y;
+    if(t1 % x == 0 && t2 % y == 0 && abs(t1 / x) % 2 == abs(t2 / y) % 2)
+        cout<<"YES\n";
+    else 
+        cout<<"NO\n";
+ 
+    return;
+}
+```
+
+
+
+## [B - Makes And The Product](https://codeforces.com/contest/817/problem/B)
+
+分类讨论，预处理出 <span class="math inline">\(a_i, a_j, a_k\)</span> 的下标
+
+三种情况：
+
+1. <span class="math inline">\(a_i = a_j = a_k\)</span> 答案为 <span class="math inline">\(\dfrac{cnt_{a_i} \times (cnt_{a_i} - 1) \times (cnt_{a_i} - 2)}{6}\)</span>
+2. <span class="math inline">\(a_i = a_j \ne a_k\)</span> 答案为 <span class="math inline">\(cnt_{a_k}\)</span> ，<span class="math inline">\(a_i \ne a_j = a_k\)</span> 答案为 <span class="math inline">\(cnt_{a_i} \times \dfrac{cnt_{a_k} \times (cnt_{a_k} - 1)}{2}\)</span>
+3. <span class="math inline">\(a_i \ne a_j \ne a_k\)</span> 答案为 <span class="math inline">\(cnt_{a_i} \times cnt_{a_j} \times cnt_{a_k}\)</span>
+
+代码写得有点乱
+
+
+
+```cpp
+const int N = 2e5 + 10;
+ 
+int n, a[N], b[N];
+ll f[4];
+void solve()
+{       
+    int x, y, z;
+    cin>>n;
+    for(int i = 1; i <= n; i++)
+    {
+        cin>>a[i];
+        b[i] = a[i];
+    }
+    sort(b + 1, b + 1 + n);
+    x = b[1], y = b[2], z = b[3];
+    vector<int> c, e[5];
+    c.push_back(x), c.push_back(y), c.push_back(z);
+    c.erase(unique(c.begin(), c.end()), c.end());
+    for(int i = 1; i <= n; i++)
+        for(int j = 0; j < c.size(); j++)
+            if(a[i] == c[j])
+                f[j]++;
+ 
+    if(f[2] != 0)
+    {
+        cout<<f[0] * f[1] * f[2]<<'\n';
+        return;
+    }
+    else if(f[1] != 0)
+    {
+        if(f[0] == 2)
+        {
+            cout<<f[0] / 2 * f[1]<<'\n';
+        }
+        else
+            cout<<f[0] * f[1] * (f[1] - 1) / 2<<'\n';
+ 
+    }
+    else
+        cout<<f[0] * (f[0] - 1) * (f[0] - 2) / 6<<'\n';
+ 
+    return;
+}
+```
+
+
+
+## [C - Really Big Numbers](https://codeforces.com/contest/817/problem/C)
+
+若 <span class="math inline">\(mid = a_1 \times 10^x + a_2 \times 10^{x-1} + \dots + a_n \times 10^0 - 9 \times x \geq s\)</span>
+
+那么 <span class="math inline">\([mid, n]\)</span> 的数都满足要求
+
+我们只要暴力判断 <span class="math inline">\([s, mid]\)</span> 这个区间的数即可
+
+所以二分出 <span class="math inline">\(mid\)</span>，再暴力判断即可，因为最大减去的数位和是 <span class="math inline">\(18 \times 9\)</span> ，所以最多暴力这么点数就可以了
+
+特判 <span class="math inline">\(mid\)</span> 不满足要求的情况
+
+
+
+```cpp
+typedef long long ll;
+
+ll n, s;
+ 
+bool check(ll x)
+{
+    ll t = x;
+    ll sub = 0;
+    while(t)
+    {
+        t /= 10;
+        sub += 9;
+    }
+    if(x - sub >= s)
+        return true;
+    else return false;
+}
+void solve()
+{       
+    cin>>n>>s;
+    ll l = 1, r = n + 2;
+    while(l < r)
+    { 
+        ll mid = (l + r) >> 1;
+        if(check(mid))  r = mid;
+        else l = mid + 1;
+    }
+    ll res = 0;
+    if(l <= n && check(l))    res = n - l + 1;
+    // cout<<l<<" "<<res<<'\n';
+ 
+    // cout<<l<<" "<<res<<'\n';
+    if(l > n)   l = n + 1;
+    
+    for(ll i = s; i <= l - 1; i++)
+    {
+        ll t = i;
+        ll sub = 0;
+        while(t)
+        {
+            sub = sub + (t % 10);
+            t /= 10;
+        }
+        if(i - sub >= s)    res++;
+ 
+    }
+    cout<<res<<'\n';
+ 
+    return;
+}
+
+```
+
+
+
+## [D - Imbalanced Array](https://codeforces.com/contest/817/problem/D)
+
+可以观察到：
+
+1. 每一个数字 <span class="math inline">\(a_i\)</span> 都作为最小值，最大值分别存在一个或多个区间区间
+2. 再观察到 <span class="math inline">\(res = s2 - s1\)</span>， <span class="math inline">\(s1\)</span> 作为所有区间的最小值之和， <span class="math inline">\(s2\)</span> 作为所有区间的最大值之和
+3. 那么我们就需要预处理出每个数字的最小值，最大值的区间，我们就需要求出 <span class="math inline">\(a_i\)</span> 从左往右第一个小于等于它的位置， 从右往左第一个小于它的位置，从左往右第一个大于等于它的位置， 从右往左第一个大于它的位置
+4. 发现可以用单调栈处理
+
+
+
+```cpp
+typedef long long ll;
+ 
+const int mod = 1e9 + 7;
+const int N = 1e6 + 10;
+ 
+ 
+ll s1, s2;
+ll n, a[N];
+ll f[N], g[N];
+void solve()
+{       
+    stack<ll> stk; 
+    cin>>n;
+    for(int i = 1; i <= n; i++)
+        cin>>a[i];
+ 
+    for(int i = 1; i <= n; i++)
+    {
+        while(!stk.empty() && a[stk.top()] >= a[i]) stk.pop();
+        if(stk.empty()) f[i] += i;
+        else f[i] = i - stk.top();
+        stk.push(i);
+    }
+    while(!stk.empty())
+        stk.pop();
+    for(int i = n; i >= 1; i--)
+    {
+        while(!stk.empty() && a[stk.top()] > a[i]) stk.pop();
+        if(stk.empty()) f[i] *= (n - i + 1);
+        else f[i] *= (stk.top() - i);
+        stk.push(i);
+    }   
+ 
+ 
+    while(!stk.empty())
+        stk.pop();
+    for(int i = 1; i <= n; i++)
+    {
+        while(!stk.empty() && a[stk.top()] <= a[i]) stk.pop();
+        if(stk.empty()) g[i] += i;
+        else g[i] = i - stk.top();
+        stk.push(i);
+    }
+    while(!stk.empty())
+        stk.pop();
+    for(int i = n; i >= 1; i--)
+    {
+        while(!stk.empty() && a[stk.top()] < a[i]) stk.pop();
+        if(stk.empty()) g[i] *= (n - i + 1);
+        else g[i] *= (stk.top() - i);
+        stk.push(i);
+    }   
+ 
+ 
+    // for(int i = 1; i <= n; i++)
+    //     cout<<f[i]<<"  ";
+    // cout<<'\n';
+ 
+    // for(int i = 1; i <= n; i++)
+    //     cout<<g[i]<<"  ";
+    // cout<<'\n';
+    for(int i = 1; i <= n; i++)
+    {
+        s1 += (f[i] * a[i]);
+        s2 += (g[i] * a[i]);
+    }
+    cout<<s2 - s1<<'\n';
+    return;
+}
+ 
+```
+
+
+
+## [E - Choosing The Commander](https://codeforces.com/contest/817/problem/E)
+
+01 trie 板子
+
+
+
+```cpp
+const int N = 2e5 + 10;
+ 
+ 
+struct 
+{
+    int sz, s[2];
+}seg[N * 32];
+ 
+int root, tot = 0, q;
+ 
+void insert(int x)
+{
+    int p = root;
+    for(int j = 29; j >= 0; j--)
+    {
+        int w = (x >> j) & 1;
+        seg[p].sz++;
+        if(seg[p].s[w] == 0)  seg[p].s[w] = ++tot;
+        p = seg[p].s[w];
+    }
+    seg[p].sz++;
+}
+void del(int x)
+{
+    int p = root;
+    for(int j = 29; j >= 0; j--)
+    {
+        int w = (x >> j) & 1;
+        seg[p].sz--;
+        // if(seg[p].s[w] == 0)  seg[p].s[w] = ++tot;
+        p = seg[p].s[w];
+    }
+    seg[p].sz--;
+}
+ 
+int query(int x, int k)
+{
+    int p = root;
+    int ans = 0;
+    for(int j = 29; j >= 0; j--)
+    {
+        int w = (x >> j) & 1; 
+        int t = (k >> j) & 1;           
+        if(w == 0 && t == 0)
+        {
+            p = seg[p].s[0];
+        }
+        else if(w == 0 && t == 1)
+        {
+            ans += seg[seg[p].s[0]].sz;
+            p = seg[p].s[1];
+        }
+        else if(w == 1 && t == 0)
+        {
+            // ans += seg[seg[p].s[1]].sz;
+            p = seg[p].s[1];
+        }
+        else if(w == 1 && t == 1)
+        {
+            ans += seg[seg[p].s[1]].sz;
+            p = seg[p].s[0];            
+        }
+ 
+        // if(seg[seg[p].s[w]].sz >= k)
+        //     p = seg[p].s[w];
+        // else 
+        // {
+        //     k -= seg[seg[p].s[w]].sz;
+        //     p = seg[p].s[1 ^ w];
+        //     ans = ans ^ (1 << j);
+        // }
+    }
+    return ans;
+}
+ 
+void solve()
+{   
+    cin>>q;
+    root = ++tot;
+    for(int i = 1; i <= q; i++)
+    {
+        int opt;    cin>>opt;
+        if(opt == 1)
+        {
+            int x;  cin>>x;
+            insert(x);
+        }
+        else if(opt == 2)
+        {
+            int x;  cin>>x;
+            del(x);
+        }
+        else if(opt == 3)
+        {
+            int x, k;  cin>>x>>k;
+            cout<<query(x, k)<<'\n';
+        }
+    }
+    return;
+}
+```
+
+
+
+## [F - MEX Queries](https://codeforces.com/contest/817/problem/F)
+
+- 维护一个集合，初始为空。
+
+- 有 <span class="math inline">\(3\)</span> 种操作：
+
+  1. 把 <span class="math inline">\([l,r]\)</span> 中在集合中没有出现过的数添加到集合中。
+  2. 把 <span class="math inline">\([l,r]\)</span> 中在集合中出现过的数从集合中删掉。
+  3. 把 <span class="math inline">\([l,r]\)</span> 中在集合中没有出现过的数添加到集合中，并把 <span class="math inline">\([l,r]\)</span> 中在集合中出现过的数从集合中删掉。
+- 每次操作后输出集合的 <span class="math inline">\(\operatorname{MEX}\)</span> —— 在集合中没有出现过的最小正整数。
+
+  how to：
+
+  1. 每次要对 <span class="math inline">\([l, r]\)</span> 集合处理，看上去很复杂，不难发现答案就是一段区间的断点，我们将询问离线，把 <span class="math inline">\(l - 1, l, r, r + 1\)</span> 离散化处理
+  2. 如何维护区间端点？建立一棵线段树，有对一段区间进行赋值 <span class="math inline">\(0/1\)</span> 和取反操作
+  3. 如何查询答案，线段树二分找区间的最左的 <span class="math inline">\(0\)</span> ，就做完了
+
+     
+
+```cpp
+//  AC one more times
+ 
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+typedef long long ll;
+ 
+const int mod = 1e9 + 7;
+const int N = 6e5 + 10;
+int n;
+vector<ll> vx;
+vector<array<ll, 3>> event;
+struct info
+{
+    int val;
+};
+ 
+struct tag
+{
+    int tag1, tag2;
+};
+ 
+info operator + (const info &a, const info &b)
+{
+    info t;
+    t.val = a.val + b.val;
+    return t;
+}
+ 
+struct segtree
+{
+    struct info val;
+    struct tag tag;
+    int sz;     // ...
+}seg[N * 4];
+ 
+ 
+void update(int id)
+{
+    seg[id].val = seg[id * 2].val + seg[id * 2 + 1].val;
+}
+ 
+void settag(int id, struct tag tag)
+{
+    if(tag.tag1 != 0)
+    {
+        if(tag.tag1 == 1)
+        {
+            seg[id].val.val = seg[id].sz;
+        }
+        else if(tag.tag1 == 2)
+        {
+            seg[id].val.val = 0;
+        }
+        seg[id].tag.tag1 = tag.tag1;
+        seg[id].tag.tag2 = 0;
+    }
+    if(tag.tag2 != 0)
+    {
+        seg[id].val.val = seg[id].sz - seg[id].val.val;
+        seg[id].tag.tag2 = seg[id].tag.tag2 ^ 1;
+    }
+}
+void pushdown(int id)
+{
+    if(seg[id].tag.tag1 != 0 || seg[id].tag.tag2 != 0)
+    {
+        settag(id * 2, seg[id].tag);
+        settag(id * 2 + 1, seg[id].tag);
+        seg[id].tag = {0, 0};
+    }
+}
+ 
+void build(int id, int l, int r)
+{
+    seg[id].sz = r - l + 1;
+    seg[id].tag = {0, 0};
+    if(l == r)
+    {
+        seg[id].val.val = 0;
+        return;
+    }
+    int mid = (l + r) >> 1;
+    build(id * 2, l, mid);
+    build(id * 2 + 1, mid + 1, r);
+    update(id);
+}
+ 
+void modify(int id, int l, int r, int ql, int qr, struct tag tag)
+{
+    if(l == ql && r == qr)
+    {
+        settag(id, tag);
+        return;
+    }
+    pushdown(id);
+    int mid = (l + r) >> 1;
+    if(qr <= mid)
+        modify(id * 2, l, mid, ql, qr, tag);
+    else if(ql > mid)
+        modify(id * 2 + 1, mid + 1, r, ql, qr, tag);
+    else 
+        modify(id * 2, l, mid, ql, mid, tag),
+        modify(id * 2 + 1, mid +1 , r, mid + 1, qr, tag);
+    update(id);
+}
+ 
+int query(int id, int l, int r)
+{
+    if(l == r)
+        return l;
+    pushdown(id);
+    int mid = (l + r) >> 1;
+    if(seg[id * 2].val.val != seg[id * 2].sz) 
+        return query(id * 2, l, mid);
+    else
+        return query(id * 2 + 1, mid + 1, r);
+}
+void solve()
+{
+    cin>>n;
+    for(int i = 1; i <= n; i++)
+    {
+        ll a, b, c; cin>>a>>b>>c;
+        if(b - 1 >= 1)
+            vx.push_back(b - 1);
+        if(c - 1 >= 1)
+            vx.push_back(c - 1);
+        vx.push_back(b), vx.push_back(c);
+        vx.push_back(b + 1), vx.push_back(c + 1);
+        event.push_back({a, b, c});
+    }
+    vx.push_back(1);
+    sort(vx.begin(), vx.end());
+    vx.erase(unique(vx.begin(), vx.end()), vx.end());
+    int m = vx.size();
+    build(1, 1, m);
+    for(int i = 0; i < n; i++)
+    {
+        int opt = event[i][0];
+        int l = lower_bound(vx.begin(), vx.end(), event[i][1]) - vx.begin() + 1;
+        int r = lower_bound(vx.begin(), vx.end(), event[i][2]) - vx.begin() + 1;
+        if(opt == 1)
+            modify(1, 1, m, l, r, tag{1, 0});
+        else if(opt == 2)
+            modify(1, 1, m, l, r, tag{2, 0});
+        else if(opt == 3)
+            modify(1, 1, m, l, r, tag{0, 1});
+        cout<<vx[query(1, 1, m) - 1]<<'\n';
+    }
+    return;
+}
+ 
+int main()
+{
+    std::ios::sync_with_stdio(false);   cin.tie(nullptr), cout.tie(nullptr);
+    
+    int TC = 1;
+    
+    //cin >> TC;    
+    for(int tc = 1; tc <= TC; tc++)
+    {
+        //cout << "Case #" << tc << ": ";         
+        solve();
+    }
+ 
+ 
+    return 0;
+}
+```
+{% endraw %}

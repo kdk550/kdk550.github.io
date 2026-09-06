@@ -1,0 +1,318 @@
+---
+layout: post
+title: "Codeforces Round 894 (Div. 3) ABCDEFG AK"
+date: 2023-08-26 18:16:00 +0800
+updated: 2023-08-27 12:52:00 +0800
+description: "Codeforces Round 894 (Div. 3) 第一次div3 ak，虽然是vp的，后三题 A - Gift Carpet 穷举四个不同列即可，时间复杂度 \\(O(M ^ 4)\\) B - Sequence Game 分两种情况： 1. 对 b 数组 的每个 \\(b {i - 1} > b i (2 \\l…"
+excerpt: "Codeforces Round 894 (Div. 3) 第一次div3 ak，虽然是vp的，后三题 A - Gift Carpet 穷举四个不同列即可，时间复杂度 \\(O(M ^ 4)\\) B - Sequence Game 分两种情况： 1. 对 b 数组 的每个 \\(b {i - 1} > b i (2 \\l…"
+categories: []
+tags: ["data structures", "contest", "dynamic programming", "algorithm basics"]
+comments: false
+related_posts: false
+---
+{% raw %}
+# [Codeforces Round 894 (Div. 3)](https://codeforces.com/contest/1862)
+
+![image](/assets/img/blog/posts/72a0565961e6c0f1b58d5db27a9b0ce59fe63cff3d5d84f3e64f4da4650a4dd0.png)
+
+第一次div3 ak，虽然是vp的，后三题
+
+## [A - Gift Carpet](https://codeforces.com/contest/1862/problem/A)
+
+穷举四个不同列即可，时间复杂度 <span class="math inline">\(O(M ^ 4)\)</span>
+
+
+
+```cpp
+int a[100][100];
+void solve()
+{       
+    memset(a, 0, sizeof a);
+    int n,  m;  cin>>n>>m;
+    for(int i = 1; i <= n; i++)
+        for(int j = 1; j <= m; j++)
+        {
+            char x; cin>>x;
+            a[j][x - 'a' + 1] = 1;
+        }
+    bool ok = false;
+    for(int i = 1; i <= m; i++)
+        for(int j = i + 1; j <= m; j++)
+            for(int k = j + 1; k <= m; k++)
+                for(int l = k + 1; l <= m; l++)
+                    if(a[i]['v' - 'a' + 1] && a[j]['i' - 'a' + 1]
+                    && a[k]['k' - 'a' + 1] && a[l]['a' - 'a' + 1])
+                        ok = true;
+    if(ok)
+        cout<<"YES\n";
+    else
+        cout<<"NO\n";
+    return;
+}
+```
+
+
+
+## [B - Sequence Game](https://codeforces.com/contest/1862/problem/B)
+
+分两种情况：
+
+1. 对 b 数组 的每个 <span class="math inline">\(b_{i - 1} &gt; b_i (2 \leq i \leq n )\)</span> ，放 <span class="math inline">\(2\)</span> 个 <span class="math inline">\(b_i\)</span> 到答案数组
+2. 对 b 数组 的每个 <span class="math inline">\(b_{i - 1} \leq b_i (2 \leq i \leq n )\)</span> ，放 <span class="math inline">\(1\)</span> 个 <span class="math inline">\(b_i\)</span> 到答案数组
+
+
+
+```cpp
+const int N = 4e5 + 10;
+
+int a[N];
+void solve()
+{       
+
+    vector<int> res;
+    int m, n = 0;   cin>>m;
+    for(int i = 1; i <= m; i++) 
+    {
+        cin>>a[i];
+    }  
+    res.push_back(a[1]);
+    for(int i = 2; i <= m; i++) 
+    {
+        if(a[i] >= a[i - 1])
+            res.push_back(a[i]);
+        else
+        {
+            res.push_back(a[i]);
+            res.push_back(a[i]);
+        }
+
+    }
+    cout<<res.size()<<'\n';
+    for(auto it : res)
+        cout<<it<<" ";
+    cout<<'\n';
+    return;
+}
+```
+
+
+
+## [C - Flower City Fence](https://codeforces.com/contest/1862/problem/C)
+
+对于水平放置的篱笆在高度上差分一下，即可求出水平放置的篱笆高度
+
+有的篱笆比 <span class="math inline">\(n\)</span> 长，要特判一下
+
+
+
+```cpp
+const int N = 4e5 + 10;
+ 
+ll n, a[N], b[N];
+void solve()
+{       
+    bool ok = true;
+    cin>>n;
+    for(int i = 1; i <= n + 1; i++)
+        a[i] = b[i] = 0;
+    for(int i = 1; i <= n; i++)
+    {
+        cin>>a[i];
+        b[1]++, b[min(n + 1, a[i] + 1)]--;
+    }
+    for(int i = 1; i <= n; i++)
+        b[i] += b[i - 1];
+    for(int i = 1, j = n; i <= n; i++, j--)
+        if(a[i] != b[i])
+            ok = false;
+    if(ok && a[1] == n)
+        cout<<"YES\n";
+    else
+        cout<<"NO\n";
+    return;
+}
+```
+
+
+
+## [D - Ice Cream Balls](https://codeforces.com/contest/1862/problem/D)
+
+问的是刚好能组合出有 <span class="math inline">\(n\)</span> 这个数量，先二分出 <span class="math inline">\(\dfrac{l \times (l - 1)}{2} \geq n\)</span>， 因为相同冰激凌可以组合起来，且贡献为 <span class="math inline">\(1\)</span>，则答案：
+
+1. <span class="math inline">\(\dfrac{l \times (l - 1)}{2} = n\)</span> 答案就为 <span class="math inline">\(l\)</span>
+2. 否则为 <span class="math inline">\(n - \dfrac{l \times (l - 1)}{2} + l\)</span>
+
+
+
+```cpp
+ll n;
+bool check(ll x)
+{
+    x--;
+    ll s = (1ll + x) * x / 2;
+    if(s >= n)  return true;
+    return false;
+    return s >= n;
+}
+
+void solve()
+{       
+    cin>>n;
+    ll l = 1, r = 1e10;
+    while(l < r)
+    {
+        ll mid = (l + r) >> 1;
+        if(check(mid))  r = mid;
+        else l = mid + 1;
+    }
+    if(l * (l - 1) / 2 > n) l--;
+    cout<<n - (l) * (l - 1) / 2 + l<<'\n';
+    return;
+}
+```
+
+
+
+## [E - Kolya and Movie Theatre](https://codeforces.com/contest/1862/problem/E)
+
+观察得到，对于任意一种方案，其方案的最后一天看电影是第 <span class="math inline">\(r\)</span> 天，则 <span class="math inline">\(\texttt{兴趣减弱的总和} = r \times d\)</span> ，也就是说可以枚举 <span class="math inline">\(r\)</span> ，求出最大的 <span class="math inline">\([1, r]\)</span> 的前 <span class="math inline">\(m\)</span> 大之和即可，发现是个可持久化板子，刚好还存了，交了MLE4， 改了下数组大小就过了
+
+等会看看有没有更简单的方法
+
+## [F - Magic Will Save the World](https://codeforces.com/contest/1862/problem/F)
+
+由于 <span class="math inline">\(n\)</span> 的大小无法求其方案，但观察到 <span class="math inline">\(n = 100\)</span> ， <span class="math inline">\(s_i \leq 10 ^ 4\)</span>
+
+我们能不能二分天数，以一种能量的总和，对敌人能量做一个 01 背包呢，再对剩下的敌人能量判断是否小于另一种能量
+
+<span class="math inline">\(\sum_{i = 1}^{n} s_i \leq 10 ^ 6\)</span>
+
+开 $\sum_{i = 1}^{n} s_i $ 的数组大小
+
+每次二分判断转移次数有 <span class="math inline">\(n \times \sum_{i = 1}^{n} s_i\)</span>
+
+时间复杂度是 <span class="math inline">\(O(T n \sum_{i = 1}^{n} s_i \log n)\)</span> 看上去很寄，但给了 4s，最终3900ms过了😁
+
+再测了下改 int 快1杯
+
+
+
+```cpp
+const int N = 1e6 + 10;
+
+ll n, a, b, s, v[N], w[N], f[N];
+
+bool check(ll x)
+{
+    ll sa = min(s, a * x), sb = min(s, b * x);
+    for(int i = 1; i <= sa; i++)
+        f[i] = 0;
+    for(int i = 1; i <= n; i++)
+        for(int j = sa; j >= v[i]; j--)
+            f[j] = max(f[j - v[i]] + v[i], f[j]);
+    if(sb >= s - f[sa])
+        return true;
+    else
+        return false;
+
+}
+void solve()
+{
+    cin>>a>>b>>n;
+    ll l = 1, r = 1;
+    s = 0;
+    for(int i = 1; i <= n; i++)
+    {
+        cin>>v[i];
+        w[i] = v[i], s += v[i];
+    }
+    r = s;
+    while(l < r)
+    {
+        ll mid = (l + r) >> 1;
+        if(check(mid))  r = mid;
+        else l = mid + 1;
+    }
+    cout<<l<<'\n';
+}
+```
+
+
+
+## [G - The Great Equalizer](https://codeforces.com/contest/1862/problem/G)
+
+找了个规律，<span class="math inline">\(res = \text{排序后数组中最大的差} + \text{数组中最大的元素}\)</span>
+
+怎么处理这个问题呢，用multiset处理一下，最近cf，atc都出过两次可以用同样方法解决的题目了，先去吃个饭，待补
+
+update：每次操作使得排序后数组中相邻两数的差减少 <span class="math inline">\(1\)</span> ，数组中的最大值又会增加 <span class="math inline">\(1\)</span> ，所以 <span class="math inline">\(res = \text{排序后数组中最大的差} + \text{数组中最大的元素}\)</span>
+
+
+
+```cpp
+//  AC one more times
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+const int mod = 1e9 + 7;
+const int N = 2e5 + 10;
+const ll up = 1ll << 60;
+ll n, q, a[N];  
+multiset<ll> s, res;
+void add(ll x)
+{
+    s.insert(x);
+    multiset<ll>::iterator it1 = s.find(x), it2 = s.find(x);
+    it1--, it2++;
+    if(*it1 != -1 && *it2 != up) 
+        res.erase(res.find((*it2) - (*it1)));
+    if(*it1 != -1)
+        res.insert(x - (*it1));
+    if(*it2 != up)
+        res.insert((*it2) - x);
+    //cout<<x<<'\n';
+}
+
+void del(ll x)
+{
+    multiset<ll>::iterator it1 = s.find(x), it2 = s.find(x);
+    it1--, it2++;
+    if(*it1 != -1 && *it2 != up) 
+        res.insert((*it2) - (*it1));
+    if(*it1 != -1)
+        res.erase(res.find(x - (*it1)));
+    if(*it2 != up)
+        res.erase(res.find((*it2) - x));
+    s.erase(s.find(x));
+}
+void solve()
+{       
+    cin>>n;
+    res.clear();    s.clear();
+    s.insert(-1);   s.insert(up);
+    for(int i = 1; i <= n; i++)
+    {
+        cin>>a[i];
+        add(a[i]);
+    }
+    cin>>q;
+    for(int i = 1; i <= q; i++)
+    {
+        ll p, x;   cin>>p>>x;
+        del(a[p]);  a[p] = x; add(a[p]);
+        if(n == 1)
+        {
+            cout<<a[n]<<" ";
+            continue;
+        }
+        cout<<*(--(--s.end())) + *(--res.end())<<" ";
+    }
+    cout<<'\n';
+    return;
+}
+```
+{% endraw %}

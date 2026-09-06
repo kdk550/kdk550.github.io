@@ -1,0 +1,137 @@
+---
+layout: post
+title: "cin读取数字时遇到字符的总结——C++ primer plus 代码引起思考， 为什么输入q使得程序结束，"
+date: 2021-07-17 02:06:00 +0800
+updated: 2021-07-17 02:06:00 +0800
+description: "那就一定是while循环中condition为false 有输出结果可知未运行到choices total choices;读入字符串跳出循环 可以用上面代码实验，读入字符串是condition为false，达到同样的效果。 总结 至于在输入数字的时候输入字符串会发生什么情况，在这种类型不匹配的情况时，有4种 1.…"
+excerpt: "那就一定是while循环中condition为false 有输出结果可知未运行到choices total choices;读入字符串跳出循环 可以用上面代码实验，读入字符串是condition为false，达到同样的效果。 总结 至于在输入数字的时候输入字符串会发生什么情况，在这种类型不匹配的情况时，有4种 1.…"
+categories: []
+tags: ["posts"]
+comments: false
+related_posts: false
+---
+{% raw %}
+```
+ 1 // lotto.cpp -- probability of winning
+ 2 #include <iostream>
+ 3 // Note: some implementations require double instead of long double
+ 4 long double probability(unsigned numbers, unsigned picks);
+ 5 int main()
+ 6 {
+ 7     using namespace std;
+ 8     double total, choices;
+ 9     cout << "Enter the total number of choices on the game card and\n"
+10         "the number of picks allowed:\n";
+11     while ((cin >> total >> choices) && choices <= total)
+12     {
+13         cout << "You have one chance in ";
+14         cout << probability(total, choices);      // compute the odds
+15         cout << " of winning.\n";
+16         cout << "Next two numbers (q to quit): ";
+17     }
+18     cout << "bye\n";
+19     // cin.get();
+20     // cin.get();
+21     return 0;
+22 }
+23 
+24 // the following function calculates the probability of picking picks
+25 // numbers correctly from numbers choices
+26 long double probability(unsigned numbers, unsigned picks)
+27 {
+28     long double result = 1.0;  // here come some local variables
+29     long double n;
+30     unsigned p;
+31 
+32     for (n = numbers, p = picks; p > 0; n--, p--)
+33         result = result * n / p;
+34     return result;
+35 }
+```
+
+
+
+
+
+```
+运行后发现输入带有字符串就会结束while循环，这是这是为什么呢？循环结束示范输入1　　　　　　　　　　输入2　　　　　　　　输入3　　12q　　　　　　　　　　haha  　　　　　　　　12     q输出1　　　　　　　　　　输出2　　　　　　　　输出3　　bye　　　　　　　　　　bye　　　　　　　　　　bye
+```
+
+
+
+ 
+
+
+
+```cpp
+while(condition)
+{
+   statement(s);
+}
+```
+
+
+
+　　那就一定是while循环中condition为false
+
+　　有输出结果可知未运行到choices<=total循环就已经跳出
+
+　　可知cin>>total>>choices;读入字符串跳出循环
+
+ 
+
+
+
+```cpp
+#include<iostream>
+using namespace std;
+int main()
+{
+    int a;
+    while (cin >> a)
+    {
+        cout << "HELLO WORLD!" << endl;
+        
+    }
+    return 0;
+}
+```
+
+
+
+ 
+
+　　可以用上面代码实验，读入字符串是condition为false，达到同样的效果。
+
+
+
+```cpp
+int a;
+cin>>a;
+```
+
+
+
+　　**总结**
+
+　　至于在输入数字的时候输入字符串会发生什么情况，在这种类型不匹配的情况时，有4种
+
+1. **n的值保持不变**
+2. **不匹配的输入将被保留在输入队列中**
+3. **cin对象中的一个错误标记被设置**
+4. **对cin方法的调用将返回false（如果被转换为bool类型）**
+
+ 
+
+　**其他资料：　《C++ primer plus》中文版第六版  第154页**
+
+　　　　　　　　**cin读取数字时遇到字符的情况<https://blog.csdn.net/weixin_36796040/article/details/78529099>**
+
+ 
+
+
+
+```
+ 
+```
+{% endraw %}

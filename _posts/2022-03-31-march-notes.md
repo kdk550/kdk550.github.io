@@ -1,0 +1,75 @@
+---
+layout: post
+title: "3月记录帖"
+date: 2022-03-31 22:37:00 +0800
+updated: 2023-01-21 17:37:00 +0800
+description: "2022/3/13 1. 1650D Twist the Permutation 2. 1650C Weight of the System of Nested Segments 3. 1649B Game of Ball Passing 4. 1641AGreat Sequence 5. 1635C Differe…"
+excerpt: "2022/3/13 1. 1650D Twist the Permutation 2. 1650C Weight of the System of Nested Segments 3. 1649B Game of Ball Passing 4. 1641AGreat Sequence 5. 1635C Differe…"
+categories: []
+tags: ["miscellaneous"]
+comments: false
+related_posts: false
+---
+{% raw %}
+2022/3/13
+
+1. 1650D Twist the Permutation
+2. 1650C Weight of the System of Nested Segments
+3. 1649B Game of Ball Passing
+4. 1641AGreat Sequence
+5. 1635C Differential Sorting
+6. 1613C Poisoned Dagger
+7. 1612C Chat Ban
+
+2022/3/14
+
+1. AcWing 3358. 放养但没有完全放养
+2. AcWing 3346. 你知道你的ABC吗
+
+2022/3/15~17
+
+1. dp练习NOIP 2001 普及组第四题
+2. dp练习福建夏令营P1359 租用游艇
+3. 1638C Inversion Graph
+4. 1637C Andrew and Stones
+5. 1627B  Not Sitting
+6. 1618D Array and Operations
+
+2022/3/18
+
+1. dp练习NOIP2005普及组 采药
+2. dp练习 精卫填海
+3. dp练习 【AHOI2001】质数和分解
+4. dp练习 最大约数和
+
+2022/3/19
+
+1. dp练习走楼梯
+2. dp练习最短路
+3. dp练习最长上升子序列
+4. dp练习最长公共子序列
+5. dp练习01背包
+6. dp练习完全背包
+7. dp练习多重背包1
+8. dp练习多重背包2
+9. dp练习分组背包
+10. dp练习二维背包
+11. dp练习石子合并
+12. dp练习括号序列
+13. dp练习石子合并2
+
+2022/3/20
+
+1. dp练习混合背包
+2. dp练习新的背包
+3. ACC两题
+4. dp树形dp课
+
+2022/3/21
+
+1. dp练习统计人数
+2. dp练习没有上司的舞会
+3. dp练习没有上司的舞会2
+
+3/21~31 记录丢失
+{% endraw %}

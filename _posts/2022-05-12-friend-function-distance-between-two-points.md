@@ -1,0 +1,45 @@
+---
+layout: post
+title: "友元函数求两点的距离"
+date: 2022-05-12 13:19:00 +0800
+updated: 2023-01-21 17:34:00 +0800
+description: "#include #include using namespace std; class point { friend double get(point,point); public: point(int a,int b) { x=a,y=b"
+excerpt: "#include #include using namespace std; class point { friend double get(point,point); public: point(int a,int b) { x=a,y=b"
+categories: []
+tags: ["posts"]
+comments: false
+related_posts: false
+---
+{% raw %}
+```
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+class point
+{
+
+friend double get(point,point);
+public:
+    point(int a,int b)
+    {
+        x=a,y=b;
+    }
+private:
+    int x,y;
+};
+
+double get(point a,point b)
+{
+    return sqrt(pow(a.x-b.x,2)+pow(a.y-b.y,2));
+}
+int main()
+{
+    int x1,y1,x2,y2;    
+    cin>>x1>>y1>>x2>>y2;
+    point p1(x1,y1),p2(x2,y2);
+    cout<<get(p1,p2)<<endl;
+    return 0;
+}
+```
+{% endraw %}

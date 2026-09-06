@@ -1,0 +1,207 @@
+---
+layout: post
+title: "上分准备 VP Codeforces Round #762 (Div. 3) 4题ABCE"
+date: 2022-07-31 09:46:00 +0800
+updated: 2022-07-31 10:06:00 +0800
+description: "+ 00:02 + 00:16 + 01:08 + 02:07 VP 情况 4/8 ABCE ，赛时排名可以到823，什么时候我可以上个青 - B 本想写个map的二分的，发现自己不会，写了个普普通通的二分 - C 高精度模拟，一发过了，用个vector将每个数位存起来，从个位开始判断，如果 A\\ i 的数能加上小于…"
+excerpt: "+ 00:02 + 00:16 + 01:08 + 02:07 VP 情况 4/8 ABCE ，赛时排名可以到823，什么时候我可以上个青 - B 本想写个map的二分的，发现自己不会，写了个普普通通的二分 - C 高精度模拟，一发过了，用个vector将每个数位存起来，从个位开始判断，如果 A\\ i 的数能加上小于…"
+categories: []
+tags: ["contest"]
+comments: false
+related_posts: false
+---
+{% raw %}
+<table class="standings">
+<tbody>
+<tr class="highlighted-row">
+<td class="dark" title="GNU C++14"><span class="cell-accepted" style="font-size: 18px">+<span class="cell-time">00:02</span></span></td>
+<td class="dark" title="GNU C++14"><span class="cell-accepted" style="font-size: 18px">+<span class="cell-time">00:16</span></span></td>
+<td class="dark" title="GNU C++14"><span class="cell-accepted" style="font-size: 18px">+<span class="cell-time">01:08</span></span></td>
+<td class="dark"><span class="cell-rejected" style="font-size: 18px"> </span></td>
+<td class="dark" title="GNU C++14"><span class="cell-accepted" style="font-size: 18px">+<span class="cell-time">02:07</span></span></td>
+</tr>
+</tbody>
+</table>
+
+
+VP 情况  4/8 ABCE ，赛时排名可以到823，什么时候我可以上个青
+
+- B 本想写个map的二分的，发现自己不会，写了个普普通通的二分
+- C 高精度模拟，一发过了，用个vector将每个数位存起来，从个位开始判断，如果 A\_i  的数能加上小于10的正整数大于等于S\_j+1  \*10  + S\_j,(S\_j+1 ! = 0),那么就能一次解决两个数位，其余正常匹配，遇到无法进位同时 A\_i > S\_j 的情况就没有解 ,最后讨论前导0，和S没有匹配完的输出
+
+
+
+```
+//  AC one more times
+
+LL a,s; 
+std::vector<int > d1,d2;
+void chuli()
+{
+    LL ta=a;
+    while(ta)
+    {
+        d1.push_back(ta%10);
+        ta/=10;
+    }
+    ta=s;
+    while(ta)
+    {
+        d2.push_back(ta%10);
+        ta/=10;
+    }
+}
+void solve()
+{
+    d1.clear(),d2.clear();
+    cin>>a>>s;
+    if(a>s) 
+    {
+        cout<<-1<<endl; return;
+    }
+    chuli();
+    int len1=d1.size(),len2=d2.size(),j=0, ca=len2-len1;
+    vector<int> ans;
+    for(int i=0;i<len1;i++)
+    {
+        int t1=d1[i],t2=d2[j],t3=d2[j+1];
+        if(ca&&t1+9>=t3*10+t2&&j<len2&&j+1<len2&&t3!=0)
+        {
+            int add=t3*10+t2;
+            ans.push_back(add-t1);
+            j++,j++;
+            ca--;
+        }
+        else if(t1+(t2-t1)<10&&t2>=t1&&j<len2)
+        {
+            int add=t2-t1;
+            ans.push_back(add);
+            j++;
+        }
+        else if(t1>t2)
+        {
+            cout<<-1<<endl; return;
+        }
+    }
+    if(j!=len2)
+    {
+        for(int i=len2-1;i>=j;i--)
+            cout<<d2[i];
+        reverse(ans.begin(),ans.end());
+        for(auto it : ans)
+            cout<<it;
+        cout<<endl;
+    }
+    else 
+    {
+        int sz=ans.size();
+        while(ans[sz-1]==0&&sz>=1)
+            sz--;
+        if(sz==0)
+        {
+            cout<<0<<endl;  return;
+        }
+        for(int i=sz-1;i>=0;i--)
+            cout<<ans[i];
+        cout<<endl;
+    }
+
+    return;
+}
+
+    
+
+    
+int main()
+{
+    std::ios::sync_with_stdio(false);   cin.tie(nullptr), cout.tie(nullptr);
+
+    int T;cin>>T;for(int i=1;i<=T;i++)
+        solve();    
+
+
+    return 0;
+}
+```
+
+
+
+E 构造贪心下，
+
+每个最小没出现的整数 d ，答案是：
+
+1. 更小的数 进行操作，使得 0~d-1 都有数字
+2. 数组内所有=d的数 进行+1
+
+用一个数组标记值为i的数有多少个
+
+如何使得进行操作数最少？ 如果到了数 i ，这个地方标记数为0，那么就要比他小的数加1，我们用更小的数进行操作使它达到i,使得 MEX= ii+1 时候成立，这里用一个优先队列来维护可以进行操作的数，使得每次操作数最小。当a[i] >=2  ，就将a[i]-1个 i 加入优先队列。也用一个 chengben来记录补上 0~i-1 的坑（原本a[0~i-1] = 0 处），当MEX=i，答案为chengben + a[i] ，如果前面有坑没补上，后面就全输出-1 了
+
+
+
+```
+//  AC one more times
+void solve()
+{
+    int a[200010],n;
+    memset(a,0,sizeof a);
+    cin>>n;
+    for(int i=1;i<=n;i++)
+    {
+        int x;  cin>>x;
+        a[x]++;
+    }
+
+    LL chengben=0;
+    priority_queue<int,vector<int>,less<int>> q;
+    for(int i=0;i<=n;i++)
+    {
+        if(i==0)
+        {
+            cout<<a[i]<<" ";
+            if(a[0]==0)
+            {
+                for(int j=1;j<=n;j++)
+                    cout<<-1<<" ";
+                cout<<endl;return;
+            }
+            if(a[i]>1)
+                for(int j=2;j<=a[i];j++)
+                    q.push(i);
+        }
+        if(i>=1)
+        {
+            cout<<chengben+a[i]<<" ";
+            if(a[i]==0)
+            {
+                if(q.empty())
+                {
+                    for(int j=i+1;j<=n;j++)
+                        cout<<-1<<" ";
+                    cout<<endl;return;
+                }
+                else
+                {
+                    chengben+=i-q.top();    q.pop();
+                }
+
+            }
+            if(a[i]>=1)
+                for(int j=2;j<=a[i];j++)
+                    q.push(i); 
+        }
+
+    }
+    cout<<endl;
+    return;
+}
+
+int main()
+{
+    std::ios::sync_with_stdio(false);   cin.tie(nullptr), cout.tie(nullptr);
+    int T;cin>>T;for(int i=1;i<=T;i++)
+        solve();    
+    return 0;
+}
+```
+{% endraw %}

@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Migrate the local CNBlogs archive into al-folio posts.
+"""Historical CNBlogs-to-al-folio migration utility.
 
-The script intentionally uses only the Python standard library.  It is safe to
-run repeatedly: it removes only known al-folio example posts, posts carrying
-the ``cnblogs_post_id`` marker, and the managed CNBlogs image directory.
+This script is retained for archival reproducibility only. It intentionally
+produces the original imported format and must not be run against the current
+unified blog repository; use the files already present in ``_posts/`` instead.
+
+The script intentionally uses only the Python standard library. Running it
+against a repository with the old imported layout may replace generated posts
+and the managed CNBlogs image directory, so treat it as a historical tool and
+use a disposable checkout when reproducing the original migration.
 """
 
 from __future__ import annotations
@@ -21,7 +26,7 @@ from typing import Any
 
 
 DEFAULT_ARCHIVE = Path(
-    "/home/magicat/00文档/blogs/20260711/archive"
+    "/home/magicat/workspace/00文档/blogs/20260711/archive"
 )
 
 # Files shipped by the al-folio template at the time this site was created.
@@ -404,6 +409,23 @@ def migrate(args: argparse.Namespace) -> dict[str, Any]:
         raise FileNotFoundError(f"Archive assets directory not found: {source_assets}")
     if not repo_root.is_dir():
         raise FileNotFoundError(f"al-folio repository not found: {repo_root}")
+
+    unified_posts = [
+        path
+        for path in posts_dir.glob("*.md")
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}-(?!cnblogs-)[a-z0-9][a-z0-9-]*\.md", path.name)
+    ] if posts_dir.is_dir() else []
+    if unified_posts:
+        raise RuntimeError(
+            "refusing to run historical migration in a repository that already "
+            "contains unified posts; use the current _posts/ files directly"
+        )
+
+    if (repo_root / "assets" / "img" / "blog" / "posts").is_dir():
+        raise RuntimeError(
+            "refusing to run historical migration in a repository that already "
+            "contains the unified blog image directory; use a disposable checkout"
+        )
 
     posts_dir.mkdir(parents=True, exist_ok=True)
     records = discover_posts(content_root)

@@ -1,0 +1,322 @@
+---
+layout: post
+title: "AtCoder Beginner Contest 302 ABCDEF"
+date: 2023-06-21 16:20:00 +0800
+updated: 2023-06-21 16:21:00 +0800
+description: "AtCoder Beginner Contest 302 F 看错题了，以为是求取得 \\(1,2,\\dots,m\\) 。 后面npy告诉我是 \\(1 \\text{ and } m\\) 。 A - Attack \\(B \\times x \\geq A\\) ，求 \\(x\\) B - Find snuke 8 个方向找 \\…"
+excerpt: "AtCoder Beginner Contest 302 F 看错题了，以为是求取得 \\(1,2,\\dots,m\\) 。 后面npy告诉我是 \\(1 \\text{ and } m\\) 。 A - Attack \\(B \\times x \\geq A\\) ，求 \\(x\\) B - Find snuke 8 个方向找 \\…"
+categories: []
+tags: ["data structures", "graph theory", "algorithm basics", "contest"]
+comments: false
+related_posts: false
+---
+{% raw %}
+[AtCoder Beginner Contest 302](https://atcoder.jp/contests/abc302)
+
+![image](/assets/img/blog/posts/92deeb3421b44511921cc37ae5d759f2215a1156963f9eec94173e71632ede29.png)
+
+F 看错题了，以为是求取得 <span class="math inline">\(1,2,\dots,m\)</span> 。 后面npy告诉我是 <span class="math inline">\(1 \text{ and } m\)</span> 。
+
+## **A - Attack**
+
+<span class="math inline">\(B \times x \geq A\)</span> ，求 <span class="math inline">\(x\)</span>
+
+
+
+```cpp
+void solve()
+{       
+    ll a, b;    cin>>a>>b;
+    cout<<(a / b) + (a % b != 0)<<'\n';
+    return;
+}
+```
+
+
+
+## **B - Find snuke**
+
+8 个方向找 <span class="math inline">\(\text{snuke}\)</span>
+
+
+
+```cpp
+int dx[] = {-1, -1, -1, 0, 0, 1, 1, 1};
+int dy[] = {-1, 0, 1, -1, 1, -1, 0, 1};
+ 
+int n, m;
+string op[110];
+string s = "snuke";
+void solve()
+{       
+    cin>>n>>m;
+    for(int i = 1; i <= n; i++)
+    {
+        cin>>op[i];
+        op[i] = "?" + op[i];
+    }
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 1; j <= m; j++)
+        {
+            for(int k = 0; k < 8; k++)
+            {
+                bool ok = false;
+                int x = i + 4 * dx[k];
+                int y = j + 4 * dy[k];
+                if(x < 1 || x > n || y < 1 || y > m)
+                    continue;
+                for(int q = 0; q <= 4; q++)
+                {
+                    x = i + q * dx[k];
+                    y = j + q * dy[k];
+                    if(x < 1 || x > n || y < 1 || y > m)
+                        break;
+                    if(op[x][y] != s[q])
+                        break;
+ 
+                    if(q == 4)
+                        ok = true;
+                }
+                if(ok)
+                {
+                    for(int q = 0; q <= 4; q++)
+                        cout<<i + q * dx[k]<<" "<<j + q * dy[k]<<'\n';
+                    return;
+                }
+ 
+            }
+        }
+    }
+    return;
+}
+```
+
+
+
+## **C - Almost Equal**
+
+全排列判断
+
+
+
+```cpp
+int n, m;
+ 
+string op[110];
+int id[10];
+bool vis[10], ok = false;
+void dfs(int u)
+{
+    if(u == n)
+    {
+        for(int i = 2; i <= n; i++)
+        {
+            int cnt = 0;
+            for(int j = 0; j < m; j++)
+                if(op[id[i]][j] != op[id[i - 1]][j])
+                    cnt++;
+            if(cnt != 1)
+                return;
+        }
+        ok = true;
+        return;
+    }
+    for(int i = 1; i <= n; i++)
+    {
+        if(!vis[i])
+        {
+            vis[i] = true;
+            id[u + 1] = i;
+            dfs(u + 1);
+            vis[i] = false;
+            id[u + 1] = 0;
+        }
+    }
+}
+ 
+void solve()
+{       
+    cin>>n>>m;
+    for(int i = 1; i <= n; i++)
+        cin>>op[i];
+    dfs(0);
+    if(ok)
+        cout<<"Yes\n";
+    else
+        cout<<"No\n";
+    return;
+}
+```
+
+
+
+## **D - Impartial Gift**
+
+对 B 序列排序后，分别找出 <span class="math inline">\(A_i (1 \leq i \leq N)\)</span> 在 B 序列中分别找出 <span class="math inline">\(A_i-d \leq B_j\)</span> 中最小的<span class="math inline">\(B_j\)</span> 和 <span class="math inline">\(B_j \leq A_i + d\)</span> 中最大的 <span class="math inline">\(B_j\)</span> 。直接找会 TLE，但将 B 序列排序后，有序即可二分，时间复杂度 <span class="math inline">\(O(N \log M)\)</span> 。
+
+要注意二分得到的数只满足一个条件，最后要判断一下是否满足<span class="math inline">\(A_i - d \leq B_J \leq A_i + d\)</span>
+
+
+
+```cpp
+int n, m;
+ll a[N], b[N], d;
+void solve()
+{       
+    cin>>n>>m>>d;
+    for(int i = 1; i <= n; i++)
+        cin>>a[i];
+    for(int j = 1; j <= m; j++)
+        cin>>b[j];
+    sort(a + 1, a + 1 + n);
+    sort(b + 1, b + 1 + m);
+    ll ans = -1;
+    for(int i = 1; i <= n; i++)
+    {
+        int l = 1, r = m;
+        while(l < r)
+        {
+            int mid = (l + r) >> 1;
+            if(b[mid] >= a[i] - d) r = mid;
+            else l = mid + 1;
+        }  
+        if(b[l] >= a[i] - d && b[l] <= a[i] + d)
+            ans = max(ans, a[i] + b[l]);
+        l = 1, r = m;
+        while(l < r)
+        {
+            int mid = (l + r + 1) >> 1;
+            if(b[mid] <= a[i] + d) l = mid;
+            else r = mid - 1;
+        }
+        if(b[l] >= a[i] - d && b[l] <= a[i] + d)
+            ans = max(ans, a[i] + b[l]);       
+    }
+    cout<<ans<<'\n';
+    return;
+}
+```
+
+
+
+## **E - Isolation**
+
+对于每个点，我们要统计如下：
+
+1. 操作1，u，v 连一条边，我们分别在 <span class="math inline">\(\text{set}_u, \text{set}_v\)</span> 中记录边，分别查看其的度数，若为 <span class="math inline">\(0\)</span> , <span class="math inline">\(\text{答案} - 1\)</span> 并将 u, v 的度数加 <span class="math inline">\(1\)</span>
+2. 将和 u 有两边的点的度数减 <span class="math inline">\(1\)</span> , 若为 <span class="math inline">\(0\)</span> , <span class="math inline">\(\text{答案} + 1\)</span> , 并删去其边，将 u 的边集清空，度数赋值为 <span class="math inline">\(0\)</span> ， <span class="math inline">\(\text{答案} +1\)</span> 。
+
+
+
+```cpp
+int n, q, d[N];
+set<int> e[N];
+void solve()
+{       
+    cin>>n>>q;
+    int res = n;
+    for(int i = 1; i <= q; i++)
+    {
+        int opt; cin>>opt;
+        if(opt == 1)
+        {
+            int u, v;   cin>>u>>v;
+            if(d[u] == 0)
+                res--;
+            if(d[v] == 0)
+                res--;
+            d[u]++, d[v]++;
+            e[u].insert(v);
+            e[v].insert(u);
+        }
+        else
+        {
+            int u; cin>>u;
+            vector<int> a;
+            for(auto &it : e[u])
+                a.push_back(it);
+            for(auto &it : a)
+            {
+                e[it].erase(u);
+                d[it]--;
+                if(d[it] == 0)
+                    res++;
+            }
+            e[u].clear();
+            if(d[u] != 0)
+                res++;
+            d[u] = 0;
+        }
+        cout<<res<<'\n';
+    }
+    return;
+}
+```
+
+
+
+## **F - Merge Set**
+
+问合并集合取得 <span class="math inline">\(1 \text{ and } m\)</span> 的最小路径， 一眼 <span class="math inline">\(\text{BFS}\)</span>
+
+记录这个点可以到哪些集合，记录集合可以到哪些点
+
+<span class="math inline">\(\text{BFS}\)</span> 里面存的是点 <span class="math inline">\(u\)</span>，遍历 <span class="math inline">\(u\)</span> 的集合中其他的点 <span class="math inline">\(v\)</span>， 然后是常规的 <span class="math inline">\(BFS\)</span> 操作了。
+
+
+
+```cpp
+int n, m, dist[N];
+vector<int> e1[N], e2[N];
+bool vis[N];
+void bfs()
+{
+    for(int i = 1; i <= m; i++)
+        dist[i] = 1e9;
+    queue<int> q;
+    q.push(1);
+    dist[1] = 0;
+    while(!q.empty())
+    {
+        auto u = q.front(); q.pop();
+        for(auto &it : e1[u])
+        {
+            if(vis[it]) continue;
+            vis[it] = true;
+            for(auto &v : e2[it])
+            {
+                if(dist[v] > dist[u] + 1)
+                {
+                    dist[v] = dist[u] + 1;
+                    if(v == m)
+                    {
+                        cout<<dist[u]<<'\n';
+                        return;
+                    }
+                    q.push(v);
+                }
+            }
+        }
+    }
+    cout<<-1<<'\n';
+}
+void solve()
+{       
+    cin>>n>>m;
+    for(int i = 1; i <= n; i++)
+    {
+        int len;    cin>>len;
+        while(len--)
+        {
+            int x;  cin>>x;
+            e1[x].push_back(i);
+            e2[i].push_back(x);        
+        }
+    }
+    bfs();
+
+    return;
+}
+```
+{% endraw %}

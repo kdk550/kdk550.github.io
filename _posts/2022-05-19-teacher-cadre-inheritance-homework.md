@@ -1,0 +1,84 @@
+---
+layout: post
+title: "某次作业"
+date: 2022-05-19 16:26:00 +0800
+updated: 2023-01-21 17:35:00 +0800
+description: "#include #include using namespace std; class Teacher { public: void set2(string a,string b,string c,string d,string e,st"
+excerpt: "#include #include using namespace std; class Teacher { public: void set2(string a,string b,string c,string d,string e,st"
+categories: []
+tags: ["posts"]
+comments: false
+related_posts: false
+---
+{% raw %}
+```
+#include<iostream>
+#include<string>
+using namespace std;
+class Teacher
+{
+    public:
+        void set2(string a,string b,string c,string d,string e,string f);
+        void display();
+    private:
+        string name,year,fm,address,phone,title;
+};
+
+
+class Cadre
+{
+    public:
+        void set3(string a,string b,string c,string d,string e,string f);
+        void display1();
+    private:
+        string name,year,fm,address,phone,post;
+};
+class Teacher_Cadre:public Teacher,public Cadre
+{
+    public:
+        void set1(string a,string b,string c,string d,string e,string f,string g,string h);
+        void show();
+    private:
+        string wages;
+};
+void Teacher_Cadre:: set1(string a,string b,string c,string d,string e,string f,string g,string h)
+{
+    wages=h;
+    set2(a,b,c,d,e,f);
+    set3(a,b,c,d,e,g);
+}
+void Teacher::set2(string a,string b,string c,string d,string e,string f)
+{
+    name=a;year=b;fm=c;address=d;phone=e;title=f;
+}
+void Cadre::set3(string a,string b,string c,string d,string e,string f)
+{
+    name=a;year=b;fm=c;address=d;phone=e,post=f;
+}
+void Teacher_Cadre::show()
+{
+    display();
+    display1();
+    cout<<wages<<endl;
+}
+void Teacher::display()
+{
+    cout<<name<<" "<<year<<" "<<fm<<" "<<title<<" "<<address<<" "<<phone<<" ";
+}
+void Cadre::display1()
+{
+    cout<<post<<" ";
+}
+int main()
+{
+    string name,year,fm,address,phone,title,post,wages;
+    cin>>name>>year>>fm>>address>>phone>>title>>post>>wages;
+    Teacher_Cadre t;
+    t.set1(name,year,fm,address,phone,title,post,wages);
+    t.show();
+}
+/*
+kdk 18 female gd 132 stu stu1 2000
+*/
+```
+{% endraw %}

@@ -1,0 +1,57 @@
+---
+layout: post
+title: "类实现明天的日期"
+date: 2022-04-21 20:30:00 +0800
+updated: 2022-04-21 22:11:00 +0800
+description: "C++作业"
+excerpt: "C++作业"
+categories: []
+tags: ["posts"]
+comments: false
+related_posts: false
+---
+{% raw %}
+**C++作业**
+
+
+
+```
+#include <iostream>
+#include <algorithm>
+using namespace std;
+class TDate 
+{
+    public:
+        TDate(int y,int m,int d):year(y),month(m),day(d)
+        {}
+        TDate(){}
+        void print()
+        {
+            cout<<year<<"/"<<month<<"/"<<day<<endl;
+        }
+        TDate tomorrow(TDate date1)
+        {
+            int day[20]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+            int yy=date1.year;
+            int mm=date1.month;
+            int dd=date1.day;
+            if(yy%400==0||(yy%4==0&&yy%100!=0))    day[2]++;
+            if(mm==12&&dd==31)    {    yy++,mm=1,dd=1;    }
+            else if(dd+1>day[mm])    {    dd=1,mm++;    }
+            else {    dd++;    }
+            TDate date3(yy,mm,dd);
+            return date3;
+        }
+    private:
+        int year,month,day;
+};
+int main()
+{
+    TDate d1(2003,12,31);
+    d1.print();
+    TDate d2=d1.tomorrow(d1);
+    d2.print();
+    return 0;
+}
+```
+{% endraw %}
