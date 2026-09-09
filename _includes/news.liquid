@@ -25,12 +25,19 @@
             </th>
             <td style="white-space: normal; overflow-wrap: anywhere; word-break: break-word">
               {% if item.inline %}
-                {% assign news_content = item.content
-                  | remove: '<p>'
-                  | remove: '</p>'
-                  | replace: '<img ', '<img style="display: block !important; width: 100% !important; max-width: 480px !important; height: auto !important; margin-top: 0.75rem" '
-                %}
-                {{ news_content | emojify }}
+                {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
+                {% if item.image %}
+                  <div style="width: 100%; margin-top: 0.75rem">
+                    {% include figure.liquid
+                      path=item.image
+                      alt=item.image_alt
+                      class="img-fluid"
+                      width="100%"
+                      sizes="(max-width: 576px) calc(100vw - 8.5rem), (max-width: 930px) calc(100vw - 10rem), 720px"
+                      loading="lazy"
+                    %}
+                  </div>
+                {% endif %}
               {% else %}
                 <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
               {% endif %}
