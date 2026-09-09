@@ -27,9 +27,9 @@ related_posts: false
 
 ## 概况
 
-![image-20230916141124495]()
+![image-20230916141124495](/assets/img/blog/posts/image-20230916141124495.png)
 
-![image-20230916141150480]()
+![image-20230916141150480](/assets/img/blog/posts/image-20230916141150480.png)
 
 前五题去年的这个时候VP的，今年学校要去打女生赛，我先帮她们看看
 

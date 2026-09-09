@@ -3,8 +3,8 @@ layout: post
 title: "AtCoder Beginner Contest 308 A~F"
 date: 2023-07-02 18:00:00 +0800
 updated: 2024-09-29 23:15:00 +0800
-description: "AtCoder Beginner Contest 308 ![image-20230702174419133]() 手速有点慢 A - New Scheme 判断给定数字是否满足条件 B - Default Price 给出要买的颜色，和一些颜色价格，算出总花费，用 map mp; 统计要买的数量，然后直接算 C…"
-excerpt: "AtCoder Beginner Contest 308 ![image-20230702174419133]() 手速有点慢 A - New Scheme 判断给定数字是否满足条件 B - Default Price 给出要买的颜色，和一些颜色价格，算出总花费，用 map mp; 统计要买的数量，然后直接算 C…"
+description: "AtCoder Beginner Contest 308 ![image-20230702174419133](/assets/img/blog/posts/image-20230702174419133.png) 手速有点慢 A - New Scheme 判断给定数字是否满足条件 B - Default Price 给出要买的颜色，和一些颜色价格，算出总花费，用 map mp; 统计要买的数量，然后直接算 C…"
+excerpt: "AtCoder Beginner Contest 308 ![image-20230702174419133](/assets/img/blog/posts/image-20230702174419133.png) 手速有点慢 A - New Scheme 判断给定数字是否满足条件 B - Default Price 给出要买的颜色，和一些颜色价格，算出总花费，用 map mp; 统计要买的数量，然后直接算 C…"
 categories: []
 tags: ["algorithm basics", "contest"]
 comments: false
@@ -13,7 +13,7 @@ related_posts: false
 {% raw %}
 [AtCoder Beginner Contest 308](https://atcoder.jp/contests/abc308)
 
-![image-20230702174419133]()
+![image-20230702174419133](/assets/img/blog/posts/image-20230702174419133.png)
 
 手速有点慢
 
