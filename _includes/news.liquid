@@ -1,0 +1,45 @@
+<div class="news">
+  {% if site.news != blank %}
+    {% assign news_size = site.news | size %}
+    <div
+      class="table-responsive"
+      {% if include.limit and page.announcements.scrollable and news_size > 3 %}
+        style="max-height: 60vw"
+      {% endif %}
+    >
+      <table class="table table-sm table-borderless">
+        {% assign news = site.news | reverse %}
+        {% if include.limit and page.announcements.limit %}
+          {% assign news_limit = page.announcements.limit %}
+        {% else %}
+          {% assign news_limit = news_size %}
+        {% endif %}
+        {% for item in news limit: news_limit %}
+          {% assign news_date = item.date | date: '%Y-%m-%d' %}
+          <tr>
+            <th
+              scope="row"
+              style="width: auto !important; min-width: 6.5rem; white-space: nowrap !important; vertical-align: top"
+            >
+              <time datetime="{{ item.date | date_to_xmlschema }}">{{ news_date }}</time>
+            </th>
+            <td style="white-space: normal; overflow-wrap: anywhere; word-break: break-word">
+              {% if item.inline %}
+                {% assign news_content = item.content
+                  | remove: '<p>'
+                  | remove: '</p>'
+                  | replace: '<img ', '<img style="display: block !important; width: 100% !important; max-width: 480px !important; height: auto !important; margin-top: 0.75rem" '
+                %}
+                {{ news_content | emojify }}
+              {% else %}
+                <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% else %}
+    <p>No news so far...</p>
+  {% endif %}
+</div>
